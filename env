@@ -26,8 +26,8 @@ CI_ENVIRONMENT = development
 # API PagSeguro
 #--------------------------------------------------------------------
 
-# api.email = 'SEU_EMAIL_AQUI'
-# api.token = 'SEU_TOKEN_AQUI'
+api.email = 'SEU_EMAIL_AQUI'
+api.token = 'SEU_TOKEN_AQUI'
 
 #--------------------------------------------------------------------
 # APP

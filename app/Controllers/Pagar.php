@@ -18,13 +18,20 @@ class Pagar extends Controller
 
     public function pg_session_id()
     {
-
-        $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/sessions';
-
+        if(env('api.mode') == 'development'){
+            $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/sessions';
+        }else {
+            $url = 'https://ws.pagseguro.uol.com.br/v2/sessions';
+        }
+      
         $params['email'] = env('api.email');
         $params['token'] = env('api.token');
 
+
+
         $ch = curl_init();
+  
+       
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, count($params));
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -38,7 +45,7 @@ class Pagar extends Controller
         $result = curl_exec($ch);
 
         curl_close($ch);
-
+        
         $xml    = simplexml_load_string($result);
         $json   = json_encode($xml);
         $std  = json_decode($json);
@@ -68,7 +75,7 @@ class Pagar extends Controller
         $pagarBoleto['token'] = env('api.token');
         $pagarBoleto['paymentMode'] = 'default';
         $pagarBoleto['paymentMethod'] = 'boleto';
-        $pagarBoleto['receiverEmail'] = 'tetel.castro23@gmail.com';
+        $pagarBoleto['receiverEmail'] = env('api.email');
         $pagarBoleto['currency'] = 'BRL';
         $pagarBoleto['extraAmount'] = '';
 
@@ -79,12 +86,12 @@ class Pagar extends Controller
 
         $pagarBoleto['notificationURL'] = '';
 
-        $pagarBoleto['reference'] = 'REF';
+        $pagarBoleto['reference'] = $this->request->getVar('ref');
         $pagarBoleto['senderName'] = $this->request->getVar('nome');
-        $pagarBoleto['senderCPF'] = '07954815781';
+        $pagarBoleto['senderCPF'] = $this->request->getVar('cpf');
         $pagarBoleto['senderAreaCode'] = '21';
         $pagarBoleto['senderPhone'] = '998551629';
-        $pagarBoleto['senderEmail'] = 'v15638893625370231056@sandbox.pagseguro.com.br'; //$this->request->getVar('email');
+        $pagarBoleto['senderEmail'] = $this->request->getVar('email');
         $pagarBoleto['senderHash'] = $this->request->getVar('hash_pagamento');
 
         $pagarBoleto['shippingAddressStreet'] = 'Av. Brig. Faria Lima';
@@ -98,10 +105,14 @@ class Pagar extends Controller
         $pagarBoleto['shippingType'] = '1';
         $pagarBoleto['shippingCost'] = '1.00';
 
-        $url_1 = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/';
-
+        if(env('api.mode') == 'development'){
+            $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/';
+        }else {
+            $url = 'https://ws.pagseguro.uol.com.br/v2/transactions/';
+        }
+        
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url_1);
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, count($pagarBoleto));
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pagarBoleto));
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
@@ -134,7 +145,7 @@ class Pagar extends Controller
             ];
         }
 
-        header('Content-Type: application/json');
+        //header('Content-Type: application/json');
         echo json_encode($retorno);
     }
 }
