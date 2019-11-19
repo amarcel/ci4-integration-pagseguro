@@ -15,3 +15,21 @@ Em desenvolvimento.
 Utilização:
 
 Alterar os parâmetros no env, mudar para .env
+
+
+Databases:
+
+CREATE DATABASE ci4_integration_pagseguro;
+
+CREATE TABLE transacao (
+id INT PRIMARY KEY AUTO_INCREMENT,
+id_pedido INT,
+id_cliente INT, 
+codigo_transacao INT,
+data_transacao DATETIME,
+tipo_transacao TINYINT(1),
+status_transacao VARCHAR(45),
+valor_transacao DOUBLE,
+url_boleto VARCHAR(255),
+lastEvent VARCHAR(255),
+);

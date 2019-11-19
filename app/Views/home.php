@@ -45,7 +45,7 @@
 		Status de pagamento: <span class="msg">**********</span>
 		</div>
 	</div>
-	
+
 	<script>
 		function pagarBoleto(e) {
 			e.preventDefault();
@@ -64,6 +64,7 @@
 					$('.msg').html('Enviando dados')
 				}
 			}).done(function(res) {
+				console.log(res);
 				if (res.error == 0) {
 					$('.msg').html('Enviado com sucesso. Link do boleto: <a target="_blank" href="' + res.code.paymentLink + '">Clique aqui para baixar</a>');
 				} else {
@@ -81,6 +82,7 @@
 				url: 'pagar/pg_session_id',
 				dataType: 'json',
 				success: function(res) {
+					console.log(res);
 					if (res.error == 0) {
 						var id_sessao = res.id_sessao;
 						//Pagamento

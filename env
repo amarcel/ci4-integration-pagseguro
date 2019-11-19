@@ -63,7 +63,7 @@ api.token = 'SEU_TOKEN_AQUI'
 #--------------------------------------------------------------------
 
 database.default.hostname = localhost
-database.default.database = ci4-integration
+database.default.database = ci4_integration_pagseguro
 database.default.username = root
 database.default.password = 
 database.default.DBDriver = MySQLi

@@ -3,35 +3,36 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use App\Models\TransacoesModel;
 
 
 class Pagar extends Controller
 {
 
-    public function __construct()
-    { }
-
     public function index()
     {
         return false;
     }
-
+/*
+    public function oi(): int{
+        return 1;
+    }
+*/
     public function pg_session_id()
     {
-        if(env('api.mode') == 'development'){
+        if (env('api.mode') == 'development') {
             $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/sessions';
-        }else {
+        } else {
             $url = 'https://ws.pagseguro.uol.com.br/v2/sessions';
         }
-      
+
         $params['email'] = env('api.email');
         $params['token'] = env('api.token');
 
 
 
         $ch = curl_init();
-  
-       
+
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, count($params));
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
@@ -45,7 +46,7 @@ class Pagar extends Controller
         $result = curl_exec($ch);
 
         curl_close($ch);
-        
+
         $xml    = simplexml_load_string($result);
         $json   = json_encode($xml);
         $std  = json_decode($json);
@@ -57,6 +58,9 @@ class Pagar extends Controller
                 'message'   => "Sessao gerada com sucesso",
                 'id_sessao' => $std->id
             ];
+
+
+
         } else {
 
             $json = [
@@ -105,12 +109,12 @@ class Pagar extends Controller
         $pagarBoleto['shippingType'] = '1';
         $pagarBoleto['shippingCost'] = '1.00';
 
-        if(env('api.mode') == 'development'){
+        if (env('api.mode') == 'development') {
             $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/';
-        }else {
+        } else {
             $url = 'https://ws.pagseguro.uol.com.br/v2/transactions/';
         }
-        
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, count($pagarBoleto));
@@ -134,7 +138,8 @@ class Pagar extends Controller
 
             $retorno = [
                 'error'     =>  $std->error->code,
-                'message'   => $std->error->message ];
+                'message'   => $std->error->message
+            ];
         }
 
         if (isset($std->code)) {
@@ -143,9 +148,56 @@ class Pagar extends Controller
                 'error'     =>  0,
                 'code'   => $std
             ];
+           
+            //Função para cadastrar transação
+            $this->store($std);
         }
 
         //header('Content-Type: application/json');
         echo json_encode($retorno);
     }
+
+    private function store($std){
+
+        $model = new TransacoesModel();
+        
+        helper('date');       
+
+        $model->save([
+            'id_pedido'         => rand(100,500),
+            'id_cliente'        => rand(100,500),
+            'codigo_transacao'  => $std->code,
+            'data_transacao'    => $std->date,
+            'lastEvent'         => $std->lastEventDate,
+            'tipo_transacao'    => $std->type,
+            'status_transacao'  => $std->status,
+            'valor_transacao'   => $std->grossAmount,
+            'url_boleto'        => $std->paymentLink
+        ]);
+    }
+
+ /*   public function store()
+    {
+
+        helper('form');
+        $model = new PagSeguro();
+
+        $rules = [
+            'title' => 'required|min_length[3]|max_length[255]',
+            'body'  => 'required'
+        ];
+
+        if ($this->validate($rules)) {
+            //Se passar o ID e ele for null ou não existir, ele insere, do contrário ele da update
+            $model->save([
+                'id_pedido'    => $this->request->getVar('id'),
+                'id_cliente' => $this->request->getVar('title'),
+                'slug'  => url_title($this->request->getVar('title')),
+                'body'  => $this->request->getVar('body')
+            ]);
+            log_message('info', 'Inserção no banco de dados de transações.');
+            //Redirect atualizado tb do ci3 para o ci4
+            return redirect()->to('/');
+        }
+    }*/
 }
