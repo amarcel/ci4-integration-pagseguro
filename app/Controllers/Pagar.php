@@ -8,16 +8,12 @@ use App\Models\TransacoesModel;
 
 class Pagar extends Controller
 {
+    public function index(){
+       
+            return view('home');
+       
+    }
 
-    public function index()
-    {
-        return false;
-    }
-/*
-    public function oi(): int{
-        return 1;
-    }
-*/
     public function pg_session_id()
     {
         if (env('api.mode') == 'development') {
@@ -28,8 +24,6 @@ class Pagar extends Controller
 
         $params['email'] = env('api.email');
         $params['token'] = env('api.token');
-
-
 
         $ch = curl_init();
 
@@ -58,9 +52,6 @@ class Pagar extends Controller
                 'message'   => "Sessao gerada com sucesso",
                 'id_sessao' => $std->id
             ];
-
-
-
         } else {
 
             $json = [
@@ -148,7 +139,7 @@ class Pagar extends Controller
                 'error'     =>  0,
                 'code'   => $std
             ];
-           
+
             //Função para cadastrar transação
             $this->store($std);
         }
@@ -157,47 +148,19 @@ class Pagar extends Controller
         echo json_encode($retorno);
     }
 
-    private function store($std){
-
+    private function store($std): void
+    {
+        //Load model TransaçõesModel - ADD USE HEADER THE CODE
         $model = new TransacoesModel();
-        
-        helper('date');       
 
         $model->save([
-            'id_pedido'         => rand(100,500),
-            'id_cliente'        => rand(100,500),
+            'id_pedido'         => rand(100, 500),
+            'id_cliente'        => rand(100, 500),
             'codigo_transacao'  => $std->code,
-            'data_transacao'    => $std->date,
-            'lastEvent'         => $std->lastEventDate,
             'tipo_transacao'    => $std->type,
             'status_transacao'  => $std->status,
             'valor_transacao'   => $std->grossAmount,
             'url_boleto'        => $std->paymentLink
         ]);
     }
-
- /*   public function store()
-    {
-
-        helper('form');
-        $model = new PagSeguro();
-
-        $rules = [
-            'title' => 'required|min_length[3]|max_length[255]',
-            'body'  => 'required'
-        ];
-
-        if ($this->validate($rules)) {
-            //Se passar o ID e ele for null ou não existir, ele insere, do contrário ele da update
-            $model->save([
-                'id_pedido'    => $this->request->getVar('id'),
-                'id_cliente' => $this->request->getVar('title'),
-                'slug'  => url_title($this->request->getVar('title')),
-                'body'  => $this->request->getVar('body')
-            ]);
-            log_message('info', 'Inserção no banco de dados de transações.');
-            //Redirect atualizado tb do ci3 para o ci4
-            return redirect()->to('/');
-        }
-    }*/
 }

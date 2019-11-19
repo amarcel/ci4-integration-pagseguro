@@ -21,15 +21,17 @@ Databases:
 
 CREATE DATABASE ci4_integration_pagseguro;
 
-CREATE TABLE transacao (
+CREATE OR REPLACE TABLE transacao (
 id INT PRIMARY KEY AUTO_INCREMENT,
 id_pedido INT,
 id_cliente INT, 
-codigo_transacao INT,
-data_transacao DATETIME,
+codigo_transacao VARCHAR(255),
 tipo_transacao TINYINT(1),
 status_transacao VARCHAR(45),
 valor_transacao DOUBLE,
 url_boleto VARCHAR(255),
-lastEvent VARCHAR(255),
+created_at DATETIME,
+updated_at DATETIME,
+deleted_at DATETIME
 );
+

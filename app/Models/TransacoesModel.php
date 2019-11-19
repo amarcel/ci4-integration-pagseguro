@@ -13,8 +13,8 @@ class TransacoesModel extends Model
     //Permitir os tempos a serem inseridos atualizados
     protected $allowedFields = ['id_pedido', 'id_cliente', 'codigo_transacao', 'data_transacao', 'tipo_transacao', 'status_transacao', 'valor_transacao', 'url_boleto', 'lastEvent'];
 
-    protected $useTimestamps = false;
-    protected $useSoftDeletes = false;
+    protected $useTimestamps = true;
+    protected $useSoftDeletes = true;
 
     //Caso queira colocar pra BR
     /*
