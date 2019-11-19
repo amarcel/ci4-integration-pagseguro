@@ -16,12 +16,6 @@ class TransacoesModel extends Model
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
 
-    //Caso queira colocar pra BR
-    /*
-    protected $createdField = 'created_at';
-    protected $updatedField = 'updated_at';
-    protected $deletedField = 'deleted_at';
-    */
 
     public function getTransacao($id = false)
     {

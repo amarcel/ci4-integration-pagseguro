@@ -12,7 +12,7 @@
 <body>
 	<div class="card">
 		<div class=" text-center card-header">
-			Sandbox
+			<a href="/">Voltar</a> - Sandbox
 		</div>
 		<div class="card-body">
 			<div class="text-center">
@@ -21,28 +21,38 @@
 			</div>
 			<form class="form mx-auto col-5">
 				<input type="hidden" class="form-control" id="hash_pagamento" name="hash_pagamento">
-				<div class="form-group mt-4">
-					<label class="text-left m-0 p-0">Nome completo</label>
-					<input type="text" class="my-2 form-control" name="nome" placeholder="Gabriela Sueli Aline Rodrigues" value="Gabriela Sueli Aline Rodrigues">
+				<div class="form-group mt-4 mb-0">
+					<label class="text-left">Nome completo</label>
+					<input type="text" class="my-1 form-control" readonly name="nome" placeholder="Gabriela Sueli Aline Rodrigues" value="Gabriela Sueli Aline Rodrigues">
 				</div>
 				<div class="form-group">
-					<label class="text-left m-0 p-0">CPF</label>
-					<input type="text" class="my-2 form-control" readonly name="cpf" placeholder="756.624.670-48" value="75662467048">
+					<label class="text-left ">CPF</label>
+					<input type="text" class="my-1 form-control" readonly name="cpf" placeholder="756.624.670-48" value="75662467048">
 				</div>
 				<div class="form-group">
-					<label class="text-left m-0 p-0">E-mail</label>
-					<input type="text" class="my-2 form-control" readonly name="email" placeholder="v15638893625370231056@sandbox.pagseguro.com.br" value="v15638893625370231056@sandbox.pagseguro.com.br">
+					<label class="text-left">E-mail</label>
+					<input type="text" class="my-1 form-control" readonly name="email" placeholder="v15638893625370231056@sandbox.pagseguro.com.br" value="v15638893625370231056@sandbox.pagseguro.com.br">
 				</div>
 				<div class="form-group">
-					<label class="text-left m-0 p-0">Referência</label>
-					<input type="text" class="my-2 form-control" readonly name="red" placeholder="<?= rand(1000,9999) ?>" value="<?= rand(1000,9999) ?>">
+					<label class="text-left">Referência</label>
+					<input type="text" class="my-1 form-control" readonly name="red" placeholder="<?= rand(1000, 9999) ?>" value="<?= rand(1000, 9999) ?>">
+				</div>
+
+				<div class="form-group">
+					<label class="text-left">Valor</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">R$</div>
+						</div>
+						<input type="text" class="form-control" readonly name="valor" value="<?= rand(100.1, 200.9).'.'.rand(10, 99) ?>">
+					</div>
 				</div>
 				<input type="submit" class="btn btn-info btn-pagar-boleto" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
 			</form>
 
 		</div>
 		<div class="card-footer text-muted text-center">
-		Status de pagamento: <span class="msg">**********</span>
+			Status de pagamento: <span class="msg">**********</span>
 		</div>
 	</div>
 

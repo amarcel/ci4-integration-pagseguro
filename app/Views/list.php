@@ -19,7 +19,7 @@
                 <h5 class="card-title">Listagens de transações</h5>
                 <p class="card-text">Esta funcionalidade está em desenvolvimento.</p>
             </div>
-            <table class="table">
+            <table class="mx-auto col-9 table">
                 <tr>
                     <td>Pedido</td>
                     <td>Cliente</td>

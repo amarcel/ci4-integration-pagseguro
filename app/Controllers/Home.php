@@ -7,10 +7,10 @@ class Home extends Controller
 {
 	public function index()
 	{
+		//helper('pagamento');
+
 		$model = new TransacoesModel();
-        
 		$data['transacoes'] = $model->getTransacao();
-		
 		return view('list', $data);
 	}
 

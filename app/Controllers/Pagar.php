@@ -8,10 +8,10 @@ use App\Models\TransacoesModel;
 
 class Pagar extends Controller
 {
-    public function index(){
-       
-            return view('home');
-       
+    public function index()
+    {
+
+        return view('home');
     }
 
     public function pg_session_id()
@@ -76,7 +76,7 @@ class Pagar extends Controller
 
         $pagarBoleto['itemId1'] = '1';
         $pagarBoleto['itemDescription1'] = 'Teste';
-        $pagarBoleto['itemAmount1'] = '10.00';
+        $pagarBoleto['itemAmount1'] = $this->request->getVar('valor');
         $pagarBoleto['itemQuantity1'] = '1';
 
         $pagarBoleto['notificationURL'] = '';
