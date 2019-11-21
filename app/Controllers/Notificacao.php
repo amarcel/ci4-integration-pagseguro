@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Controllers\Transacoes;
 use CodeIgniter\Controller;
 
+/**
+ * Responsável por receber a requisição do PagSeguro trata-la enviar a requisição para alterar
+ */
 class Notificacao extends Controller
 {
 
@@ -46,7 +49,6 @@ class Notificacao extends Controller
         $std  = json_decode($json);
 
         if (isset($std->error->code)) {
-
             $retorno = [
                 'error'     =>  $std->error->code,
                 'message'   => $std->error->message
@@ -63,10 +65,9 @@ class Notificacao extends Controller
             //Função para cadastrar transação
             $transacao = new Transacoes();
             $transacao->edit($std);
-            //$this->edit($std);
         }
 
         //header('Content-Type: application/json');
-        echo json_encode($retorno);
+        return json_encode($retorno);
     }
 }

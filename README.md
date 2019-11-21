@@ -9,11 +9,22 @@ Em desenvolvimento.
 - Utilizar o cURL do ci4
 - Pagamento por cartão de crédito/débito
 
+#### Estrutura:
+| Tipo | Nome | Razão |
+| ------ | ------ | ------ |
+| Controller  | Home  | Listagem das transações |
+| Controller | Notificação  | Receber a requisição do PagSeguro |
+|  Controller | Pagar  | Enviar as requisições ao PagSeguro |
+| Controller  | Transações  | Comunicação o banco de dados |
+| Helper  | pagamento  | Conversão de valores para o cliente |
+| Model  | Transações  | Operações no banco de dados |
+
 #### Utilização:
-Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox")
 A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro")
 
-Alterar os parâmetros no `./env`: 
+Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox")
+
+ Alterar os parâmetros no `./env`: 
 
 ```php
 #-----------------------------
@@ -23,7 +34,7 @@ api.mode	= development
 api.email	= seu_email
 api.token	= seu_token
 ```
-Ao alterar o `api.mode: ` para production acessará a URL de produção do PagSeguro.
+Ao alterar o `api.mode: ` para `production` acessará a URL de produção do PagSeguro.
 
 Banco de dados utilizado:
 
