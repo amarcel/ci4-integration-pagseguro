@@ -33,12 +33,10 @@ Em desenvolvimento.
 #### Utilização:
 - A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro")
 - Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox")
+- Caso dê algum erro de instalação do CI4 com o PHP, siga estes passos [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP") 
+- Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email`. 
 
-Caso dê algum erro de instalação do CI4 com o PHP, siga estes passos [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP") 
-
-Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email`. 
-
- Alterar os parâmetros no `./env`: 
+Alterar os parâmetros no `./env`: 
 
 ```php
 #-----------------------------
