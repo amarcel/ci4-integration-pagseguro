@@ -19,6 +19,7 @@ Em desenvolvimento.
 - Utilizar o cURL do ci4
 - Finalização de campos do formulário
 - Pagamento por cartão de crédito
+- Aviso de vencimento de boleto a 1 dia do vencimento
 
 #### Estrutura:
 | Tipo | Nome | Razão |
