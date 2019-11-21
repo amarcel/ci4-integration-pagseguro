@@ -7,7 +7,7 @@ class Home extends Controller
 {
 	public function index()
 	{
-		//helper('pagamento');
+		helper('pagamento');
 
 		$model = new TransacoesModel();
 		$data['transacoes'] = $model->getTransacao();

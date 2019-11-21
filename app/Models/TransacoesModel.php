@@ -16,7 +16,6 @@ class TransacoesModel extends Model
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
 
-
     public function getTransacao($id = false)
     {
         if ($id === false) {
@@ -25,5 +24,12 @@ class TransacoesModel extends Model
             return $this->findAll();
         }
         return $this->find($id);
+    }
+
+    public function getTransacaoPorCode($code = false)
+    {
+        if ($code) {
+            return $this->where('codigo_transacao', $code)->first();
+        }
     }
 }

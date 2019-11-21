@@ -7,16 +7,14 @@ use CodeIgniter\Controller;
 
 class Notificacao extends Controller
 {
-    
+
     public function __construct()
     {
         header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
     }
-    
+
     public function index()
     {
-       
-
         $data['email'] = env('api.email');
         $data['token'] = env('api.token');
 
@@ -68,17 +66,18 @@ class Notificacao extends Controller
         echo json_encode($retorno);
     }
 
-    public function edit($std)
+    public function edit($std = false)
     {
         helper('form');
+        helper('pagamento');
         $model = new TransacoesModel();
 
-        $transaction = $model->getTransacao($std->code);
+        $transaction = $model->getTransacaoPorCode($std->code);
 
         $model->save([
             'id'    => $transaction['id'],
             'status_transacao'  => $std->status
-           
+
         ]);
     }
 }

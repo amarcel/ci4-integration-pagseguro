@@ -36,7 +36,7 @@
                             <td><?= $transacoes_item['id_cliente'] ?></td>
                             <td><?= $transacoes_item['codigo_transacao'] ?></td>
                             <td><?= $transacoes_item['tipo_transacao'] ?></td>
-                            <td><?= $transacoes_item['status_transacao'] ?></td>
+                            <td><?= getStatusCodePag($transacoes_item['status_transacao']) ?></td>
                             <td>R$ <?= $transacoes_item['valor_transacao'] ?></td>
                             <td><a target="_blank" href="<?= $transacoes_item['url_boleto'] ?>">Abrir boleto</a></td>
                  
