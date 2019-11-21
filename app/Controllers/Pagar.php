@@ -6,8 +6,12 @@ use CodeIgniter\Controller;
 use App\Controllers\Email;
 use App\Controllers\Transacoes;
 
+/**
+ * Responsável por gerar a ID de pagamento e realizar o pagamento
+ */
 class Pagar extends Controller
 {
+    
     public function index()
     {
         return view('home');
@@ -23,6 +27,9 @@ class Pagar extends Controller
         //Bloqueia para ser acessível apenas por Ajax
         if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1001 - Não é possível acessar", 401);
 
+        /**
+         * Analisa qual o modo de desenvolvimento para setar a URL
+         */
         if (env('api.mode') == 'development') {
             $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/sessions';
         } else {
@@ -68,6 +75,7 @@ class Pagar extends Controller
         }
 
         header('Content-Type: application/json');
+
         return json_encode($json);
     }
 
@@ -81,6 +89,10 @@ class Pagar extends Controller
         //Bloqueia para ser acessível apenas por Ajax
         if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1002 - Não é possível acessar", 401);
 
+        /**
+         * Parâmetros necessários para requisição a API
+         * Dados abaixo estão apenas por via de demonstração
+         */
         $pagarBoleto = array(
             'email'         => env('api.email'),
             'email'         => env('api.email'),

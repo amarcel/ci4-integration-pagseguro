@@ -5,6 +5,11 @@ namespace App\Controllers;
 use App\Models\TransacoesModel;
 use CodeIgniter\Controller;
 
+/**
+ * Classe responsável pela comunicação com o Model transaões
+ * @author Matheus Castro <matheuscastroweb@gmail.com>
+ * @version 1.0.0
+ */
 class Transacoes extends Controller
 {
     public function __construct()

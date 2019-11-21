@@ -6,6 +6,8 @@ use CodeIgniter\Controller;
 
 /**
  * Realiza o envio de notificações por e-mail dos status das transações
+ * @author Matheus Castro <matheuscastroweb@gmail.com>
+ * @version 1.0.0
  */
 class Email extends Controller
 {
@@ -26,12 +28,13 @@ class Email extends Controller
         //Alterar no config/Email.php
         $config = array(
             'protocol' => 'smtp',
-            'SMTPHost' => env('mail.host'), 
-            'SMTPPort' => env('mail.port'), 
+            'SMTPHost' => env('mail.host'),
+            'SMTPPort' => env('mail.port'),
             'SMTPUser' => env('mail.user'),
             'SMTPPass' => env('mail.pass')
         );
 
+        //Inicializa as configurações
         $email->initialize($config);
 
         $email->setFrom('your@example.com', 'Sistema');
@@ -50,12 +53,9 @@ class Email extends Controller
             Valor:              ' . $std->grossAmount . '
 
             Nome:               ' . $std->sender->name . '
-            Endereço:           ' . $std->grossAmount . '
-
 
             <a href="' . $std->paymentLink . '">Baixar boleto</a> 
         ');
-
 
         return $email->send();
     }

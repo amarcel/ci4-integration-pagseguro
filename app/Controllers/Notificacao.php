@@ -8,6 +8,8 @@ use CodeIgniter\Controller;
 
 /**
  * Responsável por receber a requisição do PagSeguro trata-la enviar a requisição para alterar
+ * @author Matheus Castro <matheuscastroweb@gmail.com>
+ * @version 1.0.0
  */
 class Notificacao extends Controller
 {
@@ -69,12 +71,13 @@ class Notificacao extends Controller
             $transacao = new Transacoes();
             $transacao->edit($std);
             $email = new Email();
-            $email->notificar_pg($std, 2);
-
-
+            if (!$email->notificar_pg($std, 2)) {
+                $retorno = [
+                    'error'     =>  1001,
+                    'message'   => "Não foi possível enviar o e-mail de notificação."
+                ];
+            }
         } else throw new \CodeIgniter\Exceptions\ModelException("Não foi possível realizar essa requisição", 404);
-
-
         //header('Content-Type: application/json');
         return json_encode($retorno);
     }

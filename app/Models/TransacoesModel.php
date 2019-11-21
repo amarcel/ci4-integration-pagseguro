@@ -4,6 +4,11 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+/**
+ * Responsável pela comunicação com o banco de dados
+ * @author Matheus Castro <matheuscastroweb@gmail.com>
+ * @version 1.0.0
+ */
 class TransacoesModel extends Model
 {
     //Nome da tabela. Agora é obrigatório

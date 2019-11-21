@@ -12,7 +12,7 @@
 <body>
     <div class="card">
         <div class=" text-center card-header">
-            Sandbox 
+            Sandbox
         </div>
         <div class="card-body">
             <div class="text-center ">
@@ -28,7 +28,7 @@
                     <td>Tipo</td>
                     <td>Status</td>
                     <td>Valor</td>
-                  
+
                 </tr>
                 <?php if (!empty($transacoes) && is_array($transacoes)) :  ?>
                     <?php foreach ($transacoes as $transacoes_item) :  ?>
@@ -40,7 +40,7 @@
                             <td><?= getStatusTypePag($transacoes_item['tipo_transacao']) ?></td>
                             <td><?= getStatusCodePag($transacoes_item['status_transacao']) ?></td>
                             <td>R$ <?= $transacoes_item['valor_transacao'] ?></td>
-                          
+
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>

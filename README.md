@@ -36,9 +36,9 @@ Em desenvolvimento.
 
 Caso dê algum erro de instalação do CI4 com o PHP, siga estes passos [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP") 
 
-Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email`. 
-
- Alterar os parâmetros no `./env`: 
+Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email`. Serviço de e-mail utilizado: [Mailtrap](https://mailtrap.io/ "Mailtrap") 
+ 
+Alterar os parâmetros no `./env`: 
 
 ```php
 #-----------------------------
