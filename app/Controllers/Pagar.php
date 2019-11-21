@@ -163,7 +163,7 @@ class Pagar extends Controller
             $transacao->store($std);
             //Notificar por e-mail status de aguardando pagamento
             $email = new Email();
-            $email->notificar_pg($std);
+            $email->notificar_pg($std, 1);
         }
 
         //header('Content-Type: application/json');

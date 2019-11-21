@@ -68,8 +68,8 @@ class Notificacao extends Controller
             //Função para cadastrar transação
             $transacao = new Transacoes();
             $transacao->edit($std);
-           // $email = new Email();
-           // $email->notificar_pg($std);
+            $email = new Email();
+            $email->notificar_pg($std, 2);
 
 
         } else throw new \CodeIgniter\Exceptions\ModelException("Não foi possível realizar essa requisição", 404);

@@ -5,11 +5,20 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 
 /**
- * Pagina inicial com a listagem de transações
+ * Realiza o envio de notificações por e-mail dos status das transações
  */
 class Email extends Controller
 {
-    public function notificar_pg($std): bool
+    /**
+     * Realiza o envio de e-mail de acordo com cada requisição a API
+     *
+     * @param array $std
+     * @param int $who
+     * $who = 1 -> Controller | Pagar
+     * $who = 2 -> Controller | Notificação
+     * @return boolean
+     */
+    public function notificar_pg($std, $who): bool
     {
         helper('pagamento');
         $email = \Config\Services::email();
@@ -31,7 +40,7 @@ class Email extends Controller
         $email->setCC('another@another-example.com');
         $email->setBCC('them@their-example.com');
         */
-        $email->setSubject('Notificação de pagamento');
+        $email->setSubject($who == 1 ? "Pedido recebido com sucesso" : "Atualização na sua compra");
         $email->setMessage('
             Status:             ' . getStatusCodePag($std->status) . '
 

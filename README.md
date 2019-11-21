@@ -7,19 +7,18 @@ Em desenvolvimento.
 - Geração de boleto pela API do PagSeguro
 - Callback ao atualizar algum status de pagamento
 - Validação com um código de referência unico
+- Envio de confirmação por e-mail do status do pedido
 
 #### Em desenvolvimento
 
-- Envio de confirmação por e-mail do status do pedido
+- Boleto em Lightbox em um modal
 
 #### A fazer
 
 - Tratamento de erros do PagSeguro
-- Boleto em Lightbox em um modal
 - Utilizar o cURL do ci4
 - Finalização de campos do formulário
 - Pagamento por cartão de crédito
-- Envio de confirmação por e-mail do status do pedido
 
 #### Estrutura:
 | Tipo | Nome | Razão |
@@ -36,6 +35,8 @@ Em desenvolvimento.
 - Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox")
 
 Caso dê algum erro de instalação do CI4 com o PHP, siga estes passos [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP") 
+
+Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email`. 
 
  Alterar os parâmetros no `./env`: 
 
