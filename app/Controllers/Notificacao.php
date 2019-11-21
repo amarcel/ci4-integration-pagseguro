@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Transacoes;
+use App\Controllers\Email;
 use CodeIgniter\Controller;
 
 /**
@@ -67,6 +68,10 @@ class Notificacao extends Controller
             //Função para cadastrar transação
             $transacao = new Transacoes();
             $transacao->edit($std);
+           // $email = new Email();
+           // $email->notificar_pg($std);
+
+
         } else throw new \CodeIgniter\Exceptions\ModelException("Não foi possível realizar essa requisição", 404);
 
 

@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use App\Controllers\Email;
+use App\Controllers\Transacoes;
 
 class Pagar extends Controller
 {
@@ -159,7 +161,9 @@ class Pagar extends Controller
             //Função para cadastrar transação
             $transacao = new Transacoes();
             $transacao->store($std);
-            //$this->store($std);
+            //Notificar por e-mail status de aguardando pagamento
+            $email = new Email();
+            $email->notificar_pg($std);
         }
 
         //header('Content-Type: application/json');

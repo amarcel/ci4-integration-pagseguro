@@ -8,12 +8,18 @@ Em desenvolvimento.
 - Callback ao atualizar algum status de pagamento
 - Validação com um código de referência unico
 
+#### Em desenvolvimento
+
+- Envio de confirmação por e-mail do status do pedido
+
 #### A fazer
 
 - Tratamento de erros do PagSeguro
 - Boleto em Lightbox em um modal
 - Utilizar o cURL do ci4
+- Finalização de campos do formulário
 - Pagamento por cartão de crédito
+- Envio de confirmação por e-mail do status do pedido
 
 #### Estrutura:
 | Tipo | Nome | Razão |
@@ -42,6 +48,18 @@ api.email	= seu_email
 api.token	= seu_token
 ```
 Ao alterar o `api.mode: ` para `production` acessará a URL de produção do PagSeguro.
+
+Para o envio de e-mails basta alterar as para as respectivas.
+
+```php
+#--------------------------------------------------------------------
+# Config Mail
+#--------------------------------------------------------------------
+mail.host   = host
+mail.user   = user
+mail.pass   = pass
+mail.port   = port
+```
 
 Banco de dados utilizado:
 
