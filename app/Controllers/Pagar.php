@@ -18,6 +18,9 @@ class Pagar extends Controller
      */
     public function pg_session_id(): String
     {
+        //Bloqueia para ser acessível apenas por Ajax
+        if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1001 - Não é possível acessar", 401);
+
         if (env('api.mode') == 'development') {
             $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/sessions';
         } else {
@@ -73,6 +76,8 @@ class Pagar extends Controller
      */
     public function pg_boleto(): String
     {
+        //Bloqueia para ser acessível apenas por Ajax
+        if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1002 - Não é possível acessar", 401);
 
         $pagarBoleto = array(
             'email'         => env('api.email'),

@@ -11,7 +11,7 @@ class TransacoesModel extends Model
     protected $primaryKey = 'id';
 
     //Permitir os tempos a serem inseridos atualizados
-    protected $allowedFields = ['id_pedido', 'id_cliente', 'codigo_transacao', 'data_transacao', 'tipo_transacao', 'status_transacao', 'valor_transacao', 'url_boleto', 'lastEvent'];
+    protected $allowedFields = ['id_pedido', 'id_cliente', 'codigo_transacao', 'referencia_transacao', 'data_transacao', 'tipo_transacao', 'status_transacao', 'valor_transacao', 'url_boleto', 'lastEvent'];
 
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
@@ -26,10 +26,16 @@ class TransacoesModel extends Model
         return $this->find($id);
     }
 
-    public function getTransacaoPorCode($code = false)
+    /**
+     * Busca a transação pelo código de referência
+     *
+     * @param int $code
+     * @return void
+     */
+    public function getTransacaoPorRef($code = null)
     {
         if ($code) {
-            return $this->where('codigo_transacao', $code)->first();
+            return $this->where('referencia_transacao', $code)->first();
         }
     }
 }

@@ -13,6 +13,7 @@ Em desenvolvimento.
 - Boleto em Lightbox em um modal
 - Utilizar o cURL do ci4
 - Pagamento por cartão de crédito/débito
+- Alterar o REF para um HASH único
 
 #### Estrutura:
 | Tipo | Nome | Razão |
@@ -49,16 +50,18 @@ CREATE OR REPLACE DATABASE ci4_integration_pagseguro;
 
 ```sql
 CREATE OR REPLACE TABLE transacao (
-id INT PRIMARY KEY AUTO_INCREMENT,
-id_pedido INT,
-id_cliente INT, 
-codigo_transacao VARCHAR(255),
-tipo_transacao TINYINT(1),
-status_transacao VARCHAR(45),
-valor_transacao DOUBLE,
-url_boleto VARCHAR(255),
-created_at DATETIME,
-updated_at DATETIME,
-deleted_at DATETIME );
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_pedido INT NOT NULL,
+    id_cliente INT NOT NULL, 
+    codigo_transacao VARCHAR(255) NOT NULL,
+    tipo_transacao TINYINT(1) NOT NULL,
+    referencia_transacao VARCHAR(255) NOT NULL,
+    status_transacao VARCHAR(45)  NOT NULL,
+    valor_transacao DOUBLE  NOT NULL,
+    url_boleto VARCHAR(255)  NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    deleted_at DATETIME DEFAULT NULL 
+    );
 ```
 

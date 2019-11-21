@@ -21,6 +21,7 @@
             </div>
             <table class="mx-auto col-9 table">
                 <tr>
+                    <td><strong>REF</strong></td>
                     <td>Pedido</td>
                     <td>Cliente</td>
                     <td>Código</td>
@@ -32,6 +33,7 @@
                 <?php if (!empty($transacoes) && is_array($transacoes)) :  ?>
                     <?php foreach ($transacoes as $transacoes_item) :  ?>
                         <tr>
+                            <td><?= $transacoes_item['referencia_transacao'] ?></td>
                             <td><?= $transacoes_item['id_pedido'] ?></td>
                             <td><?= $transacoes_item['id_cliente'] ?></td>
                             <td><?= $transacoes_item['codigo_transacao'] ?></td>
@@ -43,7 +45,7 @@
                     <?php endforeach; ?>
                 <?php else : ?>
                     <tr>
-                        <td colspan="2">Nenhuma notícia encontrada</td>
+                        <td class="text-center" colspan="7">Nenhuma notícia encontrada</td>
                     </tr>
                 <?php endif; ?>
             </table>

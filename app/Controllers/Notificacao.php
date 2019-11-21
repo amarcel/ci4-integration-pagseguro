@@ -62,10 +62,13 @@ class Notificacao extends Controller
                 'code'      => $std
             ];
 
+            $this->response->setStatusCode(200);
+
             //Função para cadastrar transação
             $transacao = new Transacoes();
             $transacao->edit($std);
-        }
+        } else throw new \CodeIgniter\Exceptions\ModelException("Não foi possível realizar essa requisição", 404);
+
 
         //header('Content-Type: application/json');
         return json_encode($retorno);
