@@ -6,29 +6,30 @@ Em desenvolvimento.
 
 - Geração de boleto pela API do PagSeguro
 - Callback ao atualizar algum status de pagamento
+- Validação com um código de referência unico
 
 #### A fazer
 
 - Tratamento de erros do PagSeguro
 - Boleto em Lightbox em um modal
 - Utilizar o cURL do ci4
-- Pagamento por cartão de crédito/débito
-- Alterar o REF para um HASH único
+- Pagamento por cartão de crédito
 
 #### Estrutura:
 | Tipo | Nome | Razão |
 | ------ | ------ | ------ |
-| Controller  | Home  | Listagem das transações |
-| Controller | Notificação  | Receber a requisição do PagSeguro |
-|  Controller | Pagar  | Enviar as requisições ao PagSeguro |
-| Controller  | Transações  | Comunicação o banco de dados |
-| Helper  | pagamento  | Conversão de valores para o cliente |
-| Model  | Transações  | Operações no banco de dados |
+| Controller | Home.php | Listagem das transações |
+| Controller | Notificação.php | Receber a requisição do PagSeguro |
+| Controller | Pagar.php | Enviar as requisições ao PagSeguro |
+| Controller | Transações.php | Comunicação o banco de dados |
+| Helper | pagamento.php | Conversão de valores para o cliente |
+| Model | Transações.php | Operações no banco de dados |
 
 #### Utilização:
 A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro")
-
 Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox")
+
+Caso dê algum erro de instalação do CI4 com o PHP, siga estes passos [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP") 
 
  Alterar os parâmetros no `./env`: 
 

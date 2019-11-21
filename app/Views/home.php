@@ -35,7 +35,8 @@
 				</div>
 				<div class="form-group">
 					<label class="text-left">Referência</label>
-					<input type="text" class="my-1 form-control" readonly name="ref" value="<?= rand(10000, 99999) ?>">
+					<input type="text" class="my-1 form-control" readonly name="ref" value="<?= md5(uniqid(rand(), true)) ?>">
+					<p class="text-muted">Esta é a referência única ao seu pagamento</p>
 				</div>
 
 				<div class="form-group">

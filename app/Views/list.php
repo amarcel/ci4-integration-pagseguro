@@ -12,7 +12,7 @@
 <body>
     <div class="card">
         <div class=" text-center card-header">
-            Sandbox
+            Sandbox 
         </div>
         <div class="card-body">
             <div class="text-center ">
@@ -28,19 +28,19 @@
                     <td>Tipo</td>
                     <td>Status</td>
                     <td>Valor</td>
-                    <td>Boleto</td>
+                  
                 </tr>
                 <?php if (!empty($transacoes) && is_array($transacoes)) :  ?>
                     <?php foreach ($transacoes as $transacoes_item) :  ?>
                         <tr>
-                            <td><?= $transacoes_item['referencia_transacao'] ?></td>
+                            <td class="text-uppercase"><?= substr($transacoes_item['referencia_transacao'], 1, 5) ?></td>
                             <td><?= $transacoes_item['id_pedido'] ?></td>
                             <td><?= $transacoes_item['id_cliente'] ?></td>
                             <td><?= $transacoes_item['codigo_transacao'] ?></td>
                             <td><?= getStatusTypePag($transacoes_item['tipo_transacao']) ?></td>
                             <td><?= getStatusCodePag($transacoes_item['status_transacao']) ?></td>
                             <td>R$ <?= $transacoes_item['valor_transacao'] ?></td>
-                            <td><a target="_blank" href="<?= $transacoes_item['url_boleto'] ?>">Abrir boleto</a></td>
+                          
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>
@@ -51,7 +51,7 @@
             </table>
         </div>
         <div class="card-footer text-muted text-center">
-            <a href="/pagar">Criar novo boleto</a>
+            <a href="/pagar">Criar novo pagamento</a>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>

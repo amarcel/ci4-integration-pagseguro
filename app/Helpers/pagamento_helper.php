@@ -32,12 +32,12 @@ function getStatusCodePag(int $position = null): String
  * @param int $position
  * @return String
  */
-function getStatusTypePag(int $position = null): String
+function getStatusTypePag(int $position = null, String $url = null): String
 {
     if (is_numeric($position)) {
         $types = array(
             1 => '<span class="badge badge-secondary">Cartão de crédito</span>',
-            2 => '<span class="badge badge-secondary">Boleto</span>',
+            2 => '<span class="badge badge-secondary"><a class="text-light" target="_blank" href="'.$url.'">Baixar boleto</span>',
             3 => '<span class="badge badge-secondary">Débito online (TEF)</span>',
             4 => '<span class="badge badge-secondary">Saldo PagSeguro</span>',
             5 => '<span class="badge badge-secondary">Oi Paggo</span>',

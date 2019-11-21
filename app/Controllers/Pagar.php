@@ -94,7 +94,7 @@ class Pagar extends Controller
             'itemAmount1'       => $this->request->getVar('valor'),
             'itemQuantity1'     => '1',
 
-            'notificationURL'   => '',
+            'notificationURL'   => base_url('notificacao'),
 
             'reference'         => $this->request->getVar('ref'),
             'senderName'        => $this->request->getVar('nome'),
