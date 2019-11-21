@@ -21,7 +21,7 @@ class TransacoesModel extends Model
         if ($id === false) {
             //Caso queira trazer o deletado com o deletedAt preenchido
             //$this->withDeleted();
-            return $this->findAll();
+            return $this->orderBy('id', 'desc')->findAll();
         }
         return $this->find($id);
     }

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\TransacoesModel;
+use App\Controllers\Transacoes;
 use CodeIgniter\Controller;
 
 class Notificacao extends Controller
@@ -15,8 +15,10 @@ class Notificacao extends Controller
 
     public function index()
     {
-        $data['email'] = env('api.email');
-        $data['token'] = env('api.token');
+        $data = array(
+            'email' => env('api.email'),
+            'token' => env('api.token')
+        );
 
         $data = http_build_query($data);
 
@@ -55,29 +57,16 @@ class Notificacao extends Controller
 
             $retorno = [
                 'error'     =>  0,
-                'code'   => $std
+                'code'      => $std
             ];
 
             //Função para cadastrar transação
-            $this->edit($std);
+            $transacao = new Transacoes();
+            $transacao->edit($std);
+            //$this->edit($std);
         }
 
         //header('Content-Type: application/json');
         echo json_encode($retorno);
-    }
-
-    public function edit($std = false)
-    {
-        helper('form');
-        helper('pagamento');
-        $model = new TransacoesModel();
-
-        $transaction = $model->getTransacaoPorCode($std->code);
-
-        $model->save([
-            'id'    => $transaction['id'],
-            'status_transacao'  => $std->status
-
-        ]);
     }
 }

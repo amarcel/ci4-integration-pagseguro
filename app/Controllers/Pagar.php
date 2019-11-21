@@ -3,18 +3,20 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use App\Models\TransacoesModel;
-
 
 class Pagar extends Controller
 {
     public function index()
     {
-
         return view('home');
     }
 
-    public function pg_session_id()
+    /**
+     * Pegar o ID da sessão do PagSeguro
+     *
+     * @return String
+     */
+    public function pg_session_id(): String
     {
         if (env('api.mode') == 'development') {
             $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/sessions';
@@ -61,44 +63,53 @@ class Pagar extends Controller
         }
 
         header('Content-Type: application/json');
-        echo json_encode($json);
+        return json_encode($json);
     }
 
-    public function pg_boleto()
+    /**
+     * Realizar solicitação de pagamento para o PagSeguro (Boleto)
+     *
+     * @return String json
+     */
+    public function pg_boleto(): String
     {
-        $pagarBoleto['email'] = env('api.email');
-        $pagarBoleto['token'] = env('api.token');
-        $pagarBoleto['paymentMode'] = 'default';
-        $pagarBoleto['paymentMethod'] = 'boleto';
-        $pagarBoleto['receiverEmail'] = env('api.email');
-        $pagarBoleto['currency'] = 'BRL';
-        $pagarBoleto['extraAmount'] = '';
 
-        $pagarBoleto['itemId1'] = '1';
-        $pagarBoleto['itemDescription1'] = 'Teste';
-        $pagarBoleto['itemAmount1'] = $this->request->getVar('valor');
-        $pagarBoleto['itemQuantity1'] = '1';
+        $pagarBoleto = array(
+            'email'         => env('api.email'),
+            'email'         => env('api.email'),
+            'token'         => env('api.token'),
+            'paymentMode'   => 'default',
+            'paymentMethod' => 'boleto',
+            'receiverEmail' => env('api.email'),
+            'currency'      => 'BRL',
+            'extraAmount'   => '',
 
-        $pagarBoleto['notificationURL'] = '';
+            'itemId1'           => '1',
+            'itemDescription1'  => 'Teste',
+            'itemAmount1'       => $this->request->getVar('valor'),
+            'itemQuantity1'     => '1',
 
-        $pagarBoleto['reference'] = $this->request->getVar('ref');
-        $pagarBoleto['senderName'] = $this->request->getVar('nome');
-        $pagarBoleto['senderCPF'] = $this->request->getVar('cpf');
-        $pagarBoleto['senderAreaCode'] = '21';
-        $pagarBoleto['senderPhone'] = '998551629';
-        $pagarBoleto['senderEmail'] = $this->request->getVar('email');
-        $pagarBoleto['senderHash'] = $this->request->getVar('hash_pagamento');
+            'notificationURL'   => '',
 
-        $pagarBoleto['shippingAddressStreet'] = 'Av. Brig. Faria Lima';
-        $pagarBoleto['shippingAddressNumber'] = '1384';
-        $pagarBoleto['shippingAddressComplement'] = '5o andar';
-        $pagarBoleto['shippingAddressDistrict'] = 'Jardim Paulistano';
-        $pagarBoleto['shippingAddressPostalCode'] = '01452002';
-        $pagarBoleto['shippingAddressCity'] = 'Sao Paulo';
-        $pagarBoleto['shippingAddressState'] = 'SP';
-        $pagarBoleto['shippingAddressCountry'] = 'BRA';
-        $pagarBoleto['shippingType'] = '1';
-        $pagarBoleto['shippingCost'] = '1.00';
+            'reference'         => $this->request->getVar('ref'),
+            'senderName'        => $this->request->getVar('nome'),
+            'senderCPF'         => $this->request->getVar('cpf'),
+            'senderAreaCode'    => '21',
+            'senderPhone'       => '998551629',
+            'senderEmail'       => $this->request->getVar('email'),
+            'senderHash'        => $this->request->getVar('hash_pagamento'),
+
+            'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
+            'shippingAddressNumber'     => '1384',
+            'shippingAddressComplement' => '5o andar',
+            'shippingAddressDistrict'   => 'Jardim Paulistano',
+            'shippingAddressPostalCode' => '01452002',
+            'shippingAddressCity'       => 'Sao Paulo',
+            'shippingAddressState'      => 'SP',
+            'shippingAddressCountry'    => 'BRA',
+            'shippingType'              => '1',
+            'shippingCost'              => '1.00'
+        );
 
         if (env('api.mode') == 'development') {
             $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/';
@@ -137,30 +148,16 @@ class Pagar extends Controller
 
             $retorno = [
                 'error'     =>  0,
-                'code'   => $std
+                'code'      => $std
             ];
 
             //Função para cadastrar transação
-            $this->store($std);
+            $transacao = new Transacoes();
+            $transacao->store($std);
+            //$this->store($std);
         }
 
         //header('Content-Type: application/json');
-        echo json_encode($retorno);
-    }
-
-    private function store($std): void
-    {
-        //Load model TransaçõesModel - ADD USE HEADER THE CODE
-        $model = new TransacoesModel();
-
-        $model->save([
-            'id_pedido'         => rand(100, 500),
-            'id_cliente'        => rand(100, 500),
-            'codigo_transacao'  => $std->code,
-            'tipo_transacao'    => $std->type,
-            'status_transacao'  => $std->status,
-            'valor_transacao'   => $std->grossAmount,
-            'url_boleto'        => $std->paymentLink
-        ]);
+        return json_encode($retorno);
     }
 }

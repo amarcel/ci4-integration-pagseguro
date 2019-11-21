@@ -6,7 +6,6 @@ Em desenvolvimento.
 
 - Tratamento de erros do PagSeguro
 - Boleto em Lightbox em um modal
-- Fazer retorno de transação
 - Utilizar o cURL do ci4
 - Pagamento por cartão de crédito/débito
 

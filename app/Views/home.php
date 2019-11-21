@@ -44,7 +44,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">R$</div>
 						</div>
-						<input type="text" class="form-control" readonly name="valor" value="<?= rand(100.1, 200.9).'.'.rand(10, 99) ?>">
+						<input type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
 					</div>
 				</div>
 				<input type="submit" class="btn btn-info btn-pagar-boleto" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
@@ -52,8 +52,11 @@
 
 		</div>
 		<div class="card-footer text-muted text-center">
-			Status de pagamento: <span class="msg">**********</span>
+			<span class="msg">Status de pagamento
+
+			</span>
 		</div>
+
 	</div>
 
 	<script>
@@ -71,7 +74,7 @@
 				data: $('.form').serialize(),
 				dataType: 'json',
 				beforeSend: function() {
-					$('.msg').html('Enviando dados')
+					$('.msg').html('<div class="spinner-border" role="status"><span class="sr-only">Enviando dados...</span></div>')
 				}
 			}).done(function(res) {
 				console.log(res);

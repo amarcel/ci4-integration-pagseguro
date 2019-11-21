@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use App\Models\TransacoesModel;
 use CodeIgniter\Controller;
@@ -13,7 +15,4 @@ class Home extends Controller
 		$data['transacoes'] = $model->getTransacao();
 		return view('list', $data);
 	}
-
-
-
 }
