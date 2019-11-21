@@ -2,6 +2,11 @@
 
 Em desenvolvimento.
 
+#### Funcionalidades
+
+- Geração de boleto pela API do PagSeguro
+- Callback ao atualizar algum status de pagamento
+
 #### A fazer
 
 - Tratamento de erros do PagSeguro
