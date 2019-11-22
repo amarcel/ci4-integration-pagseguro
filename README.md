@@ -19,6 +19,7 @@ Em desenvolvimento.
 - Utilizar o cURL do ci4
 - Finalização de campos do formulário
 - Pagamento por cartão de crédito
+- Aviso de vencimento de boleto a 1 dia do vencimento
 
 #### Estrutura:
 | Tipo | Nome | Razão |
@@ -33,8 +34,16 @@ Em desenvolvimento.
 #### Utilização:
 - A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro")
 - Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox")
-- Caso dê algum erro de instalação do CI4 com o PHP, siga estes passos [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP") 
 - Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email`. Serviço de e-mail utilizado: [Mailtrap](https://mailtrap.io/ "Mailtrap") 
+- Caso dê algum erro de instalação do CI4 com o PHP, siga estes passos [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP") 
+
+Extensões necessárias do `php.ini`
+
+```php
+extension=mbstring
+extension=mysqli
+extension=curl
+```
 
 Alterar os parâmetros no `./env`: 
 
