@@ -14,6 +14,7 @@
         <div class=" text-center card-header">
             Sandbox
         </div>
+
         <div class="card-body">
             <div class="text-center ">
                 <h5 class="card-title">Listagens de transações</h5>
@@ -28,6 +29,7 @@
                     <td>Tipo</td>
                     <td>Status</td>
                     <td>Valor</td>
+                    <td>Link</td>
 
                 </tr>
                 <?php if (!empty($transacoes) && is_array($transacoes)) :  ?>
@@ -37,9 +39,10 @@
                             <td><?= $transacoes_item['id_pedido'] ?></td>
                             <td><?= $transacoes_item['id_cliente'] ?></td>
                             <td><?= $transacoes_item['codigo_transacao'] ?></td>
-                            <td><?= getStatusTypePag($transacoes_item['tipo_transacao'], $transacoes_item['url_boleto']) ?></td>
+                            <td><?= getStatusTypePag($transacoes_item['tipo_transacao']) ?></td>
                             <td><?= getStatusCodePag($transacoes_item['status_transacao']) ?></td>
                             <td>R$ <?= $transacoes_item['valor_transacao'] ?></td>
+                            <td><a href="javascript:;" id="link" onclick="buscar_boleto('<?= $transacoes_item['url_boleto'] ?> ');">Acessar </a> </td>
 
                         </tr>
                     <?php endforeach; ?>
@@ -49,6 +52,36 @@
                     </tr>
                 <?php endif; ?>
             </table>
+        </div>
+        <script>
+            function buscar_boleto(link) {
+                console.log(link);
+
+                $("#iframe_boleto").attr("src", "" + link + "");
+                $(".aviso").html('Caso não consiga visualizar o boleto <a target="_blank" class="url_bol" href="' + link + '">Clique aqui</a>');
+                $('.loading').html('<div class="spinner-border text-center" role="status"><span class="sr-only">Enviando dados...</span></div>')
+                setTimeout(function() {
+                    $('.loading').hide();
+                }, 3000);
+                $('#acessar').modal('show');
+            }
+        </script>
+        <div class="modal fade" id="acessar" tabindex="-1" role="dialog" aria-labelledby="acessar-link" aria-hidden="true">
+            <div style="height: 100%;  width: 100%" class="modal-dialog modal-xl" role="document">
+                <div style="height: 100%;  width: 100%" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Boleto cobrança</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="aviso"></p>
+                        <p class="loading"></p>
+                        <iframe id="iframe_boleto" src="" width="100%" height="100%" style="border: none;"></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-footer text-muted text-center">
             <a href="/pagar">Criar novo pagamento</a>

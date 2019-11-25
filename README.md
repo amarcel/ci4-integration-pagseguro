@@ -8,10 +8,10 @@ Em desenvolvimento.
 - Callback ao atualizar algum status de pagamento
 - Validação com um código de referência unico
 - Envio de confirmação por e-mail do status do pedido
+- Boleto em Lightbox em um modal
 
 #### Em desenvolvimento
 
-- Boleto em Lightbox em um modal
 
 #### A fazer
 

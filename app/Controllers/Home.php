@@ -12,6 +12,10 @@ use CodeIgniter\Controller;
  */
 class Home extends Controller
 {
+	public function __construct()
+	{
+		header("Access-Control-Allow-Origin: https://sandbox.pagseguro.uol.com.br");
+	}
 	public function index()
 	{
 		helper('pagamento');
