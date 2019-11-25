@@ -31,6 +31,15 @@ Em desenvolvimento.
 | Helper | pagamento.php | Conversão de valores para o cliente |
 | Model | Transações.php | Operações no banco de dados |
 
+
+#### Funcionamento:
+Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
+
+![listagem](https://user-images.githubusercontent.com/45601574/69562541-29d7c280-0f8e-11ea-871e-242c1d648e16.gif)
+
+![criar_boleto](https://user-images.githubusercontent.com/45601574/69562562-32c89400-0f8e-11ea-9d1e-8b0a3f664e70.gif)
+
+
 #### Utilização:
 - A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro")
 - Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox")
