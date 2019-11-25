@@ -5,10 +5,12 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Controllers\Email;
 use App\Controllers\Transacoes;
-
 /**
- * Responsável por gerar a ID de pagamento e realizar o pagamento
+ *  Responsável por gerar a ID de pagamento e realizar o pagamento
+ * @author Matheus Castro <matheuscastroweb@gmail.com>
+ * @version 1.0.0
  */
+
 class Pagar extends Controller
 {
     
@@ -24,8 +26,10 @@ class Pagar extends Controller
      */
     public function pg_session_id(): String
     {
+        helper('cookie');
         //Bloqueia para ser acessível apenas por Ajax
         if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1001 - Não é possível acessar", 401);
+
 
         /**
          * Analisa qual o modo de desenvolvimento para setar a URL

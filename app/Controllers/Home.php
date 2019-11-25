@@ -19,9 +19,16 @@ class Home extends Controller
 	public function index()
 	{
 		helper('pagamento');
+		
 
 		$model = new TransacoesModel();
-		$data['transacoes'] = $model->getTransacao();
+
+		$data = [
+            'transacoes' => $model->paginate(5),
+            'pager' => $model->pager
+		];
+		
+		//$data['transacoes'] = $model->getTransacao();
 		return view('list', $data);
 	}
 }

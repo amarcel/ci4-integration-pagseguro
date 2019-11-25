@@ -38,7 +38,7 @@ function getStatusCodePag(int $position = null): String
  * @param int $position
  * @return String
  */
-function getStatusTypePag(int $position = null, String $url = null): String
+function getStatusTypePag(int $position = null): String
 {
     if (is_numeric($position)) {
         $types = array(

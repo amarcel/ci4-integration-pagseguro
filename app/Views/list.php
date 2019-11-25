@@ -52,6 +52,17 @@
                     </tr>
                 <?php endif; ?>
             </table>
+            <style>
+                li {
+                    list-style-type: none;
+                    display: inline;
+                    margin: 0 15px;
+                }
+            </style>
+            <div class="text-center " style="">
+                <?= $pager->simpleLinks() ?>
+            </div>
+
         </div>
         <script>
             function buscar_boleto(link) {
