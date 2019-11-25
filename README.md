@@ -2,7 +2,7 @@
 
 Em desenvolvimento.
 
-#### Funcionalidades
+### Funcionalidades
 
 - Geração de boleto pela API do PagSeguro
 - Callback ao atualizar algum status de pagamento
@@ -10,10 +10,10 @@ Em desenvolvimento.
 - Envio de confirmação por e-mail do status do pedido
 - Boleto em Lightbox em um modal
 
-#### Em desenvolvimento
+### Em desenvolvimento
 
 
-#### A fazer
+### A fazer
 
 - Tratamento de erros do PagSeguro
 - Utilizar o cURL do ci4
@@ -21,7 +21,7 @@ Em desenvolvimento.
 - Pagamento por cartão de crédito
 - Aviso de vencimento de boleto a 1 dia do vencimento
 
-#### Estrutura:
+### Estrutura:
 | Tipo | Nome | Razão |
 | ------ | ------ | ------ |
 | Controller | Home.php | Listagem das transações |
@@ -32,15 +32,21 @@ Em desenvolvimento.
 | Model | Transações.php | Operações no banco de dados |
 
 
-#### Funcionamento:
+### Funcionamento:
 Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
 
+#### Listagem de todas transações:
+
 ![listagem](https://user-images.githubusercontent.com/45601574/69562541-29d7c280-0f8e-11ea-871e-242c1d648e16.gif)
+
+<br>
+
+#### Página para gerar o boleto:
 
 ![criar_boleto](https://user-images.githubusercontent.com/45601574/69562562-32c89400-0f8e-11ea-9d1e-8b0a3f664e70.gif)
 
 
-#### Utilização:
+### Utilização:
 - A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro")
 - Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox")
 - Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email`. Serviço de e-mail utilizado: [Mailtrap](https://mailtrap.io/ "Mailtrap") 
