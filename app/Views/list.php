@@ -66,14 +66,19 @@
         </div>
         <script>
             function buscar_boleto(link) {
-                console.log(link);
-
+                $('.loading').show();
+                $('#iframe_boleto').hide();
+                
                 $("#iframe_boleto").attr("src", "" + link + "");
                 $(".aviso").html('Caso não consiga visualizar o boleto <a target="_blank" class="url_bol" href="' + link + '">Clique aqui</a>');
-                $('.loading').html('<div class="spinner-border text-center" role="status"><span class="sr-only">Enviando dados...</span></div>')
-                setTimeout(function() {
+                $('.loading').html('<div class="spinner-border text-center" role="status"><span class="sr-only">Enviando dados...</span></div>');
+                $('#iframe_boleto').on('load',function(){
                     $('.loading').hide();
-                }, 3000);
+                    $('#iframe_boleto').show();
+                });
+                /*setTimeout(function() {
+                    $('.loading').hide();
+                }, 3000);*/
                 $('#acessar').modal('show');
             }
         </script>
