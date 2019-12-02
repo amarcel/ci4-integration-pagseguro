@@ -42,7 +42,19 @@
                             <td><?= getStatusTypePag($transacoes_item['tipo_transacao']) ?></td>
                             <td><?= getStatusCodePag($transacoes_item['status_transacao']) ?></td>
                             <td>R$ <?= $transacoes_item['valor_transacao'] ?></td>
-                            <td><a href="javascript:;" id="link" onclick="buscar_boleto('<?= $transacoes_item['url_boleto'] ?> ');">Acessar </a> </td>
+
+                            <td>
+                                <?php if($transacoes_item['tipo_transacao'] == 1 ){
+                                ?>
+                                <p>Sem link</p>
+                                <?php
+                                } else{
+                                ?>
+                                <a href="javascript:;" id="link" onclick="buscar_boleto('<?= $transacoes_item['url_boleto'] ?> ');">Acessar </a>
+                                <?php
+                                }
+                                ?> 
+                            </td>
 
                         </tr>
                     <?php endforeach; ?>
@@ -100,7 +112,7 @@
             </div>
         </div>
         <div class="card-footer text-muted text-center">
-            <a href="/pagar">Criar novo pagamento</a>
+            Criar novo pagamento com: <a class="mx-2" href="/pagar">Boleto</a><a href="/pagar/credito">Cartão de crédito</a>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
