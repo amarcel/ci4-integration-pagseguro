@@ -19,8 +19,9 @@
 				<h5 class="card-title">Pagamento API PagSeguro</h5>
 				<p class="card-text">Esta funcionalidade está em desenvolvimento.</p>
 			</div>
-			<form class="form mx-auto col-5">
+			<form class="form mx-auto col-5" >
 				<input type="hidden" class="form-control" id="hash_pagamento" name="hash_pagamento">
+				<input type="hidden" class="form-control" id="credit_token" name="credit_token">
 				<div class="form-group mt-4 mb-0">
 					<label class="text-left">Nome completo</label>
 					<input type="text" class="my-1 form-control" readonly name="nome" placeholder="Gabriela Sueli Aline Rodrigues" value="Gabriela Sueli Aline Rodrigues">
@@ -34,6 +35,26 @@
 					<input type="text" class="my-1 form-control" readonly name="email" placeholder="v15638893625370231056@sandbox.pagseguro.com.br" value="c19552458299156648365@sandbox.pagseguro.com.br">
 				</div>
 				<div class="form-group">
+					<label class="text-left">Número cartão</label>
+					<input id="ncartao" type="text" class="my-1 form-control" readonly name="ncartao" placeholder="4111111111111111" value="4111111111111111">
+				</div>
+				<div class="form-group">
+					<label class="text-left">Validade</label>
+					<input id="validade" type="text" class="my-1 form-control" readonly name="validade" placeholder="12/2030" value="12/2030">
+				</div>
+				<div class="form-group">
+					<label class="text-left">CVV</label>
+					<input id="cvv" type="text" class="my-1 form-control" readonly name="cvv" placeholder="123" value="123">
+				</div>
+				<div class="form-group">
+					<label class="text-left">Quantidade de Parcelas</label>
+					<input id="parcelas" type="text" class="my-1 form-control" readonly name="parcelas" placeholder="2" value="2">
+				</div>
+				<div class="form-group">
+						<label class="my-1">Valor da Parcela</label>
+						<input type="text" class="my-1 form-control" readonly id="vparcela" name="valor_parcela">
+					</div>
+				<div class="form-group">
 					<label class="text-left">Referência</label>
 					<input type="text" class="my-1 form-control" readonly name="ref" value="<?= md5(uniqid(rand(), true)) ?>">
 					<p class="text-muted">Esta é a referência única ao seu pagamento</p>
@@ -45,10 +66,11 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">R$</div>
 						</div>
-						<input id="valor" type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
+						<input id="valor" type="text" class="form-control" readonly name="valor" value="100">
 					</div>
+					
 				</div>
-				<input type="submit" class="btn btn-info btn-pagar-boleto" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
+				<input type="submit" class="btn btn-info btn-pagar-credito" onclick="gerarToken(event)" value="Pagar com boleto bancário"></input>
 			</form>
 
 		</div>
@@ -61,19 +83,85 @@
 	</div>
 
 	<script>
-		
+		//Função própria da API para calcular o valor total e o valor das parcelas
+		function getInstallments(){
+			var parc = $('#parcelas').val() - 1;
+			PagSeguroDirectPayment.getInstallments({
+		        amount: ($('#valor').val()),
+		        maxInstallmentNoInterest: parc,
+		        brand: 'visa',
+		        success: function(res){
+		       	    // Retorna as opções de parcelamento disponíveis
+		       	    console.log(res);
+		        	var valor_parcela = res.installments.visa[parc].installmentAmount;
+		        	console.log(parseFloat(valor_parcela));
+		        	var valor = res.installments.visa[parc].totalAmount;
+		        	
+		        	$('#vparcela').val(parseFloat(valor_parcela));
+		        	$('#valor').val(parseFloat(valor));
+		        	/*if(jQuery.type(valor_parcela) == "float"){
+		        		alert('boa');
+		        	} else{
+		        		alert('aiai');
+		        	}
+		        	alert(isNaN($('#vparcela').val()));*/
+		       },
+		        error: function(response) {
+		       	    // callback para chamadas que falharam.
+		       },
+		        complete: function(response){
+		            // Callback para todas chamadas.
+		       }
+			});
+		}
 
-		function pagarBoleto(e) {
+		function gerarToken(e) {
 			e.preventDefault();
+
+			var numero = $('#ncartao').val();
+			var cvv = $('#cvv').val();
+			var validade = $('#validade').val();
+			validade = validade.split("/");
+			var mes = validade[0];
+			var ano = validade[1];
+
+			//PagSeguroDirectPayment.setSessionId();
+			PagSeguroDirectPayment.createCardToken({
+			   cardNumber: numero, // Número do cartão de crédito
+			   brand: 'visa', // Bandeira do cartão
+			   cvv: 'cvv', // CVV do cartão
+			   expirationMonth: mes, // Mês da expiração do cartão
+			   expirationYear: ano, // Ano da expiração do cartão, é necessário os 4 dígitos.
+			   success: function(response) {
+			        // Retorna o cartão tokenizado.
+			        tokenPagamento = response.card.token;
+
+			        //Verifica se token não veio vazio
+			        if(!tokenPagamento){
+			        	alert('Cartão inválido');
+			        } else{
+			        	//coloca token no input type hidden
+			        	$('#credit_token').val(tokenPagamento);
+			        	pagarCartao();
+			        }
+			   },
+			   error: function(response) {
+					    // Callback para chamadas que falharam.
+					   // alert('Erro ao gerar token de pagamento, verifique os dados do cartão e tente novamenteq');
+					    console.log(response);
+			   }
+			});
+		}
+
+		function pagarCartao(){
+			getInstallments();
 
 			var hash_pagamento = PagSeguroDirectPayment.getSenderHash();
 			$('#hash_pagamento').val(hash_pagamento);
-
-			//alert(hash_pagamento);
-
+			//$('.form').submit();
 			$.ajax({
 				type: 'post',
-				url: 'pagar/pg_boleto',
+				url: 'pg_cartao',
 				data: $('.form').serialize(),
 				dataType: 'json',
 				beforeSend: function() {
@@ -95,7 +183,7 @@
 
 		function setSessionIdPagSeguro() {
 			$.ajax({
-				url: 'pagar/pg_session_id',
+				url: 'pg_session_id_credito',
 				dataType: 'json',
 				success: function(res) {
 					console.log(res);
