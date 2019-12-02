@@ -31,7 +31,7 @@
 				</div>
 				<div class="form-group">
 					<label class="text-left">E-mail</label>
-					<input type="text" class="my-1 form-control" readonly name="email" placeholder="v15638893625370231056@sandbox.pagseguro.com.br" value="c19552458299156648365@sandbox.pagseguro.com.br">
+					<input type="text" class="my-1 form-control" readonly name="email" placeholder="v15638893625370231056@sandbox.pagseguro.com.br" value="v15638893625370231056@sandbox.pagseguro.com.br">
 				</div>
 				<div class="form-group">
 					<label class="text-left">Referência</label>
@@ -45,7 +45,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">R$</div>
 						</div>
-						<input id="valor" type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
+						<input type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
 					</div>
 				</div>
 				<input type="submit" class="btn btn-info btn-pagar-boleto" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
@@ -61,8 +61,6 @@
 	</div>
 
 	<script>
-		
-
 		function pagarBoleto(e) {
 			e.preventDefault();
 

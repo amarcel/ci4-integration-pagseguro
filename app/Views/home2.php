@@ -19,7 +19,7 @@
 				<h5 class="card-title">Pagamento API PagSeguro</h5>
 				<p class="card-text">Esta funcionalidade está em desenvolvimento.</p>
 			</div>
-			<form class="form mx-auto col-5" >
+			<form class="form mx-auto col-5" method="POST">
 				<input type="hidden" class="form-control" id="hash_pagamento" name="hash_pagamento">
 				<input type="hidden" class="form-control" id="credit_token" name="credit_token">
 				<div class="form-group mt-4 mb-0">
@@ -52,7 +52,7 @@
 				</div>
 				<div class="form-group">
 						<label class="my-1">Valor da Parcela</label>
-						<input type="text" class="my-1 form-control" readonly id="vparcela" name="valor_parcela">
+						<input type="text" class="my-1 form-control" readonly id="vparcela" name="valor_parcela" value="50.50">
 					</div>
 				<div class="form-group">
 					<label class="text-left">Referência</label>
@@ -88,7 +88,7 @@
 			var parc = $('#parcelas').val() - 1;
 			PagSeguroDirectPayment.getInstallments({
 		        amount: ($('#valor').val()),
-		        maxInstallmentNoInterest: parc,
+		        maxInstallmentNoInterest: $('#parcelas').val(),
 		        brand: 'visa',
 		        success: function(res){
 		       	    // Retorna as opções de parcelamento disponíveis
@@ -97,14 +97,8 @@
 		        	console.log(parseFloat(valor_parcela));
 		        	var valor = res.installments.visa[parc].totalAmount;
 		        	
-		        	$('#vparcela').val(parseFloat(valor_parcela));
-		        	$('#valor').val(parseFloat(valor));
-		        	/*if(jQuery.type(valor_parcela) == "float"){
-		        		alert('boa');
-		        	} else{
-		        		alert('aiai');
-		        	}
-		        	alert(isNaN($('#vparcela').val()));*/
+		        	$('#vparcela').attr('value',parseFloat(valor_parcela));
+		        	$('#valor').attr('value',parseFloat(valor));
 		       },
 		        error: function(response) {
 		       	    // callback para chamadas que falharam.
@@ -158,6 +152,8 @@
 
 			var hash_pagamento = PagSeguroDirectPayment.getSenderHash();
 			$('#hash_pagamento').val(hash_pagamento);
+			
+			//$('.form').attr('action','pg_cartao');
 			//$('.form').submit();
 			$.ajax({
 				type: 'post',
@@ -165,12 +161,13 @@
 				data: $('.form').serialize(),
 				dataType: 'json',
 				beforeSend: function() {
-					$('.msg').html('<div class="spinner-border" role="status"><span class="sr-only">Enviando dados...</span></div>')
+					$('.btn-pagar-credito').hide();
+					$('.msg').html('<div class="spinner-border" role="status"><span class="sr-only">Enviando dados...</span></div>');
 				}
 			}).done(function(res) {
 				console.log(res);
 				if (res.error == 0) {
-					$('.msg').html('Enviado com sucesso. Link do boleto: <a target="_blank" href="' + res.code.paymentLink + '">Clique aqui para baixar</a>');
+					$('.msg').html('Enviado com sucesso. Código da compra: ' + res.code.code);
 				} else {
 					$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
 				}

@@ -36,6 +36,20 @@ class Transacoes extends Controller
         ]);
     }
 
+    public function storeCredit($std = null): void
+    {
+        $model = new TransacoesModel();
+        $model->save([
+            'id_pedido'             => rand(100, 500),
+            'id_cliente'            => rand(100, 500),
+            'codigo_transacao'      => $std->code,
+            'referencia_transacao'  => $std->reference,
+            'tipo_transacao'        => $std->paymentMethod->type,
+            'status_transacao'      => $std->status,
+            'valor_transacao'       => $std->grossAmount
+        ]);
+    }
+
     /**
      * Atualizar uma transação
      *

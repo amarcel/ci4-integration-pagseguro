@@ -21,9 +21,8 @@ CI_ENVIRONMENT = development
 #--------------------------------------------------------------------
 
 api.mode    = development
-api.email   = juanvictoroliveira2009@gmail.com
-api.token = A4C93E8A1AE4406FBC88C48B196AFB0B
-#api.token   = b5bb8673-48cc-4c25-b5bc-0518acc41a2d95da5e10418ab1bdf811b12a32c148eac3b5-2f31-4268-b481-9c57ff687eb8
+api.email   = email
+api.token   = token
 
 #--------------------------------------------------------------------
 # Config Mail
