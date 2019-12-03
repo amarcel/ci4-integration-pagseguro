@@ -9,16 +9,17 @@ Em desenvolvimento.
 - Validação com um código de referência unico
 - Envio de confirmação por e-mail do status do pedido
 - Boleto em Lightbox em um modal
+- Pagamento por cartão de crédito
 
 ### Em desenvolvimento
 
+- Correção do bug de parcelas
+- Tratamento de erros do PagSeguro
 
 ### A fazer
 
-- Tratamento de erros do PagSeguro
 - Utilizar o cURL do ci4
 - Finalização de campos do formulário
-- Pagamento por cartão de crédito
 - Aviso de vencimento de boleto a 1 dia do vencimento
 
 ### Estrutura:

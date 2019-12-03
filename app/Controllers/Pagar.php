@@ -16,7 +16,11 @@ class Pagar extends Controller
     
     public function index()
     {
-        return view('home');
+        return view('boleto');
+    }
+    public function credito()
+    {
+        return view('credito');
     }
 
     /**
@@ -246,7 +250,10 @@ class Pagar extends Controller
     }
 
      public function pg_cartao(): String
-    {
+    {   
+        /*echo '<pre>';
+        print_r( $this->request->getVar() ) ;
+        exit();*/
         //Bloqueia para ser acessível apenas por Ajax
         if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1002 - Não é possível acessar", 401);
 
@@ -272,7 +279,7 @@ class Pagar extends Controller
             'currency'      => 'BRL',  
             'receiverEmail' => env('api.email'),
             
-            'extraAmount'   => '1.00',
+            'extraAmount'   => '0.00',
 
             'itemId1'           => '1',
             'itemDescription1'  => 'Teste',
