@@ -38,13 +38,9 @@ Testes realizados em sandbox com geração de nome e CPF inválidos somentes par
 
 #### Listagem de todas transações:
 
-![listagem](https://user-images.githubusercontent.com/45601574/69562541-29d7c280-0f8e-11ea-871e-242c1d648e16.gif)
+![ImagemList](https://user-images.githubusercontent.com/45601574/70070096-c541e680-15d1-11ea-93e2-5f4fcc440c6c.png)
 
 <br>
-
-#### Página para gerar o boleto:
-
-![criar_boleto](https://user-images.githubusercontent.com/45601574/69563332-ac14b680-0f8f-11ea-8229-5fbb0e26940f.gif)
 
 ### Utilização:
 - A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro")
