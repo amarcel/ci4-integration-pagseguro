@@ -48,7 +48,7 @@
 						<input type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
 					</div>
 				</div>
-				<input type="submit" class="btn btn-info btn-pagar-boleto" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
+				<input type="submit" class="btn btn-info btn-pagar-boleto btn-block" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
 			</form>
 
 		</div>
@@ -60,64 +60,15 @@
 
 	</div>
 
-	<script>
-		function pagarBoleto(e) {
-			e.preventDefault();
+	<!-- JavaScript referente à página  -->
+	<script src="<?= base_url('assets/boleto.js') ?>"></script>
+	<!-- Fim -->
 
-			var hash_pagamento = PagSeguroDirectPayment.getSenderHash();
-			$('#hash_pagamento').val(hash_pagamento);
-
-			//alert(hash_pagamento);
-
-			$.ajax({
-				type: 'post',
-				url: 'pagar/pg_boleto',
-				data: $('.form').serialize(),
-				dataType: 'json',
-				beforeSend: function() {
-					$('.msg').html('<div class="spinner-border" role="status"><span class="sr-only">Enviando dados...</span></div>')
-				}
-			}).done(function(res) {
-				console.log(res);
-				if (res.error == 0) {
-					$('.msg').html('Enviado com sucesso. Link do boleto: <a target="_blank" href="' + res.code.paymentLink + '">Clique aqui para baixar</a>');
-				} else {
-					$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
-				}
-			}).fail(function(res) {
-				$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
-
-			});
-
-		}
-
-		function setSessionIdPagSeguro() {
-			$.ajax({
-				url: 'pagar/pg_session_id',
-				dataType: 'json',
-				success: function(res) {
-					console.log(res);
-					if (res.error == 0) {
-						var id_sessao = res.id_sessao;
-						//Pagamento
-						PagSeguroDirectPayment.setSessionId(id_sessao);
-
-					} else {
-						//alert('Error entrou no success:' + res.error + ' ' + res.message);
-					}
-					//alert(res.id_sessao);
-				},
-				error: function() {
-					//alert('Error:' + res.error + ' ' + res.message);
-				}
-			});
-		}
-
-		setSessionIdPagSeguro();
-	</script>
 	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

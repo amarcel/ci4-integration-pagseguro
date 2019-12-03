@@ -47,6 +47,7 @@ Testes realizados em sandbox com geração de nome e CPF inválidos somentes par
 - Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox")
 - Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email`. Serviço de e-mail utilizado: [Mailtrap](https://mailtrap.io/ "Mailtrap") 
 - Caso dê algum erro de instalação do CI4 com o PHP, siga estes passos [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP") 
+- Para utilizar o módulo de notificação em localhost, basta acessar o PagSeguro e simular uma troca de status.
 
 Extensões necessárias do `php.ini`
 

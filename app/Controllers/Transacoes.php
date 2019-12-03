@@ -60,4 +60,21 @@ class Transacoes extends Controller
             'status_transacao'  => $std->status
         ]);
     }
+
+    /**
+     * Listar todas transações
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function list($id = null): array
+    {
+        $model = new TransacoesModel();
+
+        if (isset($id)) {
+            return $model->getTransacao($id);
+        }
+
+        return $model->getTransacao();
+    }
 }

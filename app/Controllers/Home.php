@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\TransacoesModel;
+use App\Controllers\Transacoes;
 use CodeIgniter\Controller;
 
 /**
@@ -13,20 +13,15 @@ use CodeIgniter\Controller;
 class Home extends Controller
 {
 	public function __construct()
-	{
-		header("Access-Control-Allow-Origin: https://sandbox.pagseguro.uol.com.br");
-	}
+	{ }
+
 	public function index()
 	{
 		helper('pagamento');
 
+		$transacoes = new Transacoes();
 
-		$model = new TransacoesModel();
-
-		$data = [
-			'transacoes' => $model->getTransacao()
-
-		];
+		$data['transacoes'] = $transacoes->list();
 
 		return view('list', $data);
 	}
