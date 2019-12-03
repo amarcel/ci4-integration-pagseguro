@@ -31,8 +31,8 @@ class Email extends Controller
             'SMTPHost' => env('mail.host'),
             'SMTPPort' => env('mail.port'),
             'SMTPUser' => env('mail.user'),
-            'SMTPPass' => env('mail.pass')
-
+            'SMTPPass' => env('mail.pass'),
+            'SMTPCrypto' => 'tls'
         );
 
         //Inicializa as configurações
