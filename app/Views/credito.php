@@ -48,7 +48,7 @@
 				</div>
 				<div class="form-group">
 					<label class="text-left">Quantidade de Parcelas</label>
-					<input id="parcelas" type="number" class="my-1 form-control" readonly name="parcelas" placeholder="Digite em quantas parcelas" value="2">
+					<input id="parcelas" type="number" class="my-1 form-control" name="parcelas" placeholder="Digite em quantas parcelas">
 				</div>
 				<?php $valor = rand(50, 200) . '.' . rand(10, 99) ?>
 				<div class="form-group">
@@ -84,9 +84,17 @@
 	</div>
 
 	<script>
+		$('#parcelas').keyup(function() {
+			if ($('#parcelas').val() < 13 && $('#parcelas').val() > 0) {
+				getInstallments();
+			} else {
+				$('#vparcela').val('O valor precisa ser entre 1 e 12 parcelas');
+
+			}
+
+		});
 		//Função própria da API para calcular o valor total e o valor das parcelas
 		function getInstallments() {
-
 
 			var parc = $('#parcelas').val() - 1;
 			PagSeguroDirectPayment.getInstallments({
@@ -115,8 +123,6 @@
 			});
 
 		}
-
-
 
 		function gerarToken(e) {
 			e.preventDefault();
@@ -199,8 +205,6 @@
 						var id_sessao = res.id_sessao;
 						//Pagamento
 						PagSeguroDirectPayment.setSessionId(id_sessao);
-
-						getInstallments();
 
 					} else {
 						//alert('Error entrou no success:' + res.error + ' ' + res.message);

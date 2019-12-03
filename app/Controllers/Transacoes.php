@@ -16,9 +16,9 @@ class Transacoes extends Controller
     { }
 
     /**
-     * Criar uma nova transação
+     * Criar uma nova transação do tipo boleto
      *
-     * @param array $std
+     * @param array $std 
      * @return void
      */
     public function store($std = null): void
@@ -36,6 +36,12 @@ class Transacoes extends Controller
         ]);
     }
 
+    /**
+     * Criar uma nova transação do tipo crédito
+     *
+     * @param array $std
+     * @return void
+     */
     public function storeCredit($std = null): void
     {
         $model = new TransacoesModel();
@@ -46,7 +52,8 @@ class Transacoes extends Controller
             'referencia_transacao'  => $std->reference,
             'tipo_transacao'        => $std->paymentMethod->type,
             'status_transacao'      => $std->status,
-            'valor_transacao'       => $std->grossAmount
+            'valor_transacao'       => $std->grossAmount,
+            'url_boleto'            => null
         ]);
     }
 

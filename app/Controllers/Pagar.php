@@ -5,6 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Controllers\Email;
 use App\Controllers\Transacoes;
+
 /**
  *  Responsável por gerar a ID de pagamento e realizar o pagamento
  * @author Matheus Castro <matheuscastroweb@gmail.com>
@@ -13,7 +14,7 @@ use App\Controllers\Transacoes;
 
 class Pagar extends Controller
 {
-    
+
     public function index()
     {
         return view('boleto');
@@ -87,7 +88,7 @@ class Pagar extends Controller
         return json_encode($json);
     }
 
-     public function pg_session_id_credito(): String
+    public function pg_session_id_credito(): String
     {
         helper('cookie');
         //Bloqueia para ser acessível apenas por Ajax
@@ -185,6 +186,12 @@ class Pagar extends Controller
             'senderEmail'       => $this->request->getVar('email'),
             'senderHash'        => $this->request->getVar('hash_pagamento'),
 
+            'shippingAddressRequired' => 'false'
+
+            /*
+            
+            Caso queira utilizar o envio, colocar a variável acima para true e descomentar o abaixo
+
             'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
             'shippingAddressNumber'     => '1384',
             'shippingAddressComplement' => '5o andar',
@@ -194,7 +201,10 @@ class Pagar extends Controller
             'shippingAddressState'      => 'SP',
             'shippingAddressCountry'    => 'BRA',
             'shippingType'              => '1',
-            'shippingCost'              => '1.00'
+            'shippingCost'              => '1.00',
+            
+            */
+
         );
 
         if (env('api.mode') == 'development') {
@@ -245,25 +255,17 @@ class Pagar extends Controller
             $email->notificar_pg($std, 1);
         }
 
-        //header('Content-Type: application/json');
         return json_encode($retorno);
     }
 
-     public function pg_cartao(): String
-    {   
-        /*echo '<pre>';
-        print_r( $this->request->getVar() ) ;
-        exit();*/
+    public function pg_cartao(): String
+    {
+
         //Bloqueia para ser acessível apenas por Ajax
         if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1002 - Não é possível acessar", 401);
 
         $preco = $this->request->getVar('valor_parcela');
-        //$preco = (float)$preco;
-        
-        //var_dump($this->request->getVar('valor_parcela'));
-        //echo $this->request->getVar('valor_parcela');**/
 
-        //echo $this->request->getVar('vparcela');
         /**
          * Parâmetros necessários para requisição a API
          * Dados abaixo estão apenas por via de demonstração
@@ -276,14 +278,14 @@ class Pagar extends Controller
 
             'paymentMode'   => 'default',
             'paymentMethod' => 'creditCard',
-            'currency'      => 'BRL',  
+            'currency'      => 'BRL',
             'receiverEmail' => env('api.email'),
-            
+
             'extraAmount'   => '0.00',
 
             'itemId1'           => '1',
             'itemDescription1'  => 'Teste',
-            'itemAmount1'       => number_format($this->request->getVar('valor'),2,'.',''),
+            'itemAmount1'       => number_format($this->request->getVar('valor'), 2, '.', ''),
             'itemQuantity1'     => '1',
 
             'notificationURL'   => base_url('notificacao/cartao_credito'),
@@ -297,8 +299,13 @@ class Pagar extends Controller
             'senderHash'        => $this->request->getVar('hash_pagamento'),
 
             //Dados para implemento de frete
-            'shippingAddressRequired'=>'false',
-            /*'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
+            'shippingAddressRequired' => 'false',
+
+            /*
+            
+            Caso queira utilizar o envio, colocar a variável acima para true e descomentar o abaixo
+
+            'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
             'shippingAddressNumber'     => '1384',
             'shippingAddressComplement' => '5o andar',
             'shippingAddressDistrict'   => 'Jardim Paulistano',
@@ -307,28 +314,35 @@ class Pagar extends Controller
             'shippingAddressState'      => 'SP',
             'shippingAddressCountry'    => 'BRA',
             'shippingType'              => '1',
-            'shippingCost'              => '1.00',*/
+            'shippingCost'              => '1.00',
+            
+            */
 
             //DADOS DO DONO DO CARTÂO
             'creditCardToken' => $this->request->getVar('credit_token'),
             'installmentQuantity' => $this->request->getVar('parcelas'),
             'installmentValue' => number_format($preco, 2, '.', ''),
-            'noInterestInstallmentQuantity' => $this->request->getVar('parcelas'),
+
             'creditCardHolderName' => 'Jose Comprador',
             'creditCardHolderCPF' => '02690170035',
             'creditCardHolderBirthDate' => '27/10/1987',
-            'creditCardHolderAreaCode'=> '11',
-            'creditCardHolderPhone'=> '56273440',
+            'creditCardHolderAreaCode' => '11',
+            'creditCardHolderPhone' => '56273440',
 
-            'billingAddressStreet'=>"Av. Brig. Faria Lima",
-            'billingAddressNumber'=>'1384',
-            'billingAddressComplement'=>'5o andar',
-            'billingAddressDistrict'=>'Jardim Paulistano',
-            'billingAddressPostalCode'=>'01452002',
-            'billingAddressCity'=>'Sao Paulo',
-            'billingAddressState'=>'SP',
-            'billingAddressCountry'=>'BRA'
+            'billingAddressStreet' => "Av. Brig. Faria Lima",
+            'billingAddressNumber' => '1384',
+            'billingAddressComplement' => '5o andar',
+            'billingAddressDistrict' => 'Jardim Paulistano',
+            'billingAddressPostalCode' => '01452002',
+            'billingAddressCity' => 'Sao Paulo',
+            'billingAddressState' => 'SP',
+            'billingAddressCountry' => 'BRA'
         );
+
+        /**
+         * Verificar se existe parcelas, se existir colocar o juros se não, não faça nada
+         */
+        $this->request->getVar('parcelas') > 1 ?  $pagarBoleto['noInterestInstallmentQuantity'] = $this->request->getVar('parcelas') : null;
 
         if (env('api.mode') == 'development') {
             $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/';

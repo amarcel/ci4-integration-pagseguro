@@ -32,7 +32,6 @@ Em desenvolvimento.
 | Helper | pagamento.php | Conversão de valores para o cliente |
 | Model | Transações.php | Operações no banco de dados |
 
-
 ### Funcionamento:
 Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
 
