@@ -4,8 +4,6 @@ function pagarBoleto(e) {
 	var hash_pagamento = PagSeguroDirectPayment.getSenderHash();
 	$('#hash_pagamento').val(hash_pagamento);
 
-	//alert(hash_pagamento);
-
 	$.ajax({
 		type: 'post',
 		url: 'pagar/pg_boleto',

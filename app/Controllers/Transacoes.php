@@ -67,7 +67,7 @@ class Transacoes extends Controller
      * @param int $id
      * @return array
      */
-    public function list($id = null): array
+    public function list($id = null)
     {
         $model = new TransacoesModel();
 

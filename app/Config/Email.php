@@ -1,9 +1,9 @@
 <?php
+
 namespace Config;
 
 class Email
 {
-
 	/**
 	 * @var string
 	 */
@@ -68,7 +68,7 @@ class Email
 	 *
 	 * @var integer
 	 */
-	public $SMTPTimeout = 5;
+	public $SMTPTimeout = 20;
 
 	/**
 	 * Enable persistent SMTP connections
@@ -82,7 +82,7 @@ class Email
 	 *
 	 * @var string
 	 */
-	public $SMTPCrypto = 'tls';
+	public $SMTPCrypto = 'ssl';
 
 	/**
 	 * Enable word-wrap
@@ -160,5 +160,4 @@ class Email
 	 * @var boolean
 	 */
 	public $DSN = false;
-
 }

@@ -20,7 +20,7 @@ class Email extends Controller
      * $who = 2 -> Controller | Notificação
      * @return boolean
      */
-    public function notificar_pg($std, $who): bool
+    public function notificar_pg($std, $who)
     {
         helper('pagamento');
         $email = \Config\Services::email();
@@ -31,7 +31,8 @@ class Email extends Controller
             'SMTPHost' => env('mail.host'),
             'SMTPPort' => env('mail.port'),
             'SMTPUser' => env('mail.user'),
-            'SMTPPass' => env('mail.pass')
+            'SMTPPass' => env('mail.pass'),
+            'SMTPCrypto' => 'tls'
         );
 
         //Inicializa as configurações
@@ -56,7 +57,6 @@ class Email extends Controller
             Nome:               ' . $std->sender->name . '
    
         ');
-
-        return $email->send();
+        return $email->send(false);
     }
 }
