@@ -44,16 +44,16 @@
                             <td>R$ <?= $transacoes_item['valor_transacao'] ?></td>
 
                             <td>
-                                <?php if($transacoes_item['tipo_transacao'] == 1 ){
-                                ?>
-                                <p>Sem link</p>
+                                <?php if ($transacoes_item['tipo_transacao'] == 1) {
+                                            ?>
+                                    <p>Sem link</p>
                                 <?php
-                                } else{
-                                ?>
-                                <a href="javascript:;" id="link" onclick="buscar_boleto('<?= $transacoes_item['url_boleto'] ?> ');">Acessar </a>
+                                        } else {
+                                            ?>
+                                    <a href="javascript:;" id="link" onclick="buscar_boleto('<?= $transacoes_item['url_boleto'] ?> ');">Acessar </a>
                                 <?php
-                                }
-                                ?> 
+                                        }
+                                        ?>
                             </td>
 
                         </tr>
@@ -72,7 +72,7 @@
                 }
             </style>
             <div class="text-center " style="">
-                <?= $pager->simpleLinks() ?>
+
             </div>
 
         </div>
@@ -80,11 +80,11 @@
             function buscar_boleto(link) {
                 $('.loading').show();
                 $('#iframe_boleto').hide();
-                
+
                 $("#iframe_boleto").attr("src", "" + link + "");
                 $(".aviso").html('Caso não consiga visualizar o boleto <a target="_blank" class="url_bol" href="' + link + '">Clique aqui</a>');
                 $('.loading').html('<div class="spinner-border text-center" role="status"><span class="sr-only">Enviando dados...</span></div>');
-                $('#iframe_boleto').on('load',function(){
+                $('#iframe_boleto').on('load', function() {
                     $('.loading').hide();
                     $('#iframe_boleto').show();
                 });

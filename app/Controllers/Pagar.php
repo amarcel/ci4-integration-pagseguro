@@ -272,7 +272,6 @@ class Pagar extends Controller
          */
 
         $pagarBoleto = array(
-            //'email'         => env('api.email'),
             'email'         => env('api.email'),
             'token'         => env('api.token'),
 
@@ -288,7 +287,7 @@ class Pagar extends Controller
             'itemAmount1'       => number_format($this->request->getVar('valor'), 2, '.', ''),
             'itemQuantity1'     => '1',
 
-            'notificationURL'   => base_url('notificacao/cartao_credito'),
+            'notificationURL'   => base_url('notificacao'),
 
             'reference'         => $this->request->getVar('ref'),
             'senderName'        => $this->request->getVar('nome'),
@@ -301,10 +300,10 @@ class Pagar extends Controller
             //Dados para implemento de frete
             'shippingAddressRequired' => 'false',
 
-            /*
-            
-            Caso queira utilizar o envio, colocar a variável acima para true e descomentar o abaixo
-
+            /**
+             * Caso queira utilizar o envio, colocar a variável acima para true e descomentar o abaixo
+             */
+            /*   
             'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
             'shippingAddressNumber'     => '1384',
             'shippingAddressComplement' => '5o andar',
@@ -315,8 +314,8 @@ class Pagar extends Controller
             'shippingAddressCountry'    => 'BRA',
             'shippingType'              => '1',
             'shippingCost'              => '1.00',
-            
-            */
+             */
+
 
             //DADOS DO DONO DO CARTÂO
             'creditCardToken' => $this->request->getVar('credit_token'),
@@ -343,6 +342,7 @@ class Pagar extends Controller
          * Verificar se existe parcelas, se existir colocar o juros se não, não faça nada
          */
         $this->request->getVar('parcelas') > 1 ?  $pagarBoleto['noInterestInstallmentQuantity'] = $this->request->getVar('parcelas') : null;
+
 
         if (env('api.mode') == 'development') {
             $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/';
@@ -386,10 +386,10 @@ class Pagar extends Controller
 
             //Função para cadastrar transação
             $transacao = new Transacoes();
-            $transacao->storeCredit($std);
+            $transacao->store($std);
             //Notificar por e-mail status de aguardando pagamento
             $email = new Email();
-            $email->notificar_pg_credit($std, 1);
+            $email->notificar_pg($std, 1);
         }
 
         //header('Content-Type: application/json');

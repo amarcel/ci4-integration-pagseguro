@@ -18,6 +18,12 @@ class Transacoes extends Controller
     /**
      * Criar uma nova transação do tipo boleto
      *
+     * Type 1 = Cartão de crédito
+     * Type 2 = Boleto
+     * 
+     * id_pedido  = Randomico até ter a tabela pedido e relaciona-la
+     * id_cliente = Randomico até ter a tabela cliente e relaciona-la
+     * 
      * @param array $std 
      * @return void
      */
@@ -32,39 +38,19 @@ class Transacoes extends Controller
             'tipo_transacao'        => $std->paymentMethod->type,
             'status_transacao'      => $std->status,
             'valor_transacao'       => $std->grossAmount,
-            'url_boleto'            => $std->paymentLink
+            'url_boleto'            => $std->paymentMethod->type == 2 ? $std->paymentLink : null
         ]);
     }
 
     /**
-     * Criar uma nova transação do tipo crédito
-     *
-     * @param array $std
-     * @return void
-     */
-    public function storeCredit($std = null): void
-    {
-        $model = new TransacoesModel();
-        $model->save([
-            'id_pedido'             => rand(100, 500),
-            'id_cliente'            => rand(100, 500),
-            'codigo_transacao'      => $std->code,
-            'referencia_transacao'  => $std->reference,
-            'tipo_transacao'        => $std->paymentMethod->type,
-            'status_transacao'      => $std->status,
-            'valor_transacao'       => $std->grossAmount,
-            'url_boleto'            => null
-        ]);
-    }
-
-    /**
-     * Atualizar uma transação
-     *
+     * Atualizar uma transação ao receber o callback do PagSeguro
+     * 
      * @param array $std
      * @return void
      */
     public function edit($std = null): void
     {
+        if (!isset($std)) throw new \CodeIgniter\Exceptions\PageNotFoundException('É necessário passar campo para editar.');
         $model = new TransacoesModel();
 
         $transaction = $model->getTransacaoPorRef($std->reference);
@@ -72,7 +58,6 @@ class Transacoes extends Controller
         $model->save([
             'id'                => $transaction['id'],
             'status_transacao'  => $std->status
-
         ]);
     }
 }

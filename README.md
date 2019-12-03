@@ -18,6 +18,7 @@ Em desenvolvimento.
 
 ### A fazer
 
+- Colocar do boleto na função de notificar por e-mail 
 - Utilizar o cURL do ci4
 - Finalização de campos do formulário
 - Aviso de vencimento de boleto a 1 dia do vencimento
@@ -99,7 +100,7 @@ CREATE OR REPLACE TABLE transacao (
     referencia_transacao VARCHAR(255) NOT NULL,
     status_transacao VARCHAR(45)  NOT NULL,
     valor_transacao DOUBLE  NOT NULL,
-    url_boleto VARCHAR(255)  NOT NULL,
+    url_boleto VARCHAR(255),
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
     deleted_at DATETIME DEFAULT NULL 
