@@ -1,30 +1,32 @@
 /**
  * Função responsável por validar e o número de parcelas e chamar a getInstallments
  */
-$('#parcelas').keyup(function () {
-	if ($('#parcelas').val() < 13 && $('#parcelas').val() > 0) {
 
+$("#parcelas").on('change', function (e) {
+	var parcelas = $(this).val();
+	if (parcelas != 0) {
 		getInstallments();
-
 		$('#pagar_cartao').attr("disabled", false);
 		$('#pagar_cartao').addClass("btn-success").removeClass("btn-danger");
-
 	} else {
 		$('#pagar_cartao').attr("disabled", true);
-		$('#vparcela').val('O valor precisa ser entre 1 e 12 parcelas');
+		$('#vparcela').val('');
 		$('#pagar_cartao').addClass("btn-danger").removeClass("btn-success");
 	}
 });
 
+
+
 /**
  * Função da API para gerar o valor da parcela 
  */
+
 function getInstallments() {
 
 	var parc = $('#parcelas').val() - 1;
 	PagSeguroDirectPayment.getInstallments({
 		amount: ($('#valor').val()),
-		maxInstallmentNoInterest: $('#parcelas').val(),
+		maxInstallmentNoInterest: 12,
 		brand: 'visa',
 		success: function (res) {
 			// Retorna as opções de parcelamento disponíveis

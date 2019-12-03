@@ -340,8 +340,9 @@ class Pagar extends Controller
 
         /**
          * Verificar se existe parcelas, se existir colocar o juros se não, não faça nada
+         * 12 é o número de parcelas que não terão juros
          */
-        $this->request->getVar('parcelas') > 1 ?  $pagarBoleto['noInterestInstallmentQuantity'] = $this->request->getVar('parcelas') : null;
+        $this->request->getVar('parcelas') > 1 ?  $pagarBoleto['noInterestInstallmentQuantity'] = 12 : null;
 
 
         if (env('api.mode') == 'development') {

@@ -48,8 +48,21 @@
 				</div>
 				<div class="form-group">
 					<label class="text-left">Quantidade de Parcelas *</label>
-
-					<input id="parcelas" type="number" class="my-1 form-control" name="parcelas" placeholder="Digite o número de parcelas">
+					<select class="form-control" id="parcelas" name="parcelas">
+						<option value="0">Selecione o número de parcelas</option>
+						<option value="1">1 vez</option>
+						<option value="2">2 vezes</option>
+						<option value="3">3 vezes</option>
+						<option value="4">4 vezes</option>
+						<option value="5">5 vezes</option>
+						<option value="6">6 vezes</option>
+						<option value="7">7 vezes</option>
+						<option value="8">8 vezes</option>
+						<option value="9">9 vezes</option>
+						<option value="10">10 vezes</option>
+						<option value="11">11 vezes</option>
+						<option value="12">12 vezes</option>
+					</select>
 				</div>
 				<div class="form-group">
 					<label class="my-1">Valor da Parcela</label>

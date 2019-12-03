@@ -11,13 +11,11 @@ Em desenvolvimento.
 - Boleto em Lightbox em um modal
 - Pagamento por cartão de crédito
 
-### Em desenvolvimento
+### A fazer
 
 - Verificar qual bandeira do cartão
 - Tratamento de erros do PagSeguro
-
-### A fazer
-
+- Pagamento de cartão com juros
 - Colocar do boleto na função de notificar por e-mail 
 - Utilizar o cURL do ci4
 - Finalização de campos do formulário
