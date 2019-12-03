@@ -38,7 +38,7 @@ Testes realizados em sandbox com geração de nome e CPF inválidos somentes par
 
 #### Listagem de todas transações:
 
-![ImagemList](https://user-images.githubusercontent.com/45601574/70070096-c541e680-15d1-11ea-93e2-5f4fcc440c6c.png)
+![Listagem](https://user-images.githubusercontent.com/45601574/70070541-8e200500-15d2-11ea-979e-df7d617aedea.png)
 
 <br>
 
