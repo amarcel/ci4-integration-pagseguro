@@ -13,7 +13,7 @@ Em desenvolvimento.
 
 ### Em desenvolvimento
 
-- Correção do bug de parcelas
+- Verificar qual bandeira do cartão
 - Tratamento de erros do PagSeguro
 
 ### A fazer
