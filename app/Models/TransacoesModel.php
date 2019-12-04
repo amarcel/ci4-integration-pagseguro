@@ -32,9 +32,7 @@ class TransacoesModel extends Model
         'data_transacao'        => 'required',
         'tipo_transacao'        => 'required',
         'status_transacao'      => 'required',
-        'valor_transacao'       => 'required',
-        'url_boleto'            => 'required'
-
+        'valor_transacao'       => 'required'
     ];
 
     public function getTransacao($id = false)
