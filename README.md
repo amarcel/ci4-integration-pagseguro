@@ -97,7 +97,7 @@ Testes realizados em sandbox com geração de nome e CPF inválidos somentes par
 
 ### Listagem de todas transações:
 
-![Listagem](https://user-images.githubusercontent.com/45601574/70070541-8e200500-15d2-11ea-979e-df7d617aedea.png)
+![Listagem](https://user-images.githubusercontent.com/45601574/70171703-0b6c7800-16ae-11ea-8661-7ead0f8a0827.png)
 
 ### Pagamento cartão:
 
