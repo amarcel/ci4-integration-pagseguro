@@ -39,6 +39,15 @@ Testes realizados em sandbox com geração de nome e CPF inválidos somentes par
 
 ![Listagem](https://user-images.githubusercontent.com/45601574/70070541-8e200500-15d2-11ea-979e-df7d617aedea.png)
 
+#### Pagamento cartão:
+
+![Pagamento-cartao](https://user-images.githubusercontent.com/45601574/70101423-90568380-1613-11ea-9f03-adfea52c4329.gif)
+
+#### Pagamento boleto:
+
+![Pagamento](https://user-images.githubusercontent.com/45601574/70101422-90568380-1613-11ea-9bb8-da7de6576753.gif)
+
+
 <br>
 
 ### Utilização:
