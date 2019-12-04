@@ -103,6 +103,21 @@ Testes realizados em sandbox com geração de nome e CPF inválidos somentes par
 ![Pagamento](https://user-images.githubusercontent.com/45601574/70101422-90568380-1613-11ea-9bb8-da7de6576753.gif)
 
 ## Banco de dados utilizado:
+Utilizar a migration `AddTransacao` pela CLI conforme abaixo ou adicionar manualmente com o código SQL abaixo. Veja aqui como utilizar as [Migrations do CI4](https://codeigniter4.github.io/userguide/dbmgmt/migration.html#command-line-tools "Migrations do CI4").
+
+
+```php
+#--------------------------------------------------------------------
+# Comandos úteis para utilização das migrations
+#--------------------------------------------------------------------
+
+#Criação das migrations
+php spark migrate:create
+
+#Rodar as migrations
+php spark migrate
+
+```
 
 ```sql
 CREATE OR REPLACE DATABASE ci4_integration_pagseguro;
