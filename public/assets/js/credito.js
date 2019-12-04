@@ -113,13 +113,18 @@ function pagarCartao() {
 	}).done(function (res) {
 		console.log(res);
 		if (res.error == 0) {
+			$('#pagar_cartao').val('Pagamento solicitado com sucesso');
 			$('.msg').html('Enviado com sucesso. Código da compra: ' + res.code.code);
 		} else {
+
 			$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
 		}
 	}).fail(function (res) {
 		$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
 
+	}).always(function (res) {
+		$('#parcelas').attr("disabled", true);
+		$('#pagar_cartao').attr("disabled", true);
 	});
 
 }

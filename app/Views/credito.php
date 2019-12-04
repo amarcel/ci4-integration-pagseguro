@@ -94,7 +94,7 @@
 
 		</div>
 		<div class="card-footer text-muted text-center">
-			<span class="msg">Status de pagamento</span>
+			<span class="msg"></span>
 		</div>
 		<div>
 

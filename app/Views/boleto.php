@@ -53,14 +53,12 @@
 						<input type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
 					</div>
 				</div>
-				<input type="submit" class="btn btn-info btn-pagar-boleto btn-block" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
+				<input id="pagar_boleto" type="submit" class="btn btn-info btn-pagar-boleto btn-block" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
 			</form>
 
 		</div>
 		<div class="card-footer text-muted text-center">
-			<span class="msg">Status de pagamento
-
-			</span>
+			<span class="msg"></span>
 		</div>
 
 	</div>
