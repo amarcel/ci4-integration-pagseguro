@@ -1,28 +1,28 @@
 # CodeIgniter 4  Integration PagSeguro API
 
-Em desenvolvimento.
+### Em desenvolvimento.
 
-## Funcionalidades
+## Funcionalidades:
 
-- Geração de boleto pela API do PagSeguro
-- Callback ao atualizar algum status de pagamento
-- Validação com um código de referência unico
-- Envio de confirmação por e-mail do status do pedido
-- Boleto em Lightbox em um modal
-- Pagamento por cartão de crédito
-- Adicionado loader para aguardar requisição de pagamento
-- Busca de transação por id adicionado no routes `$routes->get('/(:num)', 'Home::list/$1');`
+- [x] Geração de boleto
+- [x] Pagamento por cartão de crédito
+- [x] Callback ao atualizar algum status de pagamento
+- [x] Validação com um código de referência unico
+- [x] Envio de confirmação por e-mail do status do pedido
+- [x] Boleto em Lightbox em um modal
+- [x] Loader para aguardar requisição de pagamento
+- [x] Busca de transação por id
 
-## A fazer
+## A fazer:
 
-- Verificar qual bandeira do cartão
-- Tratamento de erros do PagSeguro
-- Pagamento de cartão com juros
-- Colocar do boleto na função de notificar por e-mail 
-- Utilizar o cURL do ci4
-- Finalização de campos do formulário
-- Aviso de vencimento de boleto a 1 dia do vencimento
-- Deixar uma view apenas para listagem
+- [ ] Verificar qual bandeira do cartão
+- [ ] Tratamento de erros do PagSeguro
+- [ ] Pagamento de cartão com juros
+- [ ] Colocar do boleto na função de notificar por e-mail 
+- [ ] Utilizar o cURL do ci4
+- [ ] Finalização de campos do formulário
+- [ ] Aviso de vencimento de boleto a 1 dia do vencimento
+- [ ] Deixar uma view apenas para listagem
 
 ## Estrutura:
 | Tipo | Nome | Razão |
@@ -35,23 +35,6 @@ Em desenvolvimento.
 | Helper | pagamento_helper.php | Conversão de valores para o cliente |
 | Model | TransacoesModel.php | Operações no banco de dados |
 
-## Funcionamento:
-Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
-
-### Listagem de todas transações:
-
-![Listagem](https://user-images.githubusercontent.com/45601574/70070541-8e200500-15d2-11ea-979e-df7d617aedea.png)
-
-### Pagamento cartão:
-
-![Pagamento-cartao](https://user-images.githubusercontent.com/45601574/70101423-90568380-1613-11ea-9f03-adfea52c4329.gif)
-
-### Pagamento boleto:
-
-![Pagamento](https://user-images.githubusercontent.com/45601574/70101422-90568380-1613-11ea-9bb8-da7de6576753.gif)
-
-
-<br>
 
 ## Utilização:
 
@@ -93,19 +76,36 @@ mail.pass    = pass
 mail.port    = port
 ```
 
-4. Para utilizar o módulo de notificação em localhost, basta acessar o PagSeguro e simular uma troca de status.
+5. Para utilizar o módulo de notificação em localhost, basta acessar o PagSeguro e simular uma troca de status.
 
-OBS. Sempre ao atualizar algum parâmetro do .env reinicie o servidor php.
+> **OBS.:** Sempre ao atualizar algum parâmetro do .env reinicie o servidor php.
 
+## Funcionamento:
+Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
 
+### Listagem de todas transações:
 
-Banco de dados utilizado:
+![Listagem](https://user-images.githubusercontent.com/45601574/70070541-8e200500-15d2-11ea-979e-df7d617aedea.png)
+
+### Pagamento cartão:
+
+![Pagamento-cartao](https://user-images.githubusercontent.com/45601574/70101423-90568380-1613-11ea-9f03-adfea52c4329.gif)
+
+### Pagamento boleto:
+
+![Pagamento](https://user-images.githubusercontent.com/45601574/70101422-90568380-1613-11ea-9bb8-da7de6576753.gif)
+
+<br>
+
+## Banco de dados utilizado:
 
 ```sql
 CREATE OR REPLACE DATABASE ci4_integration_pagseguro;
 ```
 
 ```sql
+USE ci4_integration_pagseguro;
+
 CREATE OR REPLACE TABLE transacao (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_pedido INT NOT NULL,
