@@ -21,8 +21,13 @@ class Email extends Controller
      * Assim, é posível saber se o texto será "Pedido realizado" ou "Alteração de pagamento"
      * @return boolean
      */
-    public function notificar_pg($std, $who)
+    public function notificar_pg($std, $who): bool
     {
+        /**
+         * Caso esteja false não faz o envio do e-mail, apenas uma simulação para não dar erro
+         */
+        if (env('mail.using') == false) return true;
+
         helper('pagamento');
         $email = \Config\Services::email();
 
@@ -60,6 +65,8 @@ class Email extends Controller
             Nome:               ' . $std->sender->name . '
    
         ');
-        return $email->send(false);
+
+
+        return $email->send();
     }
 }

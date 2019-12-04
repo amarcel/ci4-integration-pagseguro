@@ -28,6 +28,7 @@ api.token   = token
 # Config Mail
 #--------------------------------------------------------------------
 
+mail.using  = false
 mail.host   = host
 mail.user   = user
 mail.pass   = pass
