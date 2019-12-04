@@ -2,6 +2,13 @@
 
 ### Em desenvolvimento.
 
+## Conteúdo:
+
+- [Estrutura](https://github.com/matheuscastroweb/ci4-integration-pagseguro#estrutura "Estrutura")
+- [Utilização](https://github.com/matheuscastroweb/ci4-integration-pagseguro#utiliza%C3%A7%C3%A3o "Utilização")
+- [Funcionamento](https://github.com/matheuscastroweb/ci4-integration-pagseguro#funcionamento "Funcionamento")
+- [Banco de dados](https://github.com/matheuscastroweb/ci4-integration-pagseguro#banco-de-dados-utilizado "Banco de dados")
+
 ## Funcionalidades:
 
 - [x] Geração de boleto
@@ -94,8 +101,6 @@ Testes realizados em sandbox com geração de nome e CPF inválidos somentes par
 ### Pagamento boleto:
 
 ![Pagamento](https://user-images.githubusercontent.com/45601574/70101422-90568380-1613-11ea-9bb8-da7de6576753.gif)
-
-<br>
 
 ## Banco de dados utilizado:
 
