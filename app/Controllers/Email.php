@@ -54,16 +54,17 @@ class Email extends Controller
         $email->setSubject($who == 1 ? "Pedido recebido com sucesso" : "Atualização na sua compra");
 
         $email->setMessage('
-            Status:             ' . getStatusCodePag($std->status) . '
+        <div style="text-align: center;">
+            <h2>Olá ' . $std->sender->name . '</h2><br>
+            <h2>Código do pedido:  ' . $std->code . '</h2>
+            <h3>Status:' . getStatusCodePag($std->status) . '</h3>
             <br>
-            Seu pedido código:  ' . $std->code . '
-            Data:               ' . $std->date . '
-            Referência:         ' . $std->reference . '
-            Valor:              ' . $std->grossAmount . '
-
-            <br>
-            Nome:               ' . $std->sender->name . '
-   
+            
+            Data:               ' . $std->date . '<br>
+            Referência:         ' . $std->reference . '<br>
+            Valor:              ' . $std->grossAmount . '<br>
+            
+         </div>
         ');
 
 
