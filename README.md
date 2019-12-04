@@ -9,16 +9,16 @@
 - [Funcionamento](https://github.com/matheuscastroweb/ci4-integration-pagseguro#funcionamento "Funcionamento")
 - [Banco de dados](https://github.com/matheuscastroweb/ci4-integration-pagseguro#banco-de-dados-utilizado "Banco de dados")
 
-## Funcionalidades:
+## Features:
 
-- [x] Geração de boleto
-- [x] Pagamento por cartão de crédito
-- [x] Callback ao atualizar algum status de pagamento
-- [x] Validação com um código de referência unico
-- [x] Envio de confirmação por e-mail do status do pedido
-- [x] Boleto em Lightbox em um modal
-- [x] Loader para aguardar requisição de pagamento
-- [x] Logs são gerados a cada status da transação
+- Geração de boleto pela API
+- Pagamento por cartão de crédito
+- Callback ao atualizar algum status de pagamento
+- Validação com um código de referência unico
+- Envio de confirmação por e-mail do status do pedido
+- Boleto em Lightbox em um modal
+- Loader para aguardar requisição de pagamento
+- Logs a cada status da transação
 
 ## A fazer:
 
