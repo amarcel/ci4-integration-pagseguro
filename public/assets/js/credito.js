@@ -109,7 +109,7 @@ function pagarCartao() {
 		dataType: 'json',
 		beforeSend: function () {
 			$('.btn-pagar-credito').hide();
-			$('.msg').html('<div class="spinner-border" role="status"><span class="sr-only">Enviando dados...</span></div>');
+			$('.msg').html('<div class="loading style-2"><div class="loading-wheel"></div></div')
 		}
 	}).done(function (res) {
 		console.log(res);

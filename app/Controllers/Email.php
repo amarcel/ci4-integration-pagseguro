@@ -27,12 +27,13 @@ class Email extends Controller
 
         //Alterar no config/Email.php
         $config = array(
-            'protocol' => 'smtp',
-            'SMTPHost' => env('mail.host'),
-            'SMTPPort' => env('mail.port'),
-            'SMTPUser' => env('mail.user'),
-            'SMTPPass' => env('mail.pass'),
-            'SMTPCrypto' => 'tls'
+            'protocol'   => 'smtp',
+            'SMTPHost'   => env('mail.host'),
+            'SMTPPort'   => env('mail.port'),
+            'SMTPUser'   => env('mail.user'),
+            'SMTPPass'   => env('mail.pass'),
+            'SMTPCrypto' => 'tls',
+            'mailType'   => 'html'
         );
 
         //Inicializa as configurações
@@ -48,12 +49,13 @@ class Email extends Controller
 
         $email->setMessage('
             Status:             ' . getStatusCodePag($std->status) . '
-
+            <br>
             Seu pedido código:  ' . $std->code . '
             Data:               ' . $std->date . '
             Referência:         ' . $std->reference . '
             Valor:              ' . $std->grossAmount . '
 
+            <br>
             Nome:               ' . $std->sender->name . '
    
         ');

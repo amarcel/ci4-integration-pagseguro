@@ -31,7 +31,6 @@ class Pagar extends Controller
      */
     public function pg_session_id(): String
     {
-        helper('cookie');
         //Bloqueia para ser acessível apenas por Ajax
         if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1001 - Não é possível acessar", 401);
 
@@ -90,7 +89,6 @@ class Pagar extends Controller
 
     public function pg_session_id_credito(): String
     {
-        helper('cookie');
         //Bloqueia para ser acessível apenas por Ajax
         if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1001 - Não é possível acessar", 401);
 

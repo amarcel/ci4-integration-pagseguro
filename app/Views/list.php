@@ -5,12 +5,14 @@
     <title>API de Pagamento PagSeguro</title>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+
 </head>
 
 <body>
-    <div class="card">
+    <div id="divp" class="card">
         <div class=" text-center card-header">
             Sandbox
         </div>
@@ -78,7 +80,7 @@
     </div>
 
     <!-- JavaScript referente à página  -->
-    <script src="<?= base_url('assets/list.js') ?>"></script>
+    <script src="<?= base_url('assets/js/list.js') ?>"></script>
     <!-- Fim  -->
 
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>

@@ -10,6 +10,7 @@ Em desenvolvimento.
 - Envio de confirmação por e-mail do status do pedido
 - Boleto em Lightbox em um modal
 - Pagamento por cartão de crédito
+- Adicionado loader para aguardar requisição de pagamento
 
 ### A fazer
 

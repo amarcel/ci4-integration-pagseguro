@@ -4,6 +4,11 @@
 <head>
 	<title>API de Pagamento PagSeguro</title>
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+	<!-- CSS referente à página  -->
+	<link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">
+	<!-- CSS referente à página  -->
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
@@ -16,7 +21,7 @@
 		</div>
 		<div class="card-body">
 			<div class="text-center">
-				<h5 class="card-title">Pagamento API PagSeguro</h5>
+				<h5 class="card-title">Pagamento Boleto - API PagSeguro</h5>
 				<p class="card-text">Esta funcionalidade está em desenvolvimento.</p>
 			</div>
 			<form class="form mx-auto col-5">
@@ -61,7 +66,7 @@
 	</div>
 
 	<!-- JavaScript referente à página  -->
-	<script src="<?= base_url('assets/boleto.js') ?>"></script>
+	<script src="<?= base_url('assets/js/boleto.js') ?>"></script>
 	<!-- Fim -->
 
 	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
