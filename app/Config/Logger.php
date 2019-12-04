@@ -34,8 +34,7 @@ class Logger extends BaseConfig
 	| your log files will fill up very fast.
 	|
 	*/
-
-	public $threshold = 9;
+	public $threshold = array(1, 2, 3, 7);
 
 	/*
 	|--------------------------------------------------------------------------
