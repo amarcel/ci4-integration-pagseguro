@@ -108,7 +108,6 @@ function pagarCartao() {
 		data: $('.form').serialize(),
 		dataType: 'json',
 		beforeSend: function () {
-			$('.btn-pagar-credito').hide();
 			$('.msg').html('<div class="loading style-2"><div class="loading-wheel"></div></div')
 		}
 	}).done(function (res) {
