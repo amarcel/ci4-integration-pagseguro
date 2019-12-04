@@ -1,6 +1,8 @@
 ## [v0.0.2]
 > Dez 04, 2019
 
+- Adicionado funcionalidade para utilizar ou não envio de e-mail `default: false`
+- Resolvido problema #4 do envio de e-mail
 - Busca de transação por ID 
 - Adicionado no routes `$routes->get('/(:num)', 'Home::list/$1');`
 
