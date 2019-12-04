@@ -26,11 +26,12 @@ Em desenvolvimento.
 | Tipo | Nome | Razão |
 | ------ | ------ | ------ |
 | Controller | Home.php | Listagem das transações |
-| Controller | Notificação.php | Receber a requisição do PagSeguro |
+| Controller | Notificacao.php | Receber a requisição do PagSeguro |
+| Controller | Email.php | Enviar status de atualizações por e-mail |
 | Controller | Pagar.php | Enviar as requisições ao PagSeguro |
-| Controller | Transações.php | Comunicação o banco de dados |
+| Controller | Transacoes.php | Comunicação o banco de dados |
 | Helper | pagamento.php | Conversão de valores para o cliente |
-| Model | Transações.php | Operações no banco de dados |
+| Model | TransacoesModel.php | Operações no banco de dados |
 
 ### Funcionamento:
 Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
