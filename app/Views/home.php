@@ -18,7 +18,8 @@
         <div class="card-body">
             <div class="text-center ">
                 <h1 class="card-title">Status</h1>
-                <p class="card-text mb-5">Ao estar com o PagSeguro todo configurado basta clicar <a href="/listagem"> aqui</a> para acessar a listagem de transações</p>
+                <p class="card-text mb-1">Ao estar com o PagSeguro todo configurado basta clicar <a href="/listagem"> aqui</a> para acessar a listagem de transações</p>
+                <p class="card-text mb-5 text-muted">OBS.: Sempre que alterar algum parâmetro no .env é necessário dar um restart no server PHP</p>
             </div>
 
             <div class="container col-9 mx-auto">

@@ -87,6 +87,11 @@ mail.port    = port
 
 > **OBS.:** Sempre ao atualizar algum parâmetro do .env reinicie o servidor php.
 
+6. Verificar se todos os parâmetros do PagSeguro estão configurados como `SIM`. 
+
+![Home](https://user-images.githubusercontent.com/45601574/70171446-7bc6c980-16ad-11ea-9985-342c2cd936b2.png)
+
+
 ## Funcionamento:
 Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
 

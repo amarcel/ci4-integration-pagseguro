@@ -1,6 +1,7 @@
 ## [v0.0.2]
 > Dez 04, 2019
 
+- Adição da página Status antes de inicar o código para que possa ser realizado as verificações do pagseguro.
 - Alterado `public $threshold = 9;` em `app/Config/Logger` para exibir todos os logs
 - Adicionado log de transações
 - Adicionado funcionalidade para utilizar ou não envio de e-mail `default: false`
