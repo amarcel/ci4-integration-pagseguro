@@ -11,6 +11,7 @@ Em desenvolvimento.
 - Boleto em Lightbox em um modal
 - Pagamento por cartão de crédito
 - Adicionado loader para aguardar requisição de pagamento
+- Busca de transação por id adicionado no routes `$routes->get('/(:num)', 'Home::list/$1');`
 
 ### A fazer
 
@@ -21,6 +22,7 @@ Em desenvolvimento.
 - Utilizar o cURL do ci4
 - Finalização de campos do formulário
 - Aviso de vencimento de boleto a 1 dia do vencimento
+- Deixar uma view apenas para listagem
 
 ### Estrutura:
 | Tipo | Nome | Razão |

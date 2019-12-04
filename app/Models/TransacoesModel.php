@@ -26,10 +26,12 @@ class TransacoesModel extends Model
         if ($id === false) {
             //Caso queira trazer o deletado com o deletedAt preenchido
             //$this->withDeleted();
-
-            return $this->orderBy('id', 'desc')->findAll();
+            $query = $this->orderBy('id', 'desc')->findAll();
+            return is_array($query) ? $query : false;
         }
-        return $this->find($id);
+
+        $query = $this->find($id);
+        return is_array($query) ? $query : false;
     }
 
     /**
@@ -38,10 +40,14 @@ class TransacoesModel extends Model
      * @param int $code
      * @return void
      */
-    public function getTransacaoPorRef($code = null)
+    public function getTransacaoPorRef($code)
     {
-        if ($code) {
+        if (!isset($code)) return false;
+
+        $query = $this->where('referencia_transacao', $code)->first();
+
+        if ($query === true) {
             return $this->where('referencia_transacao', $code)->first();
-        }
+        } else return false;
     }
 }

@@ -1,3 +1,9 @@
+## [v0.0.2]
+> Dez 04, 2019
+
+- Busca de transação por ID 
+- Adicionado no routes `$routes->get('/(:num)', 'Home::list/$1');`
+
 ## [v0.0.1]
 > Dez 03, 2019
 

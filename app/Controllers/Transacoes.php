@@ -51,6 +51,7 @@ class Transacoes extends Controller
     public function edit($std = null): void
     {
         if (!isset($std)) throw new \CodeIgniter\Exceptions\PageNotFoundException('É necessário passar campo para editar.');
+
         $model = new TransacoesModel();
 
         $transaction = $model->getTransacaoPorRef($std->reference);
@@ -72,7 +73,8 @@ class Transacoes extends Controller
         $model = new TransacoesModel();
 
         if (isset($id)) {
-            return $model->getTransacao($id);
+            $query = $model->getTransacao($id);
+            return $query ? $query : false;
         }
 
         return $model->getTransacao();

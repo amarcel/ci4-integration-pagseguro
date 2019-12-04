@@ -368,6 +368,9 @@ class Pagar extends Controller
         $json   = json_encode($xml);
         $std  = json_decode($json);
 
+        /**
+         * Caso exista algum erro no retorno da função do pagseguro
+         */
         if (isset($std->error->code)) {
 
             $retorno = [

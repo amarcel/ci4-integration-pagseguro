@@ -14,10 +14,11 @@ class Email extends Controller
     /**
      * Realiza o envio de e-mail de acordo com cada requisição a API
      *
-     * @param array $std
+     * @param array $std -> Mensagem passada por completo
      * @param int $who
      * $who = 1 -> Controller | Pagar
      * $who = 2 -> Controller | Notificação
+     * Assim, é posível saber se o texto será "Pedido realizado" ou "Alteração de pagamento"
      * @return boolean
      */
     public function notificar_pg($std, $who)

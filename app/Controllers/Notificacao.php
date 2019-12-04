@@ -49,7 +49,7 @@ class Notificacao extends Controller
 
         $xml    = simplexml_load_string($result);
         $json   = json_encode($xml);
-        $std  = json_decode($json);
+        $std    = json_decode($json);
 
         if (isset($std->error->code)) {
             $retorno = [

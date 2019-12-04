@@ -25,4 +25,15 @@ class Home extends Controller
 
 		return view('list', $data);
 	}
+
+	public function list($id)
+	{
+		helper('pagamento');
+
+		$transacoes = new Transacoes();
+
+		$data['transacao'] = $transacoes->list($id);
+
+		return view('listOne', $data);
+	}
 }
