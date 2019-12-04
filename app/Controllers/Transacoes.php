@@ -40,6 +40,12 @@ class Transacoes extends Controller
             'valor_transacao'       => $std->grossAmount,
             'url_boleto'            => $std->paymentMethod->type == 2 ? $std->paymentLink : null
         ]);
+
+        /**
+         * Log de transações adicionadas
+         * Format: Transação adicionada {codigo_transacao} - Código {referencia_transacao} - Valor {valor_transacao}
+         */
+        log_message('info', 'Transação adicionada {codigo_transacao} - Código {referencia_transacao} - Valor {valor_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'valor_transacao' => $std->grossAmount]);
     }
 
     /**
@@ -60,6 +66,12 @@ class Transacoes extends Controller
             'id'                => $transaction['id'],
             'status_transacao'  => $std->status
         ]);
+
+        /**
+         * Log de transações atualizadas
+         * Format: Transação atualizada {codigo_transacao} - Código {referencia_transacao} - Valor {status_transacao}
+         */
+        log_message('info', 'Transação atualizada {codigo_transacao} - Código {referencia_transacao} - Valor {status_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'status_transacao' => $std->status]);
     }
 
     /**

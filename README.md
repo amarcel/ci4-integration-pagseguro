@@ -18,7 +18,7 @@
 - [x] Envio de confirmação por e-mail do status do pedido
 - [x] Boleto em Lightbox em um modal
 - [x] Loader para aguardar requisição de pagamento
-- [x] Busca de transação por id
+- [x] Logs são gerados a cada status da transação
 
 ## A fazer:
 
