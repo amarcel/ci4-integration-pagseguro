@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Controllers\Transacoes;
+use CodeIgniter\Controller;
+
+/**
+ * Pagina inicial com a listagem de transações
+ * @author Matheus Castro <matheuscastroweb@gmail.com>
+ * @version 1.0.0
+ */
+class Listagem extends Controller
+{
+	public function __construct()
+	{ }
+
+	public function index()
+	{
+
+		helper('pagamento');
+
+		$transacoes = new Transacoes();
+
+		$data['transacoes'] = $transacoes->list();
+
+		return view('listagem', $data);
+	}
+}

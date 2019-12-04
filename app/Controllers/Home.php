@@ -12,17 +12,11 @@ use CodeIgniter\Controller;
  */
 class Home extends Controller
 {
-	public function __construct()
-	{ }
+    public function __construct()
+    { }
 
-	public function index()
-	{
-		helper('pagamento');
-
-		$transacoes = new Transacoes();
-
-		$data['transacoes'] = $transacoes->list();
-
-		return view('list', $data);
-	}
+    public function index()
+    {
+        return view('home');
+    }
 }

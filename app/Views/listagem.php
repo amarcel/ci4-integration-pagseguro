@@ -80,7 +80,7 @@
     </div>
 
     <!-- JavaScript referente à página  -->
-    <script src="<?= base_url('assets/js/list.js') ?>"></script>
+    <script src="<?= base_url('assets/js/listagem.js') ?>"></script>
     <!-- Fim  -->
 
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
