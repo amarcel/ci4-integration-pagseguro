@@ -46,7 +46,7 @@
 
 ## Use:
 
-1. Follow the installation of PHP. If you get CI4 installation errors with PHP, follow these steps [PHP installation](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "PHP installation").
+1. Follow the installation of PHP. If you get CI4 installation errors with PHP, follow these steps [PHP installation](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "PHP installation"). 
 
 ```php
 #-----------------------------
