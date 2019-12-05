@@ -4,10 +4,10 @@
 
 ## Conteúdo:
 
-- [Estrutura](https://github.com/matheuscastroweb/ci4-integration-pagseguro#estrutura "Estrutura")
-- [Utilização](https://github.com/matheuscastroweb/ci4-integration-pagseguro#utiliza%C3%A7%C3%A3o "Utilização")
-- [Funcionamento](https://github.com/matheuscastroweb/ci4-integration-pagseguro#funcionamento "Funcionamento")
-- [Banco de dados](https://github.com/matheuscastroweb/ci4-integration-pagseguro#banco-de-dados-utilizado "Banco de dados")
+- [Estrutura](#estrutura "Estrutura")
+- [Utilização](#utiliza%C3%A7%C3%A3o "Utilização")
+- [Funcionamento](#funcionamento "Funcionamento")
+- [Banco de dados](#banco-de-dados-utilizado "Banco de dados")
 
 ## Features:
 
