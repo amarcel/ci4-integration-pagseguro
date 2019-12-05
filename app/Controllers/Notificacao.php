@@ -70,12 +70,11 @@ class Notificacao extends Controller
             //Função para cadastrar transação
             $transacao = new Transacoes();
             $transacao->edit($std);
-            $email = new Email();
-            if (!$email->notificar_pg($std, 2)) {
-                $retorno = [
-                    'error'     =>  1001,
-                    'message'   => "Não foi possível enviar o e-mail de notificação."
-                ];
+            //Notificar por e-mail status de aguardando pagamento
+            //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
+            if (env('mail.using') == true) {
+                $email = new Email();
+                $email->notificar_pg($std, 2);
             }
         } else throw new \CodeIgniter\Exceptions\ModelException("Não foi possível realizar essa requisição", 404);
         //header('Content-Type: application/json');

@@ -23,6 +23,7 @@ class Email extends Controller
      */
     public function notificar_pg($std, $who): bool
     {
+        if (!isset($std) or !isset($who)) return false;
         /**
          * Caso esteja false não faz o envio do e-mail, apenas uma simulação para não dar erro
          */
@@ -67,6 +68,13 @@ class Email extends Controller
          </div>
         ');
 
+        /**
+         * Debug do envio de e-mail
+         * 
+         * $email->send(false);
+         * $email->printDebugger(['headers', 'subject', 'body']);
+         * exit();
+         */
 
         return $email->send();
     }
