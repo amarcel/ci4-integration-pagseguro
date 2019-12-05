@@ -21,9 +21,10 @@ class Email extends Controller
      * Assim, é posível saber se o texto será "Pedido realizado" ou "Alteração de pagamento"
      * @return boolean
      */
-    public function notificar_pg($std, $who): bool
+    public function notificar_pg($std = null, $who = null): bool
     {
-        if (!isset($std) or !isset($who)) return false;
+        if ($std == null or $who == null) return false;
+
         /**
          * Caso esteja false não faz o envio do e-mail, apenas uma simulação para não dar erro
          */
@@ -49,8 +50,11 @@ class Email extends Controller
         $email->setFrom('your@example.com', 'Sistema');
         $email->setTo($std->sender->email);
         /*
-        $email->setCC('another@another-example.com');
-        $email->setBCC('them@their-example.com');
+        * Setar copia no e-mail
+        * $email->setCC('another@another-example.com');
+        * 
+        * Setar cópia oculta no e-mail
+        * $email->setBCC('them@their-example.com');
         */
         $email->setSubject($who == 1 ? "Pedido recebido com sucesso" : "Atualização na sua compra");
 
