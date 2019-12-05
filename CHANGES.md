@@ -1,3 +1,8 @@
+## [v0.0.3]
+> Dez 05, 2019
+
+- Alterado o envio de e-mail para realizar apenas quando a variável de ambiente for `true`
+
 ## [v0.0.2]
 > Dez 04, 2019
 
