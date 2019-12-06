@@ -15,7 +15,7 @@ function pagarBoleto(e) {
 	}).done(function (res) {
 		console.log(res);
 		if (res.error == 0) {
-			$('#pagar_boleto').val("Boleto gerado com sucesso");
+			$('#btn_pagar').val("Boleto gerado com sucesso");
 			$('.msg').html('Enviado com sucesso. Link do boleto: <a target="_blank" href="' + res.code.paymentLink + '">Clique aqui para baixar</a>');
 		} else {
 			$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
@@ -24,7 +24,7 @@ function pagarBoleto(e) {
 		$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
 
 	}).always(function (res) {
-		$('#pagar_boleto').attr('disabled', true);
+		$('#btn_pagar').attr('disabled', true);
 	});
 
 }

@@ -6,6 +6,8 @@
 var url = 'http://localhost:8080/' + 'sessao/gerarSessao';
 
 function setSessionIdPagSeguro() {
+    $('#btn_pagar').attr("disabled", true);
+
     $.ajax({
         url: url,
         dataType: 'json',
@@ -13,16 +15,18 @@ function setSessionIdPagSeguro() {
             console.log(res);
             if (res.error == 0) {
                 var id_sessao = res.id_sessao;
-                //Pagamento
+                //Setar id_sessao
                 PagSeguroDirectPayment.setSessionId(id_sessao);
+                if (!$('#btn_pagar').hasClass('btn-danger')) {
+                    $('#btn_pagar').attr("disabled", false);
+                }
 
             } else {
-                //alert('Error entrou no success:' + res.error + ' ' + res.message);
+                alert('Erro ao setar a sessão' + res.error + ' ' + res.message);
             }
-            //alert(res.id_sessao);
         },
         error: function () {
-            //alert('Error:' + res.error + ' ' + res.message);
+            alert('Erro ao gerar sessão' + res.error + ' ' + res.message);
         }
     });
 }

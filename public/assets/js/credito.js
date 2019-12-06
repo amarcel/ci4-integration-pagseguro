@@ -6,12 +6,12 @@ $("#parcelas").on('change', function (e) {
 	var parcelas = $(this).val();
 	if (parcelas != 0) {
 		getInstallments();
-		$('#pagar_cartao').attr("disabled", false);
-		$('#pagar_cartao').addClass("btn-success").removeClass("btn-danger");
+		$('#btn_pagar').attr("disabled", false);
+		$('#btn_pagar').addClass("btn-success").removeClass("btn-danger");
 	} else {
-		$('#pagar_cartao').attr("disabled", true);
+		$('#btn_pagar').attr("disabled", true);
 		$('#vparcela').val('');
-		$('#pagar_cartao').addClass("btn-danger").removeClass("btn-success");
+		$('#btn_pagar').addClass("btn-danger").removeClass("btn-success");
 	}
 });
 
@@ -42,6 +42,7 @@ function getInstallments() {
 			$('#valor').val(parseFloat(valor));
 		},
 		error: function (response) {
+			alert('Erro getInstallments() in credito.js' + response.error)
 			// callback para chamadas que falharam.
 		},
 		complete: function (response) {
@@ -88,7 +89,7 @@ function gerarToken(e) {
 		},
 		error: function (response) {
 			// Callback para chamadas que falharam.
-			// alert('Erro ao gerar token de pagamento, verifique os dados do cartão e tente novamenteq');
+			alert('Erro ao gerar token de pagamento' + response.error);
 			console.log(response);
 		}
 	});
@@ -113,7 +114,7 @@ function pagarCartao() {
 	}).done(function (res) {
 		console.log(res);
 		if (res.error == 0) {
-			$('#pagar_cartao').val('Pagamento solicitado com sucesso');
+			$('#btn_pagar').val('Pagamento solicitado com sucesso');
 			$('.msg').html('Enviado com sucesso. Código da compra: ' + res.code.code);
 		} else {
 
@@ -124,7 +125,7 @@ function pagarCartao() {
 
 	}).always(function (res) {
 		$('#parcelas').attr("disabled", true);
-		$('#pagar_cartao').attr("disabled", true);
+		$('#btn_pagar').attr("disabled", true);
 	});
 
 }

@@ -89,7 +89,7 @@
 					</div>
 
 				</div>
-				<input id="pagar_cartao" type="submit" class="btn btn-danger btn-pagar-credito btn-block" disabled="true" onclick="gerarToken(event)" value="Pagar com cartão de crédito"></input>
+				<input id="btn_pagar" type="submit" class="btn btn-danger btn-pagar-credito btn-block" disabled="true" onclick="gerarToken(event)" value="Pagar com cartão de crédito"></input>
 			</form>
 			<div class="mt-3 text-center">
 				<span class="msg"></span>

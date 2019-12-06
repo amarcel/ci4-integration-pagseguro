@@ -55,7 +55,7 @@
 						<input type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
 					</div>
 				</div>
-				<input id="pagar_boleto" type="submit" class="btn btn-info btn-pagar-boleto btn-block" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
+				<input id="btn_pagar" type="submit" class="btn btn-info btn-pagar-boleto btn-block" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
 			</form>
 			<div class="mt-3 text-center">
 				<span class="msg"></span>
