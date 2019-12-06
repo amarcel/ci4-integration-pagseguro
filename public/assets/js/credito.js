@@ -30,9 +30,7 @@ function getInstallments() {
 		brand: 'visa',
 		success: function (res) {
 			// Retorna as opções de parcelamento disponíveis
-			console.log(res);
 			var valor_parcela = res.installments.visa[parc].installmentAmount;
-			console.log(parseFloat(valor_parcela));
 			var valor = res.installments.visa[parc].totalAmount;
 			/*
 			console.log('Valor parcela:' + valor_parcela);
@@ -57,7 +55,6 @@ function getInstallments() {
  * @param {event} e 
  */
 function gerarToken(e) {
-
 	e.preventDefault();
 
 	var numero = $('#ncartao').val();
@@ -67,7 +64,6 @@ function gerarToken(e) {
 	var mes = validade[0];
 	var ano = validade[1];
 
-	//PagSeguroDirectPayment.setSessionId();
 	PagSeguroDirectPayment.createCardToken({
 		cardNumber: numero, // Número do cartão de crédito
 		brand: 'visa', // Bandeira do cartão
@@ -100,8 +96,8 @@ function gerarToken(e) {
  */
 function pagarCartao() {
 
-	var hash_pagamento = PagSeguroDirectPayment.getSenderHash();
-	$('#hash_pagamento').val(hash_pagamento);
+	//Pega o hash de pagamento
+	$('#hash_pagamento').val(PagSeguroDirectPayment.getSenderHash());
 
 	$.ajax({
 		type: 'post',
@@ -117,7 +113,6 @@ function pagarCartao() {
 			$('#btn_pagar').val('Pagamento solicitado com sucesso');
 			$('.msg').html('Enviado com sucesso. Código da compra: ' + res.code.code);
 		} else {
-
 			$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
 		}
 	}).fail(function (res) {
