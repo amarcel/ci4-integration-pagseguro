@@ -56,17 +56,17 @@ class Email extends Controller
         * Setar cópia oculta no e-mail
         * $email->setBCC('them@their-example.com');
         */
-        $email->setSubject($who == 1 ? "Pedido recebido com sucesso" : "Atualização na sua compra");
+        $email->setSubject($who == 1 ? 'Pedido recebido com sucesso' : 'Atualização na sua compra');
 
-        $message  = '<div style="text-align: center;">';
+        $message  = '<div style="text-align: left;">';
         $message .= '<h2>Olá ' . $std->sender->name . '</h2><br>';
-        $message .= '<h2>Código do pedido:  ' . $std->code . '</h2>';
-        $message .= '<h3>Status:' . getStatusCodePag($std->status) . '</h3>';
+        $message .= '<h3>Seu pedido código do pedido:  ' . $std->code . '</h3>';
+        $message .= '<h3>Está:' . getStatusCodePag($std->status) . '</h3>';
         $message .= 'Data: ' . $std->date . '<br>';
         $message .= 'Referência:' . $std->reference . '<br>';
         $message .= 'Valor:' . $std->grossAmount . '<br>';
         if (isset($std->paymentLink)) {
-            $message .= 'URL Boleto: <a href="' . $std->paymentLink . '" target="_blank" </a>Baixar boleto<br>';
+            $message .= 'Caso não tenha acessado, aqui você pode <a href="' . $std->paymentLink . '" target="_blank" </a>baixar o boleto.<br>';
         }
         $message .= '</div>';
 
