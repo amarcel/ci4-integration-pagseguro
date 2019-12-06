@@ -17,6 +17,9 @@ function setSessionIdPagSeguro() {
                 var id_sessao = res.id_sessao;
                 //Setar id_sessao
                 PagSeguroDirectPayment.setSessionId(id_sessao);
+                /**
+                 * Verifica se o botão está como danger no caso do Pagamento de cartão ele seta danger até colocar o valor da parcela
+                 */
                 if (!$('#btn_pagar').hasClass('btn-danger')) {
                     $('#btn_pagar').attr("disabled", false);
                 }
