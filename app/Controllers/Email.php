@@ -58,19 +58,19 @@ class Email extends Controller
         */
         $email->setSubject($who == 1 ? "Pedido recebido com sucesso" : "Atualização na sua compra");
 
-        $email->setMessage('
-        <div style="text-align: center;">
-            <h2>Olá ' . $std->sender->name . '</h2><br>
-            <h2>Código do pedido:  ' . $std->code . '</h2>
-            <h3>Status:' . getStatusCodePag($std->status) . '</h3>
-            <br>
-            
-            Data:               ' . $std->date . '<br>
-            Referência:         ' . $std->reference . '<br>
-            Valor:              ' . $std->grossAmount . '<br>
-            
-         </div>
-        ');
+        $message  = '<div style="text-align: center;">';
+        $message .= '<h2>Olá ' . $std->sender->name . '</h2><br>';
+        $message .= '<h2>Código do pedido:  ' . $std->code . '</h2>';
+        $message .= '<h3>Status:' . getStatusCodePag($std->status) . '</h3>';
+        $message .= 'Data: ' . $std->date . '<br>';
+        $message .= 'Referência:' . $std->reference . '<br>';
+        $message .= 'Valor:' . $std->grossAmount . '<br>';
+        if (isset($std->paymentLink)) {
+            $message .= 'URL Boleto: <a href="' . $std->paymentLink . '" target="_blank" </a>Baixar boleto<br>';
+        }
+        $message .= '</div>';
+
+        $email->setMessage($message);
 
         /**
          * Debug do envio de e-mail
