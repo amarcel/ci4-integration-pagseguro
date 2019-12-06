@@ -5,6 +5,7 @@
 - Alteração do pagamento helper para limpar código
 - Realocação da session pagseguro para um novo controller
 - Aperfeiçoando o layout
+- Colocar do boleto na função de notificar por e-mail 
 
 ## [v0.0.3]
 > Dez 05, 2019

@@ -25,7 +25,6 @@
 - [ ] Verificar qual bandeira do cartão
 - [ ] Tratamento de erros do PagSeguro
 - [ ] Pagamento de cartão com juros
-- [ ] Colocar do boleto na função de notificar por e-mail 
 - [ ] Utilizar o cURL do ci4
 - [ ] Finalização de campos do formulário
 - [ ] Aviso de vencimento de boleto a 1 dia do vencimento
