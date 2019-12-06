@@ -20,17 +20,6 @@
 - Loader to wait for payment request
 - Logs at each transaction status
 
-## To do:
-
-- [ ] Check which flag of the card
-- [ ] PagSeguro error handling
-- [ ] Interest card payment
-- [ ] Put the bill of lading in the email notification function
-- [ ] Using ci4 cURL
-- [ ] Completion of form fields
-- [ ] Notice of payment due on 1 day due
-- [ ] Controller Pagar only in one payment function for boleto and card
-
 ## Structure:
 | Type | First name | Reason |
 | ------ | ------ | ------ |

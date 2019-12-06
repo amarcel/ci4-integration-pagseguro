@@ -24,7 +24,6 @@
 
 - [ ] Verificar qual bandeira do cartão
 - [ ] Tratar erros de validação no model transações
-- [ ] Aguardar a requisição da Session para liberar o botão de pagamento
 - [ ] Tratamento de erros do PagSeguro
 - [ ] Pagamento de cartão com juros
 - [ ] Utilizar o cURL do ci4
