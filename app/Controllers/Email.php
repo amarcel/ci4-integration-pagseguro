@@ -59,7 +59,7 @@ class Email extends Controller
         $email->setSubject($who == 1 ? 'Pedido recebido com sucesso' : 'Atualização na sua compra');
 
         $message  = '<div style="text-align: left;">';
-        $message .= '<h2>Olá ' . $std->sender->name . '</h2><br>';
+        $message .= '<h2>Olá ' . $std->sender->name . '</h2>';
         $message .= '<h3>Seu pedido código do pedido:  ' . $std->code . '</h3>';
         $message .= '<h3>Está:' . getStatusCodePag($std->status) . '</h3>';
         $message .= 'Data: ' . $std->date . '<br>';
