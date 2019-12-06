@@ -128,32 +128,3 @@ function pagarCartao() {
 	});
 
 }
-
-/**
- * Função obrigatória para gerar a sessão de pagamento da API do PagSeguro
- */
-function setSessionIdPagSeguro() {
-
-	$.ajax({
-		url: 'pg_session_id_credito',
-		dataType: 'json',
-		success: function (res) {
-			console.log(res);
-			if (res.error == 0) {
-				var id_sessao = res.id_sessao;
-				//Pagamento
-				PagSeguroDirectPayment.setSessionId(id_sessao);
-
-			} else {
-				//alert('Error entrou no success:' + res.error + ' ' + res.message);
-			}
-
-		},
-		error: function () {
-
-		}
-	});
-}
-
-//Iniciando a sessão ao abrir a página
-setSessionIdPagSeguro();
