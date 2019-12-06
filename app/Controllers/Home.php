@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Controllers\Transacoes;
 use CodeIgniter\Controller;
 
 /**
@@ -12,9 +11,6 @@ use CodeIgniter\Controller;
  */
 class Home extends Controller
 {
-    public function __construct()
-    { }
-
     public function index()
     {
         return view('home');

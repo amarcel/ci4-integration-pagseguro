@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>API de Pagamento PagSeguro</title>
+	<title>Boleto - API de Pagamento PagSeguro</title>
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 
 	<!-- CSS referente à página  -->

@@ -12,9 +12,6 @@ use CodeIgniter\Controller;
  */
 class Transacoes extends Controller
 {
-    public function __construct()
-    { }
-
     /**
      * Criar uma nova transação do tipo boleto
      *

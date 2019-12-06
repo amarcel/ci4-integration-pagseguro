@@ -12,9 +12,6 @@ use CodeIgniter\Controller;
  */
 class Listagem extends Controller
 {
-	public function __construct()
-	{ }
-
 	public function index()
 	{
 
