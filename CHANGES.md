@@ -1,3 +1,9 @@
+## [v0.0.4]
+> Dez 06, 2019
+
+- Correção da versão [v0.0.3] para fazer a verificação apenas no Controller necessário.
+- Alteração do pagamento helper para limpar código
+
 ## [v0.0.3]
 > Dez 05, 2019
 
