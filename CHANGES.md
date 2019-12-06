@@ -6,6 +6,7 @@
 - Realocação da session pagseguro para um novo controller
 - Aperfeiçoando o layout
 - Colocar do boleto na função de notificar por e-mail 
+- Aguardar a requisição da Session para liberar o botão de pagamento
 
 ## [v0.0.3]
 > Dez 05, 2019
