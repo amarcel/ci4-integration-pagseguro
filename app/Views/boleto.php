@@ -17,7 +17,7 @@
 <body>
 	<div class="card">
 		<div class=" text-center card-header">
-			<a href="/listagem">Voltar</a> - Sandbox
+			<a href="/listagem">Voltar</a> - <a target="_blank" href="https://github.com/matheuscastroweb/ci4-integration-pagseguro">CodeIgniter 4 Integration PagSeguro API</a>
 		</div>
 		<div class="card-body">
 			<div class="text-center">
@@ -55,10 +55,13 @@
 				</div>
 				<input id="pagar_boleto" type="submit" class="btn btn-info btn-pagar-boleto btn-block" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
 			</form>
+			<div class="mt-3 text-center">
+				<span class="msg"></span>
+			</div>
 
 		</div>
 		<div class="card-footer text-muted text-center">
-			<span class="msg"></span>
+			<a target="_blank" href='https://github.com/matheuscastroweb'>GitHub</a> - Matheus de Castro Pelegrino < matheuscastroweb@gmail.com>
 		</div>
 
 	</div>

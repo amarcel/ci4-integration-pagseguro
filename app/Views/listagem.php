@@ -14,18 +14,17 @@
 <body>
     <div id="divp" class="card">
         <div class=" text-center card-header">
-            Sandbox
+            <a target="_blank" href="https://github.com/matheuscastroweb/ci4-integration-pagseguro">CodeIgniter 4 Integration PagSeguro API</a>
         </div>
 
         <div class="card-body">
             <div class="text-center ">
                 <h5 class="card-title">Listagens de transações</h5>
-                <p class="card-text mb-3">Esta funcionalidade está em modo <?= env('api.mode') ?>.</p>
+                <p class="card-text mb-3">Criar novo pagamento com: <a href="/pagar/boleto">Boleto</a> ou <a href="/pagar/credito">Cartão de crédito</a></p>
             </div>
-            <table class="mx-auto col-9 table">
-                <tr>
-                    <td><strong>REF</strong></td>
-
+            <table class="mx-auto col-9 table table-striped">
+                <tr class="font-weight-bold">
+                    <td>Referência</td>
                     <td>Código</td>
                     <td>Tipo</td>
                     <td>Status</td>
@@ -36,7 +35,7 @@
                 <?php if (!empty($transacoes) && is_array($transacoes)) :  ?>
                     <?php foreach ($transacoes as $transacoes_item) :  ?>
                         <tr>
-                            <td class="text-uppercase"><?= substr($transacoes_item['referencia_transacao'], 1, 5) ?></td>
+                            <td class=" text-uppercase"><?= substr($transacoes_item['referencia_transacao'], 1, 5) ?></td>
                             <td><?= $transacoes_item['codigo_transacao'] ?></td>
                             <td><?= getStatusTypePag($transacoes_item['tipo_transacao']) ?></td>
                             <td><?= getStatusCodePag($transacoes_item['status_transacao']) ?></td>
@@ -75,7 +74,7 @@
             </div>
         </div>
         <div class="card-footer text-muted text-center">
-            Criar novo pagamento com: <a class="mx-2" href="/pagar/boleto">Boleto</a> ou <a href="/pagar/credito">Cartão de crédito</a>
+            <a target="_blank" href='https://github.com/matheuscastroweb'>GitHub</a> - Matheus de Castro Pelegrino < matheuscastroweb@gmail.com>
         </div>
     </div>
 
