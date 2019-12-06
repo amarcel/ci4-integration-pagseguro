@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div id="divp" class="card">
+    <div class="card">
         <div class=" text-center card-header">
             <a target="_blank" href="https://github.com/matheuscastroweb/ci4-integration-pagseguro">CodeIgniter 4 Integration PagSeguro API</a>
         </div>
