@@ -251,10 +251,9 @@ class Pagar extends Controller
 
             //Notificar por e-mail status de aguardando pagamento
             //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-            if (env('mail.using') == true) {
-                $email = new Email();
-                $email->notificar_pg($std, 1);
-            }
+
+            $email = new Email();
+            $email->notificar_pg($std, 1);
         }
 
         return json_encode($retorno);
@@ -395,10 +394,9 @@ class Pagar extends Controller
             $transacao->store($std);
             //Notificar por e-mail status de aguardando pagamento
             //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-            if (env('mail.using') == true) {
-                $email = new Email();
-                $email->notificar_pg($std, 1);
-            }
+
+            $email = new Email();
+            $email->notificar_pg($std, 1);
         }
 
         //header('Content-Type: application/json');
