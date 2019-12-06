@@ -35,6 +35,7 @@
 | Tipo | Nome | Razão |
 | ------ | ------ | ------ |
 | Controller | Home.php | Status para verificar as variáveis |
+| Controller | Sessao.php | Responsável por gerar as sessões de pagamento |
 | Controller | Listagem.php | Listagem das transações |
 | Controller | Notificacao.php | Receber a requisição do PagSeguro |
 | Controller | Email.php | Enviar status de atualizações por e-mail |

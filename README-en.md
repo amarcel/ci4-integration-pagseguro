@@ -35,6 +35,7 @@
 | Type | First name | Reason |
 | ------ | ------ | ------ |
 | Controller | Home.php | Status to check variables |
+| Controller | Sessao.php | Responsible for generating the payment sections |
 | Controller | Listagem.php | Transaction Listing |
 | Controller | Notificacao.php | Receive the request from PagSeguro |
 | Controller | Email.php | Email Update Status |
