@@ -70,15 +70,31 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label class="my-1">Valor da Parcela</label>
-					<input type="text" class="my-1 form-control" readonly id="vparcela" name="valor_parcela" placeholder="O valor da parcela será gerado aguarde">
+					<label class="">Valor da Parcela</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">R$</div>
+						</div>
+						<input type="text" class=" form-control" readonly id="vparcela" name="valor_parcela" placeholder="O valor da parcela será gerado aguarde">
+
+					</div>
 				</div>
 				<div class="form-group">
 					<label class="text-left">Referência</label>
 					<input type="text" class="my-1 form-control" readonly name="ref" value="<?= md5(uniqid(rand(), true)) ?>">
 					<p class="text-muted">Esta é a referência única ao seu pagamento</p>
 				</div>
-
+				<div class="form-group">
+					<label class="text-left">Número de telefone</label>
+					<div class="form-row">
+						<div class="col-3">
+							<input type="text" readonly class="form-control" name="ddd" placeholder="DDD" value="22">
+						</div>
+						<div class="col">
+							<input type="text" readonly class="form-control" name="number" placeholder="Número" value="995151114">
+						</div>
+					</div>
+				</div>
 				<div class="form-group">
 					<label class="text-left">Valor</label>
 					<div class="input-group">
@@ -87,7 +103,6 @@
 						</div>
 						<input id="valor" type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
 					</div>
-
 				</div>
 				<input id="btn_pagar" type="submit" class="btn btn-danger btn-pagar-credito btn-block" disabled="true" onclick="gerarToken(event)" value="Pagar com cartão de crédito"></input>
 			</form>

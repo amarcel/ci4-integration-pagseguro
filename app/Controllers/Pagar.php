@@ -58,8 +58,8 @@ class Pagar extends Controller
             'reference'         => $this->request->getVar('ref'),
             'senderName'        => $this->request->getVar('nome'),
             'senderCPF'         => $this->request->getVar('cpf'),
-            'senderAreaCode'    => '21',
-            'senderPhone'       => '998551629',
+            'senderAreaCode'    => $this->request->getVar('ddd'),
+            'senderPhone'       => $this->request->getVar('number'),
             'senderEmail'       => $this->request->getVar('email'),
             'senderHash'        => $this->request->getVar('hash_pagamento'),
 
@@ -172,8 +172,8 @@ class Pagar extends Controller
             'reference'         => $this->request->getVar('ref'),
             'senderName'        => $this->request->getVar('nome'),
             'senderCPF'         => $this->request->getVar('cpf'),
-            'senderAreaCode'    => '21',
-            'senderPhone'       => '998551629',
+            'senderAreaCode'    => $this->request->getVar('ddd'),
+            'senderPhone'       => $this->request->getVar('number'),
             'senderEmail'       => $this->request->getVar('email'),
             'senderHash'        => $this->request->getVar('hash_pagamento'),
 
