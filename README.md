@@ -29,7 +29,7 @@
 - [ ] Utilizar o cURL do ci4
 - [ ] Finalização de campos do formulário
 - [ ] Aviso de vencimento de boleto a 1 dia do vencimento
-- [ ] Deixar uma view apenas para listagem
+- [ ] Controller pagar apenas em uma função de pagamento para boleto e cartão
 
 ## Estrutura:
 | Tipo | Nome | Razão |

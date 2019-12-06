@@ -29,7 +29,7 @@
 - [ ] Using ci4 cURL
 - [ ] Completion of form fields
 - [ ] Notice of payment due on 1 day due
-- [ ] Leave a view for listing only
+- [ ] Controller Pagar only in one payment function for boleto and card
 
 ## Structure:
 | Type | First name | Reason |
