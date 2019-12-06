@@ -88,6 +88,7 @@ mail.port    = port
 5.To use the notification module on localhost, simply access PagSeguro and simulate a status exchange.
 
 > **OBS.:** Always when updating any .env parameter restart the php server.
+> **OBS.:** If url base is not localhost: 8080, configure in this documents to generate sessions `public/assets/js/sessao.js `
 
 6. Verify that all PagSeguro parameters are set to `YES`.
 
