@@ -17,7 +17,7 @@
 <body>
 	<div class="card">
 		<div class=" text-center card-header">
-			<a href="/">Voltar</a> - Sandbox
+			<a href="/listagem">Voltar</a> - Sandbox
 		</div>
 		<div class="card-body">
 			<div class="text-center">

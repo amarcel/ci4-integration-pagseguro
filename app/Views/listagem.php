@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="card-footer text-muted text-center">
-            Criar novo pagamento com: <a class="mx-2" href="/pagar">Boleto</a><a href="/pagar/credito">Cartão de crédito</a>
+            Criar novo pagamento com: <a class="mx-2" href="/pagar/boleto">Boleto</a> ou <a href="/pagar/credito">Cartão de crédito</a>
         </div>
     </div>
 
