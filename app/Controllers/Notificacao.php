@@ -16,7 +16,7 @@ class Notificacao extends Controller
 
     public function __construct()
     {
-        header("access-control-allow-origin: https://sandbox.pagseguro.uol.com.br");
+        header('access-control-allow-origin: https://sandbox.pagseguro.uol.com.br');
     }
 
     public function index()
@@ -75,7 +75,7 @@ class Notificacao extends Controller
 
             $email = new Email();
             $email->notificar_pg($std, 2);
-        } else throw new \CodeIgniter\Exceptions\ModelException("Não foi possível realizar essa requisição", 404);
+        } else throw new \CodeIgniter\Exceptions\ModelException('Não foi possível realizar essa requisição', 404);
         //header('Content-Type: application/json');
         return json_encode($retorno);
     }

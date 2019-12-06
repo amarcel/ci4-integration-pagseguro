@@ -20,7 +20,7 @@ class Sessao extends Controller
     public function gerarSessao(): String
     {
         //Bloqueia para ser acessível apenas por Ajax
-        if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1001 - Não é possível acessar", 401);
+        if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException('1001 - Não é possível acessar', 401);
 
 
         /**
@@ -59,14 +59,14 @@ class Sessao extends Controller
 
             $json = [
                 'error'     =>  0,
-                'message'   => "Sessao gerada com sucesso",
+                'message'   => 'Sessao gerada com sucesso',
                 'id_sessao' => $std->id
             ];
         } else {
 
             $json = [
                 'error'     =>  5000,
-                'message'   => "Erro ao gerar sessao de pagamento"
+                'message'   => 'Erro ao gerar sessao de pagamento'
             ];
         }
 
