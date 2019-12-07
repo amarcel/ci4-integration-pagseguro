@@ -23,6 +23,7 @@
 ## Structure:
 | Type | First name | Reason |
 | ------ | ------ | ------ |
+| Config | PagSeguro.php | PagSeguro Configuration Data |
 | Controller | Home.php | Status to check variables |
 | Controller | Sessao.php | Responsible for generating the payment sections |
 | Controller | Listagem.php | Transaction Listing |

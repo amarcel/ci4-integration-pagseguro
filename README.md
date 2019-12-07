@@ -34,6 +34,7 @@
 ## Estrutura:
 | Tipo | Nome | Razão |
 | ------ | ------ | ------ |
+| Config | PagSeguro.php | Dados de configuração do PagSeguro |
 | Controller | Home.php | Status para verificar as variáveis |
 | Controller | Sessao.php | Responsável por gerar as sessões de pagamento |
 | Controller | Listagem.php | Listagem das transações |
