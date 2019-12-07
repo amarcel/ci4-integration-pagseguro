@@ -20,7 +20,6 @@ CI_ENVIRONMENT = development
 # API PagSeguro
 #--------------------------------------------------------------------
 
-api.mode    = development
 api.email   = email
 api.token   = token
 
