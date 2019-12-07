@@ -88,7 +88,7 @@ Sandbox tests with only invalid name and CPF generation for testing.
 
 ### Listing of all transactions:
 
-![Listagem](https://user-images.githubusercontent.com/45601574/70171703-0b6c7800-16ae-11ea-8661-7ead0f8a0827.png)
+![Listagem](https://user-images.githubusercontent.com/45601574/70375547-a4350a80-18dd-11ea-8999-5a4b33df7d44.png)
 
 ### Card payment:
 
