@@ -8,6 +8,10 @@ class Transacao extends Migration
 {
 	public function up()
 	{
+		//Drop table 'transacao' if it exists
+		$this->forge->dropTable('transacao', true);
+
+		// Table structure for table 'transacao'
 		$this->forge->addField([
 
 			'id'          => [
@@ -20,7 +24,6 @@ class Transacao extends Migration
 			'id_pedido'       => [
 				'type'           => 'INT',
 				'constraint'     => 11,
-
 				'null'           => FALSE,
 			],
 			'id_cliente' => [
