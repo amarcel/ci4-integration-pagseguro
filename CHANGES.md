@@ -1,3 +1,8 @@
+## [v0.0.5]
+> Dez 07, 2019
+
+- Adição do extension=openssl para funcionamento do envio de e-mail
+
 ## [v0.0.4]
 > Dez 06, 2019
 
