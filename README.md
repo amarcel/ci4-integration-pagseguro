@@ -88,6 +88,7 @@ mail.port    = port
 5. Para utilizar o módulo de notificação em localhost, basta acessar o PagSeguro e simular uma troca de status.
 
 > **OBS.:** Sempre ao atualizar algum parâmetro do .env reinicie o servidor php.
+
 > **OBS.:** Caso a base url não seja localhost:8080, configurar neste documentos para gerar as sessões `public/assets/js/sessao.js `
 
 6. Verificar se todos os parâmetros do PagSeguro estão configurados como `SIM`. 
