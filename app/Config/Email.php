@@ -5,6 +5,13 @@ namespace Config;
 class Email
 {
 	/**
+	 * Using e-mail
+	 *
+	 * @var bool
+	 */
+	public $usingEmail;
+
+	/**
 	 * @var string
 	 */
 	public $fromEmail;
