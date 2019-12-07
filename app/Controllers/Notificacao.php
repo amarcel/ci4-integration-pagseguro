@@ -28,11 +28,11 @@ class Notificacao extends Controller
 
         $data = http_build_query($data);
 
-        if (env('api.mode') == 'development') {
-            $url = 'https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/notifications/' . $this->request->getVar('notificationCode') . '?' . $data;
-        } else {
-            $url = 'https://ws.pagseguro.uol.com.br/v3/transactions/notifications/' . $this->request->getVar('notificationCode') . '?' . $data;
-        }
+        /**
+         * Configurações do PagSeguro para verificar a URL
+         */
+        $pagSeguroConfig = new \Config\PagSeguro();
+        $url = $pagSeguroConfig->urlNotification . $this->request->getVar('notificationCode') . '?' . $data;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

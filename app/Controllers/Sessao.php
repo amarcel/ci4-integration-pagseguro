@@ -22,15 +22,11 @@ class Sessao extends Controller
         //Bloqueia para ser acessível apenas por Ajax
         if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException('1001 - Não é possível acessar', 401);
 
-
         /**
-         * Analisa qual o modo de desenvolvimento para setar a URL
+         * Configurações do PagSeguro para verificar a URL
          */
-        if (env('api.mode') == 'development') {
-            $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/sessions';
-        } else {
-            $url = 'https://ws.pagseguro.uol.com.br/v2/sessions';
-        }
+        $pagSeguroConfig = new \Config\PagSeguro();
+        $url = $pagSeguroConfig->urlSession;
 
         $params['email'] = env('api.email');
         $params['token'] = env('api.token');

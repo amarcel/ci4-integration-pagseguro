@@ -84,11 +84,11 @@ class Pagar extends Controller
 
         );
 
-        if (env('api.mode') == 'development') {
-            $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/';
-        } else {
-            $url = 'https://ws.pagseguro.uol.com.br/v2/transactions/';
-        }
+        /**
+         * Configurações do PagSeguro para verificar a URL
+         */
+        $pagSeguroConfig = new \Config\PagSeguro();
+        $url = $pagSeguroConfig->urlTransaction;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -225,11 +225,12 @@ class Pagar extends Controller
         $this->request->getVar('parcelas') > 1 ?  $pagarBoleto['noInterestInstallmentQuantity'] = 12 : null;
 
 
-        if (env('api.mode') == 'development') {
-            $url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/';
-        } else {
-            $url = 'https://ws.pagseguro.uol.com.br/v2/transactions/';
-        }
+        /**
+         * Configurações do PagSeguro para verificar a URL
+         */
+        $pagSeguroConfig = new \Config\PagSeguro();
+        $url = $pagSeguroConfig->urlTransaction;
+
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
