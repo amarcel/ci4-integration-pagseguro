@@ -45,6 +45,7 @@
 extension=mbstring
 extension=mysqli
 extension=curl
+extension=openssl
 ```
 
 2.  Create an account on [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox"). Documentation can be accessed through the link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro"). Changing `api.mode` to` production` will access the production URL of PagSeguro.
