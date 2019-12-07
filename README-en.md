@@ -49,14 +49,12 @@ extension=curl
 extension=openssl
 ```
 
-2.  Create an account on [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox"). Documentation can be accessed through the link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro"). Changing `api.mode` to` production` will access the production URL of PagSeguro.
-
+2.  Create an account on [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox"). Documentation can be accessed through the link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro"). Change ``Config/PagSeguro.php` to access production mode.
 
 ```php
 #-----------------------------
 # API PagSeguro - Alterar no .env
 #-----------------------------
-api.mode	= development
 api.email	= seu_email
 api.token	= seu_token
 ```

@@ -54,20 +54,18 @@
 #-----------------------------
 # Extensões necessárias do php.ini
 #-----------------------------
-extension=mbstring #
+extension=mbstring
 extension=mysqli
 extension=curl
 extension=openssl
 ```
 
-2.  Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox"). A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro"). Ao alterar o `api.mode ` para `production` acessará a URL de produção do PagSeguro.
-
+2.  Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox"). A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro"). Altere `Config/PagSeguro.php` para acessar a URL de produção do PagSeguro quando finalizado o projeto.
 
 ```php
 #-----------------------------
 # API PagSeguro - Alterar no .env
 #-----------------------------
-api.mode	= development
 api.email	= seu_email
 api.token	= seu_token
 ```
