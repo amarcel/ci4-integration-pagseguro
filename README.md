@@ -20,17 +20,6 @@
 - Loader para aguardar requisição de pagamento
 - Logs a cada status da transação
 
-## A fazer:
-
-- [ ] Verificar qual bandeira do cartão
-- [ ] Tratar erros de validação no model transações
-- [ ] Tratamento de erros do PagSeguro
-- [ ] Pagamento de cartão com juros
-- [ ] Utilizar o cURL do ci4
-- [ ] Finalização de campos do formulário
-- [ ] Aviso de vencimento de boleto a 1 dia do vencimento
-- [ ] Controller pagar apenas em uma função de pagamento para boleto e cartão
-
 ## Estrutura:
 | Tipo | Nome | Razão |
 | ------ | ------ | ------ |
