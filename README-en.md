@@ -81,8 +81,7 @@ mail.port    = port
 
 6. Verify that all PagSeguro parameters are set to `YES`.
 
-![Home](https://user-images.githubusercontent.com/45601574/70171446-7bc6c980-16ad-11ea-9985-342c2cd936b2.png)
-
+![PáginaStatus](https://user-images.githubusercontent.com/45601574/70375499-2244e180-18dd-11ea-843b-609750996eb7.png)
 
 ## Operation:
 Sandbox tests with only invalid name and CPF generation for testing.
