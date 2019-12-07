@@ -4,6 +4,7 @@
 - Adição do extension=openssl para funcionamento do envio de e-mail
 - Alterado os dados de configuração de URL do PagSeguro para `Config/PagSeguro.php`
 - Removido parâmetro `api.mode` do .env
+- Alterado new `Config\PagSeguro` para `config('PagSeguro')`
 
 ## [v0.0.4]
 > Dez 06, 2019
