@@ -58,10 +58,6 @@ class TransacoesModel extends Model
     {
         if (!isset($code)) return false;
 
-        $query = $this->where('referencia_transacao', $code)->first();
-
-        if ($query === true) {
-            return $this->where('referencia_transacao', $code)->first();
-        } else return false;
+        return $this->where('referencia_transacao', $code)->first();
     }
 }
