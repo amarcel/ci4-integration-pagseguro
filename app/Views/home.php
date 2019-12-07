@@ -37,12 +37,6 @@
                 </thead>
                 <tbody class="table-striped">
                     <tr>
-                        <td>api.mode</td>
-                        <td><?= env('api.mode') ?></td>
-                        <td>Modo da aplicação</td>
-                        <td><?= env('api.mode') ?  '<p class="font-weight-bold text-success ">SIM</p>' : '<p class="font-weight-bold text-danger">NÃO</p>' ?></td>
-                    </tr>
-                    <tr>
                         <td>api.email</td>
                         <td><?= env('api.email') ?></td>
                         <td>E-mail do Pagseguro</td>
