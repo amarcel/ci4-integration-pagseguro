@@ -31,7 +31,7 @@ class Notificacao extends Controller
         /**
          * Configurações do PagSeguro para verificar a URL
          */
-        $pagSeguroConfig = new \Config\PagSeguro();
+        $pagSeguroConfig = config('PagSeguro');
         $url = $pagSeguroConfig->urlNotification . $this->request->getVar('notificationCode') . '?' . $data;
 
         $ch = curl_init();

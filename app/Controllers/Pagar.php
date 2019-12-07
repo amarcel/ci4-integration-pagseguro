@@ -87,7 +87,7 @@ class Pagar extends Controller
         /**
          * Configurações do PagSeguro para verificar a URL
          */
-        $pagSeguroConfig = new \Config\PagSeguro();
+        $pagSeguroConfig = config('PagSeguro');
         $url = $pagSeguroConfig->urlTransaction;
 
         $ch = curl_init();
@@ -228,7 +228,7 @@ class Pagar extends Controller
         /**
          * Configurações do PagSeguro para verificar a URL
          */
-        $pagSeguroConfig = new \Config\PagSeguro();
+        $pagSeguroConfig = config('PagSeguro');
         $url = $pagSeguroConfig->urlTransaction;
 
 
