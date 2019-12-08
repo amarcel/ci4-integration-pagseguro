@@ -5,11 +5,12 @@
 
 ## Conteúdo:
 
+- [Features](#features "Features")
 - [Estrutura](#estrutura "Estrutura")
 - [Utilização](#utiliza%C3%A7%C3%A3o "Utilização")
 - [Funcionamento](#funcionamento "Funcionamento")
 - [Banco de dados](#banco-de-dados-utilizado "Banco de dados")
-- [Library](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/library "Library")
+- [Library](https://github.com/matheuscastroweb/ci4-integration-pagseguro/ "Library")
 
 ## Features:
 
@@ -22,7 +23,7 @@
 - Loader para aguardar requisição de pagamento
 - Logs a cada status da transação
 
-## Estrutura Library `PagSeguro`:
+## Estrutura Library
 | Função | Razão |
 | ------ | ------ |
 | getSession | Gerar uma sessão de pagamento obrigatória| 
@@ -32,7 +33,6 @@
 | store | Adicionar uma transação ao banco de dados | 
 | edit | Editar um status de transação no banco de dados |
 | notifyStatus | Envia notificação por e-mail sobre o status do pedido | 
-
 
 
 ## Utilização:
