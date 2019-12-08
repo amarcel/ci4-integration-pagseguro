@@ -9,7 +9,7 @@
 - [Utilização](#utiliza%C3%A7%C3%A3o "Utilização")
 - [Funcionamento](#funcionamento "Funcionamento")
 - [Banco de dados](#banco-de-dados-utilizado "Banco de dados")
-- [Library](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/develop "Library")
+- [Library](https://github.com/matheuscastroweb/ci4-integration-pagseguro "Library")
 
 ## Features:
 
