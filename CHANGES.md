@@ -1,3 +1,10 @@
+## [v0.0.61]
+> Dez 08, 2019
+
+- Melhora na documentação 
+- Adicionado INSTALING.md
+- Correção dos bugs de e-mail e insert no banco de dados
+
 ## [v0.0.6]
 > Dez 08, 2019
 
