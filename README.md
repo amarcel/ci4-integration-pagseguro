@@ -69,6 +69,7 @@
 | credito | Cadastro de pagamntos por cartão por ajax |
 | listagem | Listagem dos boletos em modal |
 | sessao | Criar uma sessão de pagamento |
+| main | Loading de carregamento |
 
 
 ## Utilização:
