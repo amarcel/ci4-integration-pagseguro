@@ -45,6 +45,13 @@ CREATE OR REPLACE TABLE transacao (
     deleted_at DATETIME DEFAULT NULL 
     );
 ```
+Ou utilizar a migration
+```php
+#Rodar a migration
+php spark migrate
+
+```
+
 
 4.  Configurar banco de dados dentro do framework
 
@@ -56,25 +63,10 @@ CREATE OR REPLACE TABLE transacao (
             'hostname' => 'localhost',
             'username' => 'root',
             'password' => '',
-		    'database' => 'ci4_integration_pagseguro',
-		{...}
+	    'database' => 'ci4_integration_pagseguro',
+	{...}
 	];
 ```
-
-
-```php
-#--------------------------------------------------------------------
-# Comandos úteis para utilização das migrations
-#--------------------------------------------------------------------
-
-#Criação das migrations
-php spark migrate:create
-
-#Rodar as migrations
-php spark migrate
-
-```
-
 
 5.  Configurar variáveis do PagSeguro
 
