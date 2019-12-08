@@ -27,15 +27,17 @@ class Pagar extends Controller
      *
      * @return String json
      */
-    public function pg_boleto(): String
+    public function gerarPagamento(): String
     {
         $pagSeguro = new PagSeguro();
-        return $pagSeguro->paymentBillet($this->request->getVar());
-    }
-
-    public function pg_cartao(): String
-    {
-        $pagSeguro = new PagSeguro();
-        return $pagSeguro->paymentCard($this->request->getVar());
+        $typePayment = $this->request->getVar('typePayment');
+        /**
+         * Verifica se e do tipo 2 = boleto ou tipo 1 = cartão
+         */
+        if ($typePayment == 2) {
+            return $pagSeguro->paymentBillet($this->request->getVar());
+        } else if ($typePayment == 1) {
+            return $pagSeguro->paymentCard($this->request->getVar());
+        }
     }
 }

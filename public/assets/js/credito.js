@@ -101,7 +101,7 @@ function pagarCartao() {
 
 	$.ajax({
 		type: 'post',
-		url: 'pg_cartao',
+		url: 'gerarPagamento',
 		data: $('.form').serialize(),
 		dataType: 'json',
 		beforeSend: function () {

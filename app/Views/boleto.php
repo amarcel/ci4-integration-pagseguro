@@ -28,6 +28,7 @@
 			</div>
 			<form class="form mx-auto col-5">
 				<input type="hidden" class="form-control" id="hash_pagamento" name="hash_pagamento">
+				<input type="hidden" class="form-control" name="typePayment" value="2">
 				<div class="form-group mt-4 mb-0">
 					<label class="text-left">Nome completo</label>
 					<input type="text" class="my-1 form-control" readonly name="nome" placeholder="Gabriela Sueli Aline Rodrigues" value="Gabriela Sueli Aline Rodrigues">

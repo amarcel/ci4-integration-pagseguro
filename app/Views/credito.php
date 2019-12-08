@@ -26,6 +26,7 @@
 			</div>
 			<form class="form mx-auto col-5" method="POST">
 				<input type="hidden" class="form-control" id="hash_pagamento" name="hash_pagamento">
+				<input type="hidden" class="form-control" name="typePayment" value="1">
 				<input type="hidden" class="form-control" id="credit_token" name="credit_token">
 				<div class="form-group mt-4 mb-0">
 					<label class="text-left">Nome completo</label>
