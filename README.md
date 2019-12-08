@@ -5,7 +5,8 @@
 
 ## Conteúdo:
 
-- [Estrutura](#estrutura "Estrutura")
+- [Features](#features "Features")
+- [Estrutura library](#estrutura-library "Estrutura library")
 - [Utilização](#utiliza%C3%A7%C3%A3o "Utilização")
 - [Funcionamento](#funcionamento "Funcionamento")
 - [Banco de dados](#banco-de-dados-utilizado "Banco de dados")
@@ -21,7 +22,7 @@
 - Loader para aguardar requisição de pagamento
 - Logs a cada status da transação
 
-## Estrutura Library PagSeguro:
+## Estrutura Library:
 | Função | Razão |
 | ------ | ------ |
 | getSession | Gerar uma sessão de pagamento obrigatória| 
@@ -31,45 +32,6 @@
 | store | Adicionar uma transação ao banco de dados | 
 | edit | Editar um status de transação no banco de dados |
 | notifyStatus | Envia notificação por e-mail sobre o status do pedido | 
-
-## Estrutura dos Controllers:
-| Nome | Razão |
-| ------ | ------ |
-| Home | Gerar uma sessão de pagamento obrigatória| 
-| Listagem | Receber notificação do PagSeguro de alteração de status |
-| Notificacao | Gerar pagamento por boleto bancário |
-| Pagar | Gerar pagamento por cartão de crédito | 
-| Sessao | Adicionar uma transação ao banco de dados | 
-
-## Estrutura do Helper:
-| Função | Razão |
-| ------ | ------ |
-| getStatusCodePag | Retornar o código do status da transação | 
-| getStatusTypePag | Retornar o tipo de transação que foi feita |
-
-## Estrutura do Model:
-| Função | Razão | 
-| ------ | ------ |
-| getTransacao | Retornar todas transações | 
-| getTransacaoPorRef | Retornar transação buscando pela sua referência |
-
-
-## Estrutura das Views:
-| Nome | Razão | 
-| ------ | ------ |
-| boleto | Cadastro dos pagamentos por boleto | 
-| credito | Cadastro de pagamntos por cartão |
-| listagem | Listagem de todas transações |
-
-## Estrutura dos Assets:
-
-| Função | Razão | 
-| ------ | ------ |
-| boleto | Cadastro dos pagamentos por boleto por ajax | 
-| credito | Cadastro de pagamntos por cartão por ajax |
-| listagem | Listagem dos boletos em modal |
-| sessao | Criar uma sessão de pagamento |
-| main | Loading de carregamento |
 
 
 ## Utilização:
