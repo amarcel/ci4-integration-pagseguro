@@ -36,17 +36,28 @@
 
 ## Utilização:
 
-1. Seguir a instalação do PHP. Caso dê algum erro de instalação do CI4 com o PHP, siga estes passos [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP").
+ Config banco de dados
+ Acessar /listagem
+ Colocar dados no config/PagSeguro
 
 ```php
-#-----------------------------
-# Extensões necessárias do php.ini
-#-----------------------------
-extension=mbstring
-extension=mysqli
-extension=curl
-extension=openssl
+use App\Libraries\PagSeguro;
+
+$pagseguro = new PagSeguro();
+
+//Controller Sessao - Pegar sessão
+$pagseguro->getSession();
+
+//Controller Notificacao - Receber requisição do PagSeguro para atualizar status
+$pagseguro->requestNotification($request);
+
+//Controller Pagar - Pagamento por boleto
+$pagseguro->paymentBillet($request);
+
+//Controller pagar - Pagamento por cartão de crédito
+$pagseguro->paymentCard($request);
 ```
+ 
 
 2.  Criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox"). A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro"). Altere `Config/PagSeguro.php` para acessar a URL de produção do PagSeguro quando finalizado o projeto.
 
@@ -75,7 +86,17 @@ mail.port    = port
 
 5. Para utilizar o módulo de notificação em localhost, basta acessar o PagSeguro e simular uma troca de status.
 
-> **OBS.:** Sempre ao atualizar algum parâmetro do .env reinicie o servidor php.
+6. Bibliotecas necessárias
+
+```php
+#-----------------------------
+# Extensões necessárias do php.ini
+#-----------------------------
+extension=mbstring
+extension=mysqli
+extension=curl
+extension=openssl
+```
 
 > **OBS.:** Caso a base url não seja localhost:8080, configurar neste documentos para gerar as sessões `assets/js/sessao.js `
 
