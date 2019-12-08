@@ -6,7 +6,7 @@ function pagarBoleto(e) {
 
 	$.ajax({
 		type: 'post',
-		url: 'pg_boleto',
+		url: 'gerarPagamento',
 		data: $('.form').serialize(),
 		dataType: 'json',
 		beforeSend: function () {

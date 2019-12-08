@@ -1,3 +1,10 @@
+## [v0.0.6]
+> Dez 08, 2019
+
+- Criação da Library de pagamento
+- Alterações nas funções da library para previnir erros
+- Adição de um único método para o controller de pagamento
+
 ## [v0.0.5]
 > Dez 07, 2019
 
