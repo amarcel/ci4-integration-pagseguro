@@ -48,11 +48,9 @@ class PagSeguro
          */
         $url = $this->pagSeguroConfig->urlSession;
 
-        /**
-         * Em modo de produção altere as variáveis env() por $this->email e $this->token
-         */
-        $params['email'] = env('api.email');
-        $params['token'] = env('api.token');
+
+        $params['email'] = $this->email;
+        $params['token'] = $this->token;
 
         $ch = curl_init();
 
@@ -104,8 +102,8 @@ class PagSeguro
         /**
          * Em modo de produção altere as variáveis env() por $this->email e $this->token
          */
-        $data['email'] = env('api.email');
-        $data['token'] = env('api.token');
+        $data['email'] = $this->email;
+        $data['token'] = $this->token;
 
         $data = http_build_query($data);
 
@@ -182,12 +180,11 @@ class PagSeguro
          * Dados abaixo estão apenas por via de demonstração
          */
         $pagarBoleto = array(
-            'email'         => env('api.email'),
-            'email'         => env('api.email'),
-            'token'         => env('api.token'),
+            'email'         => $this->email,
+            'token'         => $this->token,
             'paymentMode'   => 'default',
             'paymentMethod' => 'boleto',
-            'receiverEmail' => env('api.email'),
+            'receiverEmail' => $this->email,
             'currency'      => 'BRL',
             'extraAmount'   => '',
 
@@ -306,13 +303,13 @@ class PagSeguro
          */
 
         $pagarBoleto = array(
-            'email'         => env('api.email'),
-            'token'         => env('api.token'),
+            'email'         => $this->email,
+            'token'         => $this->token,
 
             'paymentMode'   => 'default',
             'paymentMethod' => 'creditCard',
             'currency'      => 'BRL',
-            'receiverEmail' => env('api.email'),
+            'receiverEmail' => $this->email,
 
             'extraAmount'   => '0.00',
 
@@ -518,12 +515,14 @@ class PagSeguro
      */
     protected function notifyStatus($std = null, $who = null): bool
     {
+
         if ($std == null or $who == null) return false;
 
         /**
          * Caso esteja false não faz o envio do e-mail, apenas uma simulação para não dar erro
          */
-        if (env('mail.using') == false) return true;
+        $configMail = config('Email');
+        if ($configMail->usingEmail == false) return true;
 
         helper('pagamento');
         $email = \Config\Services::email();
@@ -531,10 +530,10 @@ class PagSeguro
         //Alterar no config/Email.php quando em produção $email->SMTPHost;
         $config = array(
             'protocol'   => 'smtp',
-            'SMTPHost'   => env('mail.host'),
-            'SMTPPort'   => env('mail.port'),
-            'SMTPUser'   => env('mail.user'),
-            'SMTPPass'   => env('mail.pass'),
+            'SMTPHost'   => $configMail->SMTPHost,
+            'SMTPPort'   => $configMail->SMTPPort,
+            'SMTPUser'   => $configMail->SMTPUser,
+            'SMTPPass'   => $configMail->SMTPPass,
             'SMTPCrypto' => 'tls',
             'mailType'   => 'html'
         );

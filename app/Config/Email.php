@@ -9,7 +9,7 @@ class Email
 	 *
 	 * @var bool
 	 */
-	public $usingEmail;
+	public $usingEmail = false;
 
 	/**
 	 * @var string
