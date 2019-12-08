@@ -10,7 +10,11 @@
 - [Utilização](#utiliza%C3%A7%C3%A3o "Utilização")
 - [Funcionamento](#funcionamento "Funcionamento")
 - [Banco de dados](#banco-de-dados-utilizado "Banco de dados")
+<<<<<<< HEAD
 - [Library](https://github.com/matheuscastroweb/ci4-integration-pagseguro/ "Library")
+=======
+- [Library](https://github.com/matheuscastroweb/ci4-integration-pagseguro "Library")
+>>>>>>> ff6d59597c15ef39aca48998f900b6b7e3e6aeb1
 
 ## Features:
 
