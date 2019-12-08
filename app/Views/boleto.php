@@ -58,15 +58,51 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="text-left">Valor</label>
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">R$</div>
+					<label class="text-left">Referência</label>
+					<input type="text" class="my-1 form-control" readonly name="ref" value="<?= md5(uniqid(rand(), true)) ?>">
+					<p class="text-muted">Esta é a referência única ao seu pagamento</p>
+				</div>
+				<div class="form-group">
+					<label class="text-left">Dados do produto</label>
+					<div class="form-row">
+						<div class="col-2">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">#ID</div>
+								</div>
+								<input type="text" class="form-control" readonly name="itemId1" value="<?= rand(1, 50) ?>">
+							</div>
 						</div>
-						<input type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
+						<div class="col">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Descrição</div>
+								</div>
+								<input type="text" class="form-control" readonly name="itemDescription1" value="Serviço de e-mail">
+							</div>
+						</div>
 					</div>
 				</div>
-
+				<div class="form-group">
+					<div class="form-row">
+						<div class="col">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Quant.</div>
+								</div>
+								<input type="text" class="form-control" readonly name="itemQuantity1" value="<?= rand(1, 5) ?>">
+							</div>
+						</div>
+						<div class="col">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">R$</div>
+								</div>
+								<input type="text" class="form-control" readonly name="itemAmount1" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
+							</div>
+						</div>
+					</div>
+				</div>
 				<input id="btn_pagar" type="submit" class="btn btn-info btn-pagar-boleto btn-block" onclick="pagarBoleto(event)" value="Pagar com boleto bancário"></input>
 			</form>
 			<div class="mt-3 text-center">
