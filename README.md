@@ -81,8 +81,6 @@ mail.port    = port
 
 6. Verificar se todos os parâmetros do PagSeguro estão configurados como `SIM`. 
 
-![PáginaStatus](https://user-images.githubusercontent.com/45601574/70375499-2244e180-18dd-11ea-843b-609750996eb7.png)
-
 ## Funcionamento:
 Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
 
