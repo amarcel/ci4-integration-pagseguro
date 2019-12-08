@@ -9,8 +9,8 @@
 - [Estrutura library](#estrutura-library "Estrutura library")
 - [Utilização](#utiliza%C3%A7%C3%A3o "Utilização")
 - [Funcionamento](#funcionamento "Funcionamento")
-- [Banco de dados](#banco-de-dados-utilizado "Banco de dados")
-
+- [Banco de dados](#banco-de-dados-utilizado "Banco de dados") 
+- [Projeto completo no CI4](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "Projeto completo no CI4") 
 ## Features:
 
 - Geração de boleto pela API
