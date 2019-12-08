@@ -1,4 +1,5 @@
 # CodeIgniter 4  Integration PagSeguro API
+![](https://img.shields.io/github/issues-raw/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/contributors/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/stars/matheuscastroweb/ci4-integration-pagseguro) 
 
 ### Under development.
 
