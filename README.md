@@ -21,19 +21,17 @@
 - Loader para aguardar requisição de pagamento
 - Logs a cada status da transação
 
-## Estrutura:
-| Tipo | Nome | Razão |
-| ------ | ------ | ------ |
-| Config | PagSeguro.php | Dados de configuração do PagSeguro |
-| Controller | Home.php | Status para verificar as variáveis |
-| Controller | Sessao.php | Responsável por gerar as sessões de pagamento |
-| Controller | Listagem.php | Listagem das transações |
-| Controller | Notificacao.php | Receber a requisição do PagSeguro |
-| Controller | Email.php | Enviar status de atualizações por e-mail |
-| Controller | Pagar.php | Enviar as requisições ao PagSeguro |
-| Controller | Transacoes.php | Comunicação o banco de dados |
-| Helper | pagamento_helper.php | Conversão de valores para o cliente |
-| Model | TransacoesModel.php | Operações no banco de dados |
+## Estrutura Library `PagSeguro`:
+| Função | Razão |
+| ------ | ------ |
+| getSession | Gerar uma sessão de pagamento obrigatória| 
+| requestNotification | Receber notificação do PagSeguro de alteração de status |
+| paymentBillet | Gerar pagamento por boleto bancário |
+| paymentCard | Gerar pagamento por cartão de crédito | 
+| store | Adicionar uma transação ao banco de dados | 
+| edit | Editar um status de transação no banco de dados |
+| notifyStatus | Envia notificação por e-mail sobre o status do pedido | 
+
 
 
 ## Utilização:

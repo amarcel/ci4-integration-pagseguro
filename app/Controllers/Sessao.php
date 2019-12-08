@@ -21,6 +21,6 @@ class Sessao extends Controller
     public function gerarSessao()
     {
         $pagSeguro = new PagSeguro();
-        return $pagSeguro->gerarSessao();
+        return $pagSeguro->getSession();
     }
 }

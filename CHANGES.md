@@ -1,3 +1,9 @@
+## [v0.0.6]
+> Dez 08, 2019
+
+- Criação da Library de pagamento
+- Alterações nas funções da library para previnir erros
+
 ## [v0.0.5]
 > Dez 07, 2019
 

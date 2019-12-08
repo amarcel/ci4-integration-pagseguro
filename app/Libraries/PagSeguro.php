@@ -16,12 +16,11 @@ class PagSeguro
         $this->pagSeguroConfig = config('PagSeguro');
     }
 
-
     /**
      * Pegar o ID da sessão do PagSeguro
      * @return object
      */
-    public function gerarSessao()
+    public function getSession()
     {
         /**
          * Configurações do PagSeguro para verificar a URL
@@ -70,79 +69,13 @@ class PagSeguro
 
         return json_encode($json);
     }
+
     /**
-     * Realiza o envio de e-mail de acordo com cada requisição a API
-     *
-     * @param array $std -> Mensagem passada por completo
-     * @param int $who
-     * $who = 1 -> Controller | Pagar
-     * $who = 2 -> Controller | Notificação
-     * Assim, é posível saber se o texto será "Pedido realizado" ou "Alteração de pagamento"
-     * @return boolean
+     * Receber notificação do pagseguro quando alguma transação atualizar seu status
+     * @param array $request Transação completa
+     * @return object
      */
-    public function notificar_pg($std = null, $who = null): bool
-    {
-        if ($std == null or $who == null) return false;
-
-        /**
-         * Caso esteja false não faz o envio do e-mail, apenas uma simulação para não dar erro
-         */
-        if (env('mail.using') == false) return true;
-
-        helper('pagamento');
-        $email = \Config\Services::email();
-
-        //Alterar no config/Email.php
-        $config = array(
-            'protocol'   => 'smtp',
-            'SMTPHost'   => env('mail.host'),
-            'SMTPPort'   => env('mail.port'),
-            'SMTPUser'   => env('mail.user'),
-            'SMTPPass'   => env('mail.pass'),
-            'SMTPCrypto' => 'tls',
-            'mailType'   => 'html'
-        );
-
-        //Inicializa as configurações
-        $email->initialize($config);
-
-        $email->setFrom('your@example.com', 'Sistema');
-        $email->setTo($std->sender->email);
-        /*
-        * Setar copia no e-mail
-        * $email->setCC('another@another-example.com');
-        * 
-        * Setar cópia oculta no e-mail
-        * $email->setBCC('them@their-example.com');
-        */
-        $email->setSubject($who == 1 ? 'Pedido recebido com sucesso' : 'Atualização na sua compra');
-
-        $message  = '<div style="text-align: left;">';
-        $message .= '<h2>Olá ' . $std->sender->name . '</h2>';
-        $message .= '<h3>Seu pedido código do pedido:  ' . $std->code . '</h3>';
-        $message .= '<h3>Está:' . getStatusCodePag($std->status) . '</h3>';
-        $message .= 'Data: ' . $std->date . '<br>';
-        $message .= 'Referência:' . $std->reference . '<br>';
-        $message .= 'Valor:' . $std->grossAmount . '<br>';
-        if (isset($std->paymentLink)) {
-            $message .= 'Caso não tenha acessado, aqui você pode <a href="' . $std->paymentLink . '" target="_blank" </a>baixar o boleto.<br>';
-        }
-        $message .= '</div>';
-
-        $email->setMessage($message);
-
-        /**
-         * Debug do envio de e-mail
-         * 
-         * $email->send(false);
-         * $email->printDebugger(['headers', 'subject', 'body']);
-         * exit();
-         */
-
-        return $email->send();
-    }
-
-    public function notificacao(array $request)
+    public function requestNotification(array $request)
     {
         $data['email'] = env('api.email');
         $data['token'] = env('api.token');
@@ -190,68 +123,19 @@ class PagSeguro
             $this->edit($std);
             //Notificar por e-mail status de aguardando pagamento
             //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-
-
-            $this->notificar_pg($std, 2);
+            $this->notifyStatus($std, 2);
         } else return false;
         //header('Content-Type: application/json');
         return json_encode($retorno);
     }
 
-    protected function store($std = null): void
-    {
-        $model = new \App\Models\TransacoesModel();
-        $model->save([
-            'id_pedido'             => rand(100, 500),
-            'id_cliente'            => rand(100, 500),
-            'codigo_transacao'      => $std->code,
-            'referencia_transacao'  => $std->reference,
-            'tipo_transacao'        => $std->paymentMethod->type,
-            'status_transacao'      => $std->status,
-            'valor_transacao'       => $std->grossAmount,
-            'url_boleto'            => $std->paymentMethod->type == 2 ? $std->paymentLink : null
-        ]);
-
-        /**
-         * Log de transações adicionadas
-         * Format: Transação adicionada {codigo_transacao} - Código {referencia_transacao} - Valor {valor_transacao}
-         */
-        log_message('info', 'Transação adicionada {codigo_transacao} - Código {referencia_transacao} - Valor {valor_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'valor_transacao' => $std->grossAmount]);
-    }
-
-    /**
-     * Atualizar uma transação ao receber o callback do PagSeguro
-     * 
-     * @param array $std
-     * @return void
-     */
-    protected function edit($std = null): void
-    {
-        $model = new \App\Models\TransacoesModel();
-
-        $transaction = $model->getTransacaoPorRef($std->reference);
-
-        $model->save([
-            'id'                => $transaction['id'],
-            'status_transacao'  => $std->status
-        ]);
-
-        /**
-         * Log de transações atualizadas
-         * Format: Transação atualizada {codigo_transacao} - Código {referencia_transacao} - Valor {status_transacao}
-         */
-        log_message('info', 'Transação atualizada {codigo_transacao} - Código {referencia_transacao} - Valor {status_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'status_transacao' => $std->status]);
-    }
     /**
      * Realizar solicitação de pagamento para o PagSeguro (Boleto)
-     *
-     * @return String json
+     * @param array $request
+     * @return string|bool
      */
-    public function pg_boleto(array $request): String
+    public function paymentBillet(array $request)
     {
-        //Bloqueia para ser acessível apenas por Ajax
-        //if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1002 - Não é possível acessar", 401);
-
         /**
          * Parâmetros necessários para requisição a API
          * Dados abaixo estão apenas por via de demonstração
@@ -284,9 +168,7 @@ class PagSeguro
             'shippingAddressRequired' => 'false'
 
             /*
-            
             Caso queira utilizar o envio, colocar a variável acima para true e descomentar o abaixo
-
             'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
             'shippingAddressNumber'     => '1384',
             'shippingAddressComplement' => '5o andar',
@@ -297,7 +179,6 @@ class PagSeguro
             'shippingAddressCountry'    => 'BRA',
             'shippingType'              => '1',
             'shippingCost'              => '1.00',
-            
             */
 
         );
@@ -305,7 +186,6 @@ class PagSeguro
         /**
          * Configurações do PagSeguro para verificar a URL
          */
-
         $url = $this->pagSeguroConfig->urlTransaction;
 
         $ch = curl_init();
@@ -345,17 +225,21 @@ class PagSeguro
             //Função para cadastrar transação
 
             $this->store($std);
-
             //Notificar por e-mail status de aguardando pagamento
             //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-
-            $this->notificar_pg($std, 1);
+            $this->notifyStatus($std, 1);
         }
 
         return json_encode($retorno);
     }
 
-    public function pg_cartao(array $request): String
+    /**
+     * Pagamento por cartão de crédito
+     *
+     * @param array $request
+     * @return string|bool
+     */
+    public function paymentCard(array $request)
     {
 
         //Bloqueia para ser acessível apenas por Ajax
@@ -486,14 +370,146 @@ class PagSeguro
             ];
 
             //Função para cadastrar transação
-
             $this->store($std);
             //Notificar por e-mail status de aguardando pagamento
             //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-            $this->notificar_pg($std, 1);
+            $this->notifyStatus($std, 1);
         }
 
         //header('Content-Type: application/json');
         return json_encode($retorno);
+    }
+
+    /**
+     * Cadastrar nova transação no banco de dados
+     *
+     * @param array $std
+     * @return bool
+     */
+    protected function store($std = null): bool
+    {
+        try {
+            $model = new \App\Models\TransacoesModel();
+            $model->save([
+                'id_pedido'             => rand(100, 500),
+                'id_cliente'            => rand(100, 500),
+                'codigo_transacao'      => $std->code,
+                'referencia_transacao'  => $std->reference,
+                'tipo_transacao'        => $std->paymentMethod->type,
+                'status_transacao'      => $std->status,
+                'valor_transacao'       => $std->grossAmount,
+                'url_boleto'            => $std->paymentMethod->type == 2 ? $std->paymentLink : null
+            ]);
+            /**
+             * Log de transações adicionadas
+             * Format: Transação adicionada {codigo_transacao} - Código {referencia_transacao} - Valor {valor_transacao}
+             */
+            log_message('info', 'Transação adicionada {codigo_transacao} - Código {referencia_transacao} - Valor {valor_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'valor_transacao' => $std->grossAmount]);
+            return true;
+        } catch (Exception $e) {
+            log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
+            return false;
+        }
+    }
+
+    /**
+     * Atualizar uma transação ao receber o callback do PagSeguro
+     * 
+     * @param array $std
+     * @return bool
+     */
+    protected function edit($std = null): bool
+    {
+        if ($std == null) return false;
+
+        try {
+            $model = new \App\Models\TransacoesModel();
+            $transaction = $model->getTransacaoPorRef($std->reference);
+            $model->save([
+                'id'                => $transaction['id'],
+                'status_transacao'  => $std->status
+            ]);
+            /**
+             * Log de transações atualizadas
+             * Format: Transação atualizada {codigo_transacao} - Código {referencia_transacao} - Valor {status_transacao}
+             */
+            log_message('info', 'Transação atualizada {codigo_transacao} - Código {referencia_transacao} - Valor {status_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'status_transacao' => $std->status]);
+            return true;
+        } catch (Exception $e) {
+            log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
+            return false;
+        }
+    }
+
+    /**
+     * Realiza o envio de e-mail de acordo com cada requisição a API
+     *
+     * @param array $std -> Mensagem passada por completo
+     * @param int $who
+     * $who = 1 -> Controller | Pagar
+     * $who = 2 -> Controller | Notificação
+     * Assim, é posível saber se o texto será "Pedido realizado" ou "Alteração de pagamento"
+     * @return boolean
+     */
+    protected function notifyStatus($std = null, $who = null): bool
+    {
+        if ($std == null or $who == null) return false;
+
+        /**
+         * Caso esteja false não faz o envio do e-mail, apenas uma simulação para não dar erro
+         */
+        if (env('mail.using') == false) return true;
+
+        helper('pagamento');
+        $email = \Config\Services::email();
+
+        //Alterar no config/Email.php
+        $config = array(
+            'protocol'   => 'smtp',
+            'SMTPHost'   => env('mail.host'),
+            'SMTPPort'   => env('mail.port'),
+            'SMTPUser'   => env('mail.user'),
+            'SMTPPass'   => env('mail.pass'),
+            'SMTPCrypto' => 'tls',
+            'mailType'   => 'html'
+        );
+
+        //Inicializa as configurações
+        $email->initialize($config);
+
+        $email->setFrom('your@example.com', 'Sistema');
+        $email->setTo($std->sender->email);
+        /*
+        * Setar copia no e-mail
+        * $email->setCC('another@another-example.com');
+        * 
+        * Setar cópia oculta no e-mail
+        * $email->setBCC('them@their-example.com');
+        */
+        $email->setSubject($who == 1 ? 'Pedido recebido com sucesso' : 'Atualização na sua compra');
+
+        $message  = '<div style="text-align: left;">';
+        $message .= '<h2>Olá ' . $std->sender->name . '</h2>';
+        $message .= '<h3>Seu pedido código do pedido:  ' . $std->code . '</h3>';
+        $message .= '<h3>Está:' . getStatusCodePag($std->status) . '</h3>';
+        $message .= 'Data: ' . $std->date . '<br>';
+        $message .= 'Referência:' . $std->reference . '<br>';
+        $message .= 'Valor:' . $std->grossAmount . '<br>';
+        if (isset($std->paymentLink)) {
+            $message .= 'Caso não tenha acessado, aqui você pode <a href="' . $std->paymentLink . '" target="_blank" </a>baixar o boleto.<br>';
+        }
+        $message .= '</div>';
+
+        $email->setMessage($message);
+
+        /**
+         * Debug do envio de e-mail
+         * 
+         * $email->send(false);
+         * $email->printDebugger(['headers', 'subject', 'body']);
+         * exit();
+         */
+
+        return $email->send();
     }
 }

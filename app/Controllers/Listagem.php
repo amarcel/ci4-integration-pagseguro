@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Controllers\Transacoes;
+use App\Models\TransacoesModel;
 use CodeIgniter\Controller;
 
 /**
@@ -14,13 +14,9 @@ class Listagem extends Controller
 {
 	public function index()
 	{
-
 		helper('pagamento');
-
-		$transacoes = new Transacoes();
-
-		$data['transacoes'] = $transacoes->list();
-
+		$transacoes = new TransacoesModel();
+		$data['transacoes'] = $transacoes->getTransacao();
 		return view('listagem', $data);
 	}
 }

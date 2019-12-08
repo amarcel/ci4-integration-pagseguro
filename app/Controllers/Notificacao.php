@@ -21,7 +21,6 @@ class Notificacao extends Controller
     public function index()
     {
         $pagSeguro = new PagSeguro();
-
-        return $pagSeguro->notificacao($this->request->getVar());
+        return $pagSeguro->requestNotification($this->request->getVar());
     }
 }

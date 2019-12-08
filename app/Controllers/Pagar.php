@@ -3,8 +3,6 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use App\Controllers\Email;
-use App\Controllers\Transacoes;
 use App\Libraries\PagSeguro;
 
 /**
@@ -24,7 +22,6 @@ class Pagar extends Controller
     {
         return view('credito');
     }
-
     /**
      * Realizar solicitação de pagamento para o PagSeguro (Boleto)
      *
@@ -33,14 +30,12 @@ class Pagar extends Controller
     public function pg_boleto(): String
     {
         $pagSeguro = new PagSeguro();
-
-        return $pagSeguro->pg_boleto($this->request->getVar());
+        return $pagSeguro->paymentBillet($this->request->getVar());
     }
 
     public function pg_cartao(): String
     {
         $pagSeguro = new PagSeguro();
-
-        return $pagSeguro->pg_cartao($this->request->getVar());
+        return $pagSeguro->paymentCard($this->request->getVar());
     }
 }
