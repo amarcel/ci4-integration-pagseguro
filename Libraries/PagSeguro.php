@@ -48,11 +48,9 @@ class PagSeguro
          */
         $url = $this->pagSeguroConfig->urlSession;
 
-        /**
-         * Em modo de produção altere as variáveis env() por $this->email e $this->token
-         */
-        $params['email'] =  $this->email;
-        $params['token'] =  $this->token;
+
+        $params['email'] = $this->email;
+        $params['token'] = $this->token;
 
         $ch = curl_init();
 
@@ -101,7 +99,9 @@ class PagSeguro
      */
     public function requestNotification(array $request)
     {
-
+        /**
+         * Em modo de produção altere as variáveis env() por $this->email e $this->token
+         */
         $data['email'] = $this->email;
         $data['token'] = $this->token;
 
@@ -180,7 +180,6 @@ class PagSeguro
          * Dados abaixo estão apenas por via de demonstração
          */
         $pagarBoleto = array(
-
             'email'         => $this->email,
             'token'         => $this->token,
             'paymentMode'   => 'default',
@@ -516,24 +515,25 @@ class PagSeguro
      */
     protected function notifyStatus($std = null, $who = null): bool
     {
-        helper('pagamento');
-        $email = \Config\Services::email();
-        $configEmail = config('Email');
 
         if ($std == null or $who == null) return false;
 
         /**
          * Caso esteja false não faz o envio do e-mail, apenas uma simulação para não dar erro
          */
-        if ($configEmail->usingEmail == false) return true;
+        $configMail = config('Email');
+        if ($configMail->usingEmail == false) return true;
+
+        helper('pagamento');
+        $email = \Config\Services::email();
 
         //Alterar no config/Email.php quando em produção $email->SMTPHost;
         $config = array(
             'protocol'   => 'smtp',
-            'SMTPHost'   => $configEmail->SMTPHost,
-            'SMTPPort'   => $configEmail->SMTPPort,
-            'SMTPUser'   => $configEmail->SMTPUser,
-            'SMTPPass'   => $configEmail->SMTPPass,
+            'SMTPHost'   => $configMail->SMTPHost,
+            'SMTPPort'   => $configMail->SMTPPort,
+            'SMTPUser'   => $configMail->SMTPUser,
+            'SMTPPass'   => $configMail->SMTPPass,
             'SMTPCrypto' => 'tls',
             'mailType'   => 'html'
         );
