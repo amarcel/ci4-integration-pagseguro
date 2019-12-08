@@ -6,7 +6,7 @@ use CodeIgniter\Controller;
 
 
 /**
- * Pagina inicial com a listagem de transações
+ * Pagina inicial os status de variáveis
  * @author Matheus Castro <matheuscastroweb@gmail.com>
  * @version 1.0.0
  */
