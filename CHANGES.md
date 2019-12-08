@@ -4,6 +4,7 @@
 - Criação da Library de pagamento
 - Alterações nas funções da library para previnir erros
 - Adição de um único método para o controller de pagamento
+- Adição da develop somente com os códigos necessários para integração
 
 ## [v0.0.5]
 > Dez 07, 2019
