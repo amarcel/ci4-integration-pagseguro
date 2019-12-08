@@ -188,10 +188,10 @@ class PagSeguro
             'currency'      => 'BRL',
             'extraAmount'   => '',
 
-            'itemId1'           => '1',
-            'itemDescription1'  => 'Teste',
-            'itemAmount1'       => $request['valor'],
-            'itemQuantity1'     => '1',
+            'itemId1'           => $request['itemId1'],
+            'itemDescription1'  => $request['itemDescription1'],
+            'itemAmount1'       => number_format($request['itemAmount1'], 2, '.', ''),
+            'itemQuantity1'     => $request['itemQuantity1'],
 
             'notificationURL'   => base_url('notificacao'),
 
@@ -261,12 +261,14 @@ class PagSeguro
             ];
             //Função para cadastrar transação
             try {
+
                 $this->store($std);
                 //Notificar por e-mail status de aguardando pagamento
                 //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
                 $this->notifyStatus($std, 1);
                 log_message('info', 'Transação cadastrada {codigo_transacao}', ['codigo_transacao' => $std->code]);
             } catch (Exception $e) {
+
                 log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
                 $retorno = [
                     'error'     => 5000,
@@ -274,6 +276,7 @@ class PagSeguro
                 ];
             }
         } else {
+
             $retorno = [
                 'error'     => 5000,
                 'message'   => 'Não existe código de transação'
@@ -302,7 +305,7 @@ class PagSeguro
          * Dados abaixo estão apenas por via de demonstração
          */
 
-        $pagarBoleto = array(
+        $pagarCartao = array(
             'email'         => $this->email,
             'token'         => $this->token,
 
@@ -311,12 +314,12 @@ class PagSeguro
             'currency'      => 'BRL',
             'receiverEmail' => $this->email,
 
-            'extraAmount'   => '0.00',
+            'extraAmount'   => '',
 
-            'itemId1'           => '1',
-            'itemDescription1'  => 'Teste',
-            'itemAmount1'       => number_format($request['valor'], 2, '.', ''),
-            'itemQuantity1'     => '1',
+            'itemId1'           => $request['itemId1'],
+            'itemDescription1'  => $request['itemDescription1'],
+            'itemAmount1'       => number_format($request['itemAmount1'], 2, '.', ''),
+            'itemQuantity1'     => $request['itemQuantity1'],
 
             'notificationURL'   => base_url('notificacao'),
 
@@ -372,7 +375,7 @@ class PagSeguro
          * Verificar se existe parcelas, se existir colocar o juros se não, não faça nada
          * 12 é o número de parcelas que não terão juros
          */
-        $request['parcelas'] > 1 ?  $pagarBoleto['noInterestInstallmentQuantity'] = 12 : null;
+        $request['parcelas'] > 1 ?  $pagarCartao['noInterestInstallmentQuantity'] = 12 : null;
 
 
         /**
@@ -383,8 +386,8 @@ class PagSeguro
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, count($pagarBoleto));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pagarBoleto));
+        curl_setopt($ch, CURLOPT_POST, count($pagarCartao));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pagarCartao));
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
