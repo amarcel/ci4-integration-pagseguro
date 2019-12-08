@@ -2,6 +2,8 @@
 
 namespace App\Libraries;
 
+use Exception;
+
 class PagSeguro
 {
     /**
@@ -11,14 +13,33 @@ class PagSeguro
      */
     protected $pagSeguroConfig;
 
+    /**
+     * Email necessário para autenticação
+     * 
+     * @var \Config\PagSeguro::email
+     * 
+     */
+    protected $email;
+
+    /**
+     * Token necessário para autenticação
+     * 
+     * @var \Config\PagSeguro::token
+     * 
+     */
+    protected $token;
+
+
     public function __construct()
     {
-        $this->pagSeguroConfig = config('PagSeguro');
+        $this->pagSeguroConfig  = config('PagSeguro');
+        $this->email            = $this->pagSeguroConfig->email;
+        $this->token            = $this->pagSeguroConfig->token;
     }
 
     /**
      * Pegar o ID da sessão do PagSeguro
-     * @return object
+     * @return object json
      */
     public function getSession()
     {
@@ -27,6 +48,9 @@ class PagSeguro
          */
         $url = $this->pagSeguroConfig->urlSession;
 
+        /**
+         * Em modo de produção altere as variáveis env() por $this->email e $this->token
+         */
         $params['email'] = env('api.email');
         $params['token'] = env('api.token');
 
@@ -65,8 +89,8 @@ class PagSeguro
             ];
         }
 
-        header('Content-Type: application/json');
 
+        header('Content-Type: application/json');
         return json_encode($json);
     }
 
@@ -77,6 +101,9 @@ class PagSeguro
      */
     public function requestNotification(array $request)
     {
+        /**
+         * Em modo de produção altere as variáveis env() por $this->email e $this->token
+         */
         $data['email'] = env('api.email');
         $data['token'] = env('api.token');
 
@@ -119,13 +146,27 @@ class PagSeguro
             ];
 
             //Função para cadastrar transação
+            try {
+                $this->edit($std);
+                //Notificar por e-mail status de aguardando pagamento
+                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
+                $this->notifyStatus($std, 2);
+                log_message('info', 'Transação atualizada {codigo_transacao}', ['codigo_transacao' => $std->code]);
+            } catch (Exception $e) {
+                log_message('error', 'Erro ao receber notificação do código {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
+                $retorno = [
+                    'error'     => 5000,
+                    'message'   => 'Erro ao receber notificação do código'
+                ];
+            }
+        } else {
 
-            $this->edit($std);
-            //Notificar por e-mail status de aguardando pagamento
-            //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-            $this->notifyStatus($std, 2);
-        } else return false;
-        //header('Content-Type: application/json');
+            $retorno = [
+                'error'     => 5000,
+                'message'   => 'Não existe código de transação'
+            ];
+        };
+
         return json_encode($retorno);
     }
 
@@ -221,13 +262,25 @@ class PagSeguro
                 'error'     =>  0,
                 'code'      => $std
             ];
-
             //Função para cadastrar transação
-
-            $this->store($std);
-            //Notificar por e-mail status de aguardando pagamento
-            //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-            $this->notifyStatus($std, 1);
+            try {
+                $this->store($std);
+                //Notificar por e-mail status de aguardando pagamento
+                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
+                $this->notifyStatus($std, 1);
+                log_message('info', 'Transação cadastrada {codigo_transacao}', ['codigo_transacao' => $std->code]);
+            } catch (Exception $e) {
+                log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
+                $retorno = [
+                    'error'     => 5000,
+                    'message'   => 'Erro ao cadastrar transação'
+                ];
+            }
+        } else {
+            $retorno = [
+                'error'     => 5000,
+                'message'   => 'Não existe código de transação'
+            ];
         }
 
         return json_encode($retorno);
@@ -237,7 +290,7 @@ class PagSeguro
      * Pagamento por cartão de crédito
      *
      * @param array $request
-     * @return string|bool
+     * @return string
      */
     public function paymentCard(array $request)
     {
@@ -297,26 +350,25 @@ class PagSeguro
             'shippingCost'              => '1.00',
              */
 
-
             //DADOS DO DONO DO CARTÂO
-            'creditCardToken' => $request['credit_token'],
-            'installmentQuantity' => $request['parcelas'],
-            'installmentValue' => number_format($preco, 2, '.', ''),
+            'creditCardToken'           => $request['credit_token'],
+            'installmentQuantity'       => $request['parcelas'],
+            'installmentValue'          => number_format($preco, 2, '.', ''),
 
-            'creditCardHolderName' => 'Jose Comprador',
-            'creditCardHolderCPF' => '02690170035',
+            'creditCardHolderName'      => 'Jose Comprador',
+            'creditCardHolderCPF'       => '02690170035',
             'creditCardHolderBirthDate' => '27/10/1987',
-            'creditCardHolderAreaCode' => '11',
-            'creditCardHolderPhone' => '56273440',
+            'creditCardHolderAreaCode'  => '11',
+            'creditCardHolderPhone'     => '56273440',
 
-            'billingAddressStreet' => "Av. Brig. Faria Lima",
-            'billingAddressNumber' => '1384',
-            'billingAddressComplement' => '5o andar',
-            'billingAddressDistrict' => 'Jardim Paulistano',
-            'billingAddressPostalCode' => '01452002',
-            'billingAddressCity' => 'Sao Paulo',
-            'billingAddressState' => 'SP',
-            'billingAddressCountry' => 'BRA'
+            'billingAddressStreet'      => "Av. Brig. Faria Lima",
+            'billingAddressNumber'      => '1384',
+            'billingAddressComplement'  => '5o andar',
+            'billingAddressDistrict'    => 'Jardim Paulistano',
+            'billingAddressPostalCode'  => '01452002',
+            'billingAddressCity'        => 'Sao Paulo',
+            'billingAddressState'       => 'SP',
+            'billingAddressCountry'     => 'BRA'
         );
 
         /**
@@ -370,12 +422,25 @@ class PagSeguro
             ];
 
             //Função para cadastrar transação
-            $this->store($std);
-            //Notificar por e-mail status de aguardando pagamento
-            //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-            $this->notifyStatus($std, 1);
+            try {
+                $this->store($std);
+                //Notificar por e-mail status de aguardando pagamento
+                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
+                $this->notifyStatus($std, 1);
+                log_message('info', 'Transação cadastrada {codigo_transacao}', ['codigo_transacao' => $std->code]);
+            } catch (Exception $e) {
+                log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
+                $retorno = [
+                    'error'     => 5000,
+                    'message'   => 'Erro ao cadastrar transação'
+                ];
+            }
+        } else {
+            $retorno = [
+                'error'     => 5000,
+                'message'   => 'Não existe código de transação'
+            ];
         }
-
         //header('Content-Type: application/json');
         return json_encode($retorno);
     }
@@ -404,7 +469,7 @@ class PagSeguro
              * Log de transações adicionadas
              * Format: Transação adicionada {codigo_transacao} - Código {referencia_transacao} - Valor {valor_transacao}
              */
-            log_message('info', 'Transação adicionada {codigo_transacao} - Código {referencia_transacao} - Valor {valor_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'valor_transacao' => $std->grossAmount]);
+            log_message('info', 'Transação adicionada no banco de dados {codigo_transacao} - Código {referencia_transacao} - Valor {valor_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'valor_transacao' => $std->grossAmount]);
             return true;
         } catch (Exception $e) {
             log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
@@ -433,7 +498,7 @@ class PagSeguro
              * Log de transações atualizadas
              * Format: Transação atualizada {codigo_transacao} - Código {referencia_transacao} - Valor {status_transacao}
              */
-            log_message('info', 'Transação atualizada {codigo_transacao} - Código {referencia_transacao} - Valor {status_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'status_transacao' => $std->status]);
+            log_message('info', 'Transação atualizada no banco de dados {codigo_transacao} - Código {referencia_transacao} - Valor {status_transacao}', ['codigo_transacao' => $std->code, 'referencia_transacao' => $std->reference, 'status_transacao' => $std->status]);
             return true;
         } catch (Exception $e) {
             log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
@@ -463,7 +528,7 @@ class PagSeguro
         helper('pagamento');
         $email = \Config\Services::email();
 
-        //Alterar no config/Email.php
+        //Alterar no config/Email.php quando em produção $email->SMTPHost;
         $config = array(
             'protocol'   => 'smtp',
             'SMTPHost'   => env('mail.host'),
@@ -473,6 +538,7 @@ class PagSeguro
             'SMTPCrypto' => 'tls',
             'mailType'   => 'html'
         );
+
 
         //Inicializa as configurações
         $email->initialize($config);
@@ -509,7 +575,9 @@ class PagSeguro
          * $email->printDebugger(['headers', 'subject', 'body']);
          * exit();
          */
-
-        return $email->send();
+        if ($email->send()) {
+            log_message('info', 'Notificação enviada com sucesso {codigo_transacao}', ['codigo_transacao' => $std->code]);
+            return true;
+        } else return false;
     }
 }
