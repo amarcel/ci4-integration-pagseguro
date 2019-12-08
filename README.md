@@ -82,9 +82,7 @@ mail.port    = port
 
 > **OBS.:** Caso a base url não seja localhost:8080, configurar neste documentos para gerar as sessões `public/assets/js/sessao.js `
 
-6. Verificar se todos os parâmetros do PagSeguro estão configurados como `SIM`. 
-
-![PáginaStatus](https://user-images.githubusercontent.com/45601574/70375499-2244e180-18dd-11ea-843b-609750996eb7.png)
+6. Verificar se todos os parâmetros da página de stauts estão configurados como `SIM`. 
 
 ## Funcionamento:
 Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
