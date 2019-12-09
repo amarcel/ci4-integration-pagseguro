@@ -1,3 +1,9 @@
+## [v0.0.62]
+> Dez 09, 2019
+
+- Adicionado Demo 
+- Separação da versão develop (Versão em desenvolvimento) e master (Última versão funcional)
+
 ## [v0.0.61]
 > Dez 08, 2019
 
