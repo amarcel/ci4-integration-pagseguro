@@ -1,7 +1,7 @@
 # CodeIgniter 4  Integration PagSeguro API
 ![](https://img.shields.io/github/issues-raw/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/contributors/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/stars/matheuscastroweb/ci4-integration-pagseguro) 
 
-### Em desenvolvimento.
+### Em desenvolvimento. Acesse a última versão testada [ aqui (master)](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "aqui (master)").
 
 ## Conteúdo:
 
@@ -10,8 +10,8 @@
 - [Utilização](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/INSTALLING.md "Utilização")
 - [Atualizações](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/CHANGES.md "Atualizações")
 - [Funcionamento](#funcionamento "Funcionamento")
-- [Projeto completo no CI4](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "Projeto completo no CI4") 
 - [Contribuir](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/CONTRIBUTING.md "Contribuir")
+- [Última versão estável](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "Última versão estável") 
 
 ## Features:
 
@@ -24,7 +24,7 @@
 - Loader para aguardar requisição de pagamento
 - Logs a cada status da transação
 
-## Estrutura Library:
+## Estrutura da library:
 | Função | Razão |
 | ------ | ------ |
 | getSession | Gerar uma sessão de pagamento obrigatória| 
@@ -35,23 +35,17 @@
 | edit | Editar um status de transação no banco de dados |
 | notifyStatus | Envia notificação por e-mail sobre o status do pedido | 
 
+- Na pasta `/Demo` contém a versão já instalada no Codeigniter 4.  
+
+- Forma de utilização:  
 
 ```php
 use App\Libraries\PagSeguro;
 
 $pagseguro = new PagSeguro();
 
-//Controller Sessao - Pegar sessão
-$pagseguro->getSession();
-
-//Controller Notificacao - Receber requisição do PagSeguro para atualizar status
-$pagseguro->requestNotification($request);
-
-//Controller Pagar - Pagamento por boleto
-$pagseguro->paymentBillet($request);
-
-//Controller pagar - Pagamento por cartão de crédito
-$pagseguro->paymentCard($request);
+//Puxar a function necessária
+$pagseguro->function();
 ```
 
 -  É necessário criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox"). A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro"). Altere `Config/PagSeguro.php` para acessar a URL de produção do PagSeguro quando finalizado o projeto.
