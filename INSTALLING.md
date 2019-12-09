@@ -1,6 +1,7 @@
 
 # Utilização Library PagSeguro:
 
+- Caso queira utilizar a Demo, basta utilizar `cd Demo` e `php spark serve` assumindo que esta instalação do PHP já está completa. Do contrário, acesse: [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP").
 1. Realizar o dowload do repositório:
 
 `git clone https://github.com/matheuscastroweb/ci4-integration-pagseguro.git`

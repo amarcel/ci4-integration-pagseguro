@@ -99,12 +99,12 @@
 				<div class="form-group">
 					<label class="text-left">Dados do produto</label>
 					<div class="form-row">
-						<div class="col-2">
+						<div class="col-3">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<div class="input-group-text">#ID</div>
 								</div>
-								<input type="text" class="form-control" readonly name="itemId1" value="<?= rand(1, 50) ?>">
+								<input type="text" class="form-control" readonly name="itemId1" value="<?= rand(1, 5) ?>">
 							</div>
 						</div>
 						<div class="col">
