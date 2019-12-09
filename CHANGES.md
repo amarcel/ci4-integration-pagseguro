@@ -1,10 +1,24 @@
+## [v0.0.62]
+> Dez 09, 2019
+
+- Adicionado Demo 
+- Separação da versão develop (Versão em desenvolvimento) e master (Última versão funcional)
+
+## [v0.0.61]
+> Dez 08, 2019
+
+- Melhora na documentação 
+- Adicionado INSTALING.md
+- Correção dos bugs de e-mail e insert no banco de dados
+- Adição do item na forma de pagamento
+
 ## [v0.0.6]
 > Dez 08, 2019
 
 - Criação da Library de pagamento
 - Alterações nas funções da library para previnir erros
 - Adição de um único método para o controller de pagamento
-- Adicionado item na hora do pagamento
+- Adição da develop somente com os códigos necessários para integração
 
 ## [v0.0.5]
 > Dez 07, 2019
