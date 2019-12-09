@@ -24,11 +24,11 @@ function setSessionIdPagSeguro() {
                 }
 
             } else {
-                alert('Erro ao setar a sessão' + res.error + ' ' + res.message);
+                alert('Erro - Código: ' + res.error + '. Mensagem: ' + res.message);
             }
         },
         error: function () {
-            alert('Erro ao gerar sessão' + res.error + ' ' + res.message);
+            alert('Erro - Código: ' + res.error + '. Mensagem: ' + res.message);
         }
     });
 }

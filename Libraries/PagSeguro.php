@@ -52,41 +52,48 @@ class PagSeguro
         $params['email'] = $this->email;
         $params['token'] = $this->token;
 
-        $ch = curl_init();
+        try {
+            $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, count($params));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, count($params));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
 
-        //Verificar o SSL para TRUE
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            //Verificar o SSL para TRUE
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-        $result = curl_exec($ch);
+            $result = curl_exec($ch);
 
-        curl_close($ch);
+            curl_close($ch);
 
-        $xml    = simplexml_load_string($result);
-        $json   = json_encode($xml);
-        $std  = json_decode($json);
+            $xml    = simplexml_load_string($result);
+            $json   = json_encode($xml);
+            $std  = json_decode($json);
 
-        if (isset($std->id)) {
 
+            if (isset($std->id)) {
+
+                $json = [
+                    'error'     =>  0,
+                    'message'   => 'Sessao gerada com sucesso',
+                    'id_sessao' => $std->id
+                ];
+            } else {
+
+                $json = [
+                    'error'     =>  5000,
+                    'message'   => 'Erro ao gerar sessao de pagamento'
+                ];
+            }
+        } catch (\Exception $e) {
             $json = [
-                'error'     =>  0,
-                'message'   => 'Sessao gerada com sucesso',
-                'id_sessao' => $std->id
-            ];
-        } else {
-
-            $json = [
-                'error'     =>  5000,
-                'message'   => 'Erro ao gerar sessao de pagamento'
+                'error'     =>  5001,
+                'message'   => 'Não foi possivel fazer a busca. Verifique se está configurado corretamente o parâmetro $email e $senha da API.',
             ];
         }
-
 
         header('Content-Type: application/json');
         return json_encode($json);
