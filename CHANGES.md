@@ -4,6 +4,7 @@
 - Adicionado Demo 
 - Separação da versão develop (Versão em desenvolvimento) e master (Última versão funcional)
 - Correção do bug de não aparecer ID
+- Adicionado verificação de erro quando não é possível gerar a sessão
 
 ## [v0.0.61]
 > Dez 08, 2019
