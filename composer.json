@@ -1,6 +1,8 @@
 {
-    "name": "ci4-integration-pagseguro",
+    "name": "matheuscastroweb/ci4-integration-pagseguro",
     "description": "Simplificando a usabilidade de uma forma de pagamento com checkout transparente. ",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Matheus de Castro Pelegrino",
