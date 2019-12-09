@@ -1,0 +1,13 @@
+{
+    "name": "CI4 Integração com PagSeguro",
+    "description": "Simplificando a usabilidade de uma forma de pagamento com checkout transparente. ",
+    "authors": [
+        {
+            "name": "Matheus de Castro Pelegrino",
+            "email": "matheuscastroweb@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0"
+    }
+}
