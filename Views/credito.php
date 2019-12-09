@@ -97,12 +97,53 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="text-left">Valor</label>
+					<label class="text-left">Dados do produto</label>
+					<div class="form-row">
+						<div class="col-2">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">#ID</div>
+								</div>
+								<input type="text" class="form-control" readonly name="itemId1" value="<?= rand(1, 50) ?>">
+							</div>
+						</div>
+						<div class="col">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Descrição</div>
+								</div>
+								<input type="text" class="form-control" readonly name="itemDescription1" value="Servico de e-mail">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-row">
+						<div class="col">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Quant.</div>
+								</div>
+								<input type="text" id="quantidade" class="form-control" readonly name="itemQuantity1" value="<?= rand(1, 5) ?>">
+							</div>
+						</div>
+						<div class="col">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">R$</div>
+								</div>
+								<input type="text" id="valor" class="form-control" readonly name="itemAmount1" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="text-left">Valor total</label>
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<div class="input-group-text">R$</div>
 						</div>
-						<input id="valor" type="text" class="form-control" readonly name="valor" value="<?= rand(50, 200) . '.' . rand(10, 99) ?>">
+						<input id="valorTotal" type="text" class="form-control" readonly name="valor" value="O valor total será calculado">
 					</div>
 				</div>
 				<input id="btn_pagar" type="submit" class="btn btn-danger btn-pagar-credito btn-block" disabled="true" onclick="gerarToken(event)" value="Pagar com cartão de crédito"></input>

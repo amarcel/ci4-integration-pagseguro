@@ -20,12 +20,12 @@ $("#parcelas").on('change', function (e) {
 /**
  * Função da API para gerar o valor da parcela 
  */
-
+$('#valorTotal').val($('#valor').val() * $('#quantidade').val());
 function getInstallments() {
 
 	var parc = $('#parcelas').val() - 1;
 	PagSeguroDirectPayment.getInstallments({
-		amount: ($('#valor').val()),
+		amount: ($('#valor').val() * $('#quantidade').val()),
 		maxInstallmentNoInterest: 12,
 		brand: 'visa',
 		success: function (res) {
@@ -37,7 +37,7 @@ function getInstallments() {
 			console.log('Valor total:' + valor);
 			*/
 			$('#vparcela').val(parseFloat(valor_parcela));
-			$('#valor').val(parseFloat(valor));
+			$('#valorTotal').val(parseFloat(valor));
 		},
 		error: function (response) {
 			alert('Erro getInstallments() in credito.js' + response.error)

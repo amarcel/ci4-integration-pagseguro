@@ -4,6 +4,7 @@
 - Melhora na documentação 
 - Adicionado INSTALING.md
 - Correção dos bugs de e-mail e insert no banco de dados
+- Adição do item na forma de pagamento
 
 ## [v0.0.6]
 > Dez 08, 2019
