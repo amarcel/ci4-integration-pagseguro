@@ -13,7 +13,6 @@ function pagarBoleto(e) {
 			$('.msg').html('<div class="loading style-2"><div class="loading-wheel"></div></div');
 		}
 	}).done(function (res) {
-		console.log(res.message);
 		if (res.error === 0) {
 			$('#btn_pagar').val("Boleto gerado com sucesso");
 			$('.msg').html('Enviado com sucesso. Link do boleto: <a target="_blank" href="' + res.code.paymentLink + '">Clique aqui para baixar</a>');

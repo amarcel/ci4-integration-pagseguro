@@ -12,8 +12,8 @@ function getInstallments() {
 		brand: 'visa',
 		success(res) {
 			// Retorna as opções de parcelamento disponíveis
-			var valorParcela = res.installments.visa[parc].installmentAmount;
-			var valor = res.installments.visa[parc].totalAmount;
+			var valorParcela = res.installments.visa[parseInt(parc)].installmentAmount;
+			var valor = res.installments.visa[parseInt(parc)].totalAmount;
 			/*
 			console.log('Valor parcela:' + valorParcela);
 			console.log('Valor total:' + valor);
@@ -90,19 +90,19 @@ function pagarCartao() {
 function gerarToken(e) {
 	e.preventDefault();
 
-	var numero = $('#ncartao').val();
+	var cardNumber = $('#ncartao').val();
 	var cvv = $('#cvv').val();
 	var validade = $('#validade').val();
 	validade = validade.split('/');
-	var mes = validade[0];
-	var ano = validade[1];
+	var expirationMonth = validade[0];
+	var expirationYear = validade[1];
 
 	PagSeguroDirectPayment.createCardToken({
-		cardNumber: numero, // Número do cartão de crédito
+		cardNumber, // Número do cartão de crédito
 		brand: 'visa', // Bandeira do cartão
-		cvv: cvv, // CVV do cartão
-		expirationMonth: mes, // Mês da expiração do cartão
-		expirationYear: ano, // Ano da expiração do cartão, é necessário os 4 dígitos.
+		cvv, // CVV do cartão
+		expirationMonth, // Mês da expiração do cartão
+		expirationYear, // Ano da expiração do cartão, é necessário os 4 dígitos.
 		success(response) {
 			// Retorna o cartão tokenizado.
 			var tokenPagamento = response.card.token;
@@ -119,7 +119,6 @@ function gerarToken(e) {
 		error(response) {
 			// Callback para chamadas que falharam.
 			alert('Erro ao gerar token de pagamento' + response.error);
-			console.log(response.error);
 		}
 	});
 }
