@@ -1,3 +1,9 @@
+## [v0.0.7]
+> Dez 10, 2019
+
+- Adicionado tabela de erros
+- Alterado métodos privados com o prefixo `_method`
+
 ## [v0.0.62]
 > Dez 09, 2019
 
