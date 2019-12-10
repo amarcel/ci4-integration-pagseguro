@@ -13,7 +13,7 @@ function setSessionIdPagSeguro() {
         dataType: 'json',
         success: function (res) {
             console.log(res);
-            if (res.error == 0) {
+            if (res.error === 0) {
                 //Setar id_sessao
                 PagSeguroDirectPayment.setSessionId(res.id_sessao);
                 /**

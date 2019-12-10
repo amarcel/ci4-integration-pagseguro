@@ -42,7 +42,7 @@
                                 <?php if ($transacoes_item['tipo_transacao'] == 1) : ?>
                                     Sem link
                                 <?php else : ?>
-                                    <a href="javascript:;" onclick="buscar_boleto('<?= $transacoes_item['url_boleto'] ?> ');">Acessar </a>
+                                    <a href="javascript:;" onclick="buscarBoleto('<?= $transacoes_item['url_boleto'] ?> ');">Acessar </a>
                                 <?php endif; ?>
                             </td>
                         </tr>

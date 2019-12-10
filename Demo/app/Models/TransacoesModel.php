@@ -35,16 +35,16 @@ class TransacoesModel extends Model
         'valor_transacao'       => 'required'
     ];
 
-    public function getTransacao($id = false)
+    public function getTransacao($idTransacao = false)
     {
-        if ($id === false) {
+        if ($idTransacao === false) {
             //Caso queira trazer o deletado com o deletedAt preenchido
             //$this->withDeleted();
             $query = $this->orderBy('id', 'desc')->findAll();
             return is_array($query) ? $query : false;
         }
 
-        $query = $this->find($id);
+        $query = $this->find($idTransacao);
         return is_array($query) ? $query : false;
     }
 

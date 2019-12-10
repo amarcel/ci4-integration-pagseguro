@@ -2,7 +2,7 @@
  * Função responsável abrir o modal com o iframe do boleto passado por parâmetro
  * @param {String} link 
  */
-function buscar_boleto(link) {
+function buscarBoleto(link) {
 
     //Inicia o loading
     $('.loading').show();

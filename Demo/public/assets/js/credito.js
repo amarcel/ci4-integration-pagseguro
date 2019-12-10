@@ -106,7 +106,7 @@ function gerarToken(e) {
 		expirationYear: ano, // Ano da expiração do cartão, é necessário os 4 dígitos.
 		success: function (response) {
 			// Retorna o cartão tokenizado.
-			tokenPagamento = response.card.token;
+			var tokenPagamento = response.card.token;
 
 			//Verifica se token não veio vazio
 			if (!tokenPagamento) {
