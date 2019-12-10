@@ -3,6 +3,7 @@
 
 - Adicionado tabela de erros
 - Alterado métodos privados com o prefixo `_method`
+- Utilização do Codacy para melhoria de código
 
 ## [v0.0.62]
 > Dez 09, 2019
