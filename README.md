@@ -1,5 +1,5 @@
 # CodeIgniter 4  Integration PagSeguro API
-![](https://img.shields.io/github/issues-raw/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/contributors/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/stars/matheuscastroweb/ci4-integration-pagseguro) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5e86f42e3060402d96d20804335b3681)](https://www.codacy.com/manual/matheuscastroweb/ci4-integration-pagseguro?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=matheuscastroweb/ci4-integration-pagseguro&amp;utm_campaign=Badge_Grade)
 
 ### Em desenvolvimento. Última versão testada [ aqui ](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "aqui)").
 
@@ -36,7 +36,7 @@ Veja o arquivo [CHANGELOG.md](CHANGELOG.md).
 - Logs a cada status da transação
 
 
-## Estrutura da library:
+## Estrutura library:
 | Função | Razão |
 | ------ | ------ |
 | `getSession` | Gerar uma sessão de pagamento obrigatória| 
