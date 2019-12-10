@@ -84,13 +84,13 @@ class PagSeguro
             } else {
 
                 $json = [
-                    'error'     =>  5000,
+                    'error'     =>  1000,
                     'message'   => 'Erro ao gerar sessao de pagamento'
                 ];
             }
         } catch (\Exception $e) {
             $json = [
-                'error'     =>  5001,
+                'error'     =>  1001,
                 'message'   => 'Não foi possivel fazer a busca. Verifique se está configurado corretamente o parâmetro $email e $senha da API.',
             ];
         }
@@ -152,22 +152,22 @@ class PagSeguro
 
             //Função para cadastrar transação
             try {
-                $this->edit($std);
+                $this->_edit($std);
                 //Notificar por e-mail status de aguardando pagamento
                 //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-                $this->notifyStatus($std, 2);
+                $this->_notifyStatus($std, 2);
                 log_message('info', 'Transação atualizada {codigo_transacao}', ['codigo_transacao' => $std->code]);
             } catch (Exception $e) {
                 log_message('error', 'Erro ao receber notificação do código {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
                 $retorno = [
-                    'error'     => 5000,
+                    'error'     => 1002,
                     'message'   => 'Erro ao receber notificação do código'
                 ];
             }
         } else {
 
             $retorno = [
-                'error'     => 5000,
+                'error'     => 1003,
                 'message'   => 'Não existe código de transação'
             ];
         };
@@ -269,24 +269,24 @@ class PagSeguro
             //Função para cadastrar transação
             try {
 
-                $this->store($std);
+                $this->_store($std);
                 //Notificar por e-mail status de aguardando pagamento
                 //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-                $this->notifyStatus($std, 1);
+                $this->_notifyStatus($std, 1);
                 log_message('info', 'Transação cadastrada {codigo_transacao}', ['codigo_transacao' => $std->code]);
             } catch (Exception $e) {
 
                 log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
                 $retorno = [
-                    'error'     => 5000,
-                    'message'   => 'Erro ao cadastrar transação'
+                    'error'     => 1004,
+                    'message'   => 'Erro ao cadastrar transação do tipo boleto'
                 ];
             }
         } else {
 
             $retorno = [
-                'error'     => 5000,
-                'message'   => 'Não existe código de transação'
+                'error'     => 1005,
+                'message'   => 'Erro ao gerar transação do tipo boleto'
             ];
         }
 
@@ -430,22 +430,22 @@ class PagSeguro
 
             //Função para cadastrar transação
             try {
-                $this->store($std);
+                $this->_store($std);
                 //Notificar por e-mail status de aguardando pagamento
                 //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-                $this->notifyStatus($std, 1);
+                $this->_notifyStatus($std, 1);
                 log_message('info', 'Transação cadastrada {codigo_transacao}', ['codigo_transacao' => $std->code]);
             } catch (Exception $e) {
                 log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
                 $retorno = [
-                    'error'     => 5000,
-                    'message'   => 'Erro ao cadastrar transação'
+                    'error'     => 1006,
+                    'message'   => 'Erro ao cadastrar transação do tipo cartão'
                 ];
             }
         } else {
             $retorno = [
-                'error'     => 5000,
-                'message'   => 'Não existe código de transação'
+                'error'     => 1007,
+                'message'   => 'Erro ao gerar transação do tipo cartao'
             ];
         }
         //header('Content-Type: application/json');
@@ -458,7 +458,7 @@ class PagSeguro
      * @param array $std
      * @return bool
      */
-    protected function store($std = null): bool
+    protected function _store($std = null): bool
     {
         try {
             $model = new \App\Models\TransacoesModel();
@@ -490,7 +490,7 @@ class PagSeguro
      * @param array $std
      * @return bool
      */
-    protected function edit($std = null): bool
+    protected function _edit($std = null): bool
     {
         if ($std == null) return false;
 
@@ -523,7 +523,7 @@ class PagSeguro
      * Assim, é posível saber se o texto será "Pedido realizado" ou "Alteração de pagamento"
      * @return boolean
      */
-    protected function notifyStatus($std = null, $who = null): bool
+    protected function _notifyStatus($std = null, $who = null): bool
     {
 
         if ($std == null or $who == null) return false;
