@@ -7,7 +7,7 @@
 - [Features](#features "Features")
 - [Estrutura library](#estrutura-library "Estrutura library")
 - [Utilização](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/INSTALLING.md "Utilização")
-- [Atualizações](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/CHANGES.md "Atualizações")
+- [Atualizações](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/CHANGELOG.md "Atualizações")
 - [Funcionamento](#funcionamento "Funcionamento")
 - [Contribuir](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/CONTRIBUTING.md "Contribuir")
 - [Última versão estável](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "Última versão estável") 
