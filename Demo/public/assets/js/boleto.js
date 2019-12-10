@@ -17,10 +17,10 @@ function pagarBoleto(e) {
 			$('#btn_pagar').val("Boleto gerado com sucesso");
 			$('.msg').html('Enviado com sucesso. Link do boleto: <a target="_blank" href="' + res.code.paymentLink + '">Clique aqui para baixar</a>');
 		} else {
-			$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message);
+			$('.msg').html('Ocorreu um erro do PagSeguro: ' + res.error + ' ' + res.message);
 		}
 	}).fail(function (res) {
-		$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message);
+		$('.msg').html('Ocorreu um erro de verificação: ' + res.error + ' ' + res.message);
 
 	}).always(function (res) {
 		$('#btn_pagar').attr('disabled', true);

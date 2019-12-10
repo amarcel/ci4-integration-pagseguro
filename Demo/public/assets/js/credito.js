@@ -69,10 +69,10 @@ function pagarCartao() {
 			$('#btn_pagar').val('Pagamento solicitado com sucesso');
 			$('.msg').html('Enviado com sucesso. Código da compra: ' + res.code.code);
 		} else {
-			$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message);
+			$('.msg').html('Ocorreu um erro do PagSeguro: ' + res.error + ' ' + res.message);
 		}
 	}).fail(function (res) {
-		$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message);
+		$('.msg').html('Ocorreu um erro na verificacao: ' + res.error + ' ' + res.message);
 
 	}).always(function (res) {
 		$('#parcelas').attr('disabled', true);
