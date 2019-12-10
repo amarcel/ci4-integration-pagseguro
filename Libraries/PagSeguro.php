@@ -174,7 +174,6 @@ class PagSeguro
 
         return json_encode($retorno);
     }
-
     /**
      * Realizar solicitação de pagamento para o PagSeguro (Boleto)
      * @param array $request
@@ -194,14 +193,11 @@ class PagSeguro
             'receiverEmail' => $this->email,
             'currency'      => 'BRL',
             'extraAmount'   => '',
-
             'itemId1'           => $request['itemId1'],
             'itemDescription1'  => $request['itemDescription1'],
             'itemAmount1'       => number_format($request['itemAmount1'], 2, '.', ''),
             'itemQuantity1'     => $request['itemQuantity1'],
-
             'notificationURL'   => base_url('notificacao'),
-
             'reference'         => $request['ref'],
             'senderName'        => $request['nome'],
             'senderCPF'         => $request['cpf'],
@@ -211,7 +207,6 @@ class PagSeguro
             'senderHash'        => $request['hash_pagamento'],
 
             'shippingAddressRequired' => 'false'
-
             /*
             Caso queira utilizar o envio, colocar a variável acima para true e descomentar o abaixo
             'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
@@ -225,9 +220,7 @@ class PagSeguro
             'shippingType'              => '1',
             'shippingCost'              => '1.00',
             */
-
         );
-
         /**
          * Configurações do PagSeguro para verificar a URL
          */
@@ -253,25 +246,20 @@ class PagSeguro
         $std  = json_decode($json);
 
         if (isset($std->error->code)) {
-
             $retorno = [
                 'error'     =>  $std->error->code,
                 'message'   => $std->error->message
             ];
         }
-
         if (isset($std->code)) {
-
             $retorno = [
                 'error'     =>  0,
                 'code'      => $std
             ];
             //Função para cadastrar transação
             try {
-
                 $this->_store($std);
-                //Notificar por e-mail status de aguardando pagamento
-                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
+                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail. Notificar por e-mail status de aguardando pagamento
                 $this->_notifyStatus($std, 1);
                 log_message('info', 'Transação cadastrada {codigo_transacao}', ['codigo_transacao' => $std->code]);
             } catch (Exception $e) {
@@ -283,13 +271,11 @@ class PagSeguro
                 ];
             }
         } else {
-
             $retorno = [
                 'error'     => 1005,
                 'message'   => 'Erro ao gerar transação do tipo boleto'
             ];
         }
-
         return json_encode($retorno);
     }
 
@@ -301,35 +287,21 @@ class PagSeguro
      */
     public function paymentCard(array $request)
     {
-
-        //Bloqueia para ser acessível apenas por Ajax
-        //if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1002 - Não é possível acessar", 401);
-
         $preco = $request['valor_parcela'];
-
-        /**
-         * Parâmetros necessários para requisição a API
-         * Dados abaixo estão apenas por via de demonstração
-         */
-
+        //Parâmetros necessários para requisição a API Dados abaixo estão apenas por via de demonstração
         $pagarCartao = array(
             'email'         => $this->email,
             'token'         => $this->token,
-
             'paymentMode'   => 'default',
             'paymentMethod' => 'creditCard',
             'currency'      => 'BRL',
             'receiverEmail' => $this->email,
-
             'extraAmount'   => '',
-
             'itemId1'           => $request['itemId1'],
             'itemDescription1'  => $request['itemDescription1'],
             'itemAmount1'       => number_format($request['itemAmount1'], 2, '.', ''),
             'itemQuantity1'     => $request['itemQuantity1'],
-
             'notificationURL'   => base_url('notificacao'),
-
             'reference'         => $request['ref'],
             'senderName'        => $request['nome'],
             'senderCPF'         => $request['cpf'],
@@ -337,37 +309,18 @@ class PagSeguro
             'senderPhone'       => $request['number'],
             'senderEmail'       => $request['email'],
             'senderHash'        => $request['hash_pagamento'],
-
             //Dados para implemento de frete
             'shippingAddressRequired' => 'false',
-
-            /**
-             * Caso queira utilizar o envio, colocar a variável acima para true e descomentar o abaixo
-             */
-            /*   
-            'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
-            'shippingAddressNumber'     => '1384',
-            'shippingAddressComplement' => '5o andar',
-            'shippingAddressDistrict'   => 'Jardim Paulistano',
-            'shippingAddressPostalCode' => '01452002',
-            'shippingAddressCity'       => 'Sao Paulo',
-            'shippingAddressState'      => 'SP',
-            'shippingAddressCountry'    => 'BRA',
-            'shippingType'              => '1',
-            'shippingCost'              => '1.00',
-             */
 
             //DADOS DO DONO DO CARTÂO
             'creditCardToken'           => $request['credit_token'],
             'installmentQuantity'       => $request['parcelas'],
             'installmentValue'          => number_format($preco, 2, '.', ''),
-
             'creditCardHolderName'      => 'Jose Comprador',
             'creditCardHolderCPF'       => '02690170035',
             'creditCardHolderBirthDate' => '27/10/1987',
             'creditCardHolderAreaCode'  => '11',
             'creditCardHolderPhone'     => '56273440',
-
             'billingAddressStreet'      => "Av. Brig. Faria Lima",
             'billingAddressNumber'      => '1384',
             'billingAddressComplement'  => '5o andar',
@@ -377,19 +330,11 @@ class PagSeguro
             'billingAddressState'       => 'SP',
             'billingAddressCountry'     => 'BRA'
         );
-
-        /**
-         * Verificar se existe parcelas, se existir colocar o juros se não, não faça nada
-         * 12 é o número de parcelas que não terão juros
-         */
+        // Verificar se existe parcelas, se existir colocar o juros se não, não faça nada 12 é o número de parcelas que não terão juros
         $request['parcelas'] > 1 ?  $pagarCartao['noInterestInstallmentQuantity'] = 12 : null;
 
-
-        /**
-         * Configurações do PagSeguro para verificar a URL
-         */
+        //Configurações do PagSeguro para verificar a URL
         $url = $this->pagSeguroConfig->urlTransaction;
-
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -401,20 +346,14 @@ class PagSeguro
 
         //Verificar o SSL para TRUE
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
         $result = curl_exec($ch);
-
         curl_close($ch);
-
         $xml    = simplexml_load_string($result);
         $json   = json_encode($xml);
         $std  = json_decode($json);
 
-        /**
-         * Caso exista algum erro no retorno da função do pagseguro
-         */
+        //Caso exista algum erro no retorno da função do pagseguro
         if (isset($std->error->code)) {
-
             $retorno = [
                 'error'     =>  $std->error->code,
                 'message'   => $std->error->message
@@ -422,17 +361,14 @@ class PagSeguro
         }
 
         if (isset($std->code)) {
-
             $retorno = [
                 'error'     =>  0,
                 'code'      => $std
             ];
-
             //Função para cadastrar transação
             try {
                 $this->_store($std);
-                //Notificar por e-mail status de aguardando pagamento
-                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
+                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail Notificar por e-mail status de aguardando pagamento
                 $this->_notifyStatus($std, 1);
                 log_message('info', 'Transação cadastrada {codigo_transacao}', ['codigo_transacao' => $std->code]);
             } catch (Exception $e) {
@@ -448,7 +384,6 @@ class PagSeguro
                 'message'   => 'Erro ao gerar transação do tipo cartao'
             ];
         }
-        //header('Content-Type: application/json');
         return json_encode($retorno);
     }
 
