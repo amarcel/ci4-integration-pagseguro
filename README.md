@@ -1,16 +1,28 @@
 # CodeIgniter 4  Integration PagSeguro API
 ![](https://img.shields.io/github/issues-raw/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/contributors/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/stars/matheuscastroweb/ci4-integration-pagseguro) 
 
-### Em desenvolvimento. Última versão testada [ aqui (master)](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "aqui (master)").
+### Em desenvolvimento. Última versão testada [ aqui ](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "aqui)").
+
 ## Conteúdo:
 
 - [Features](#features "Features")
 - [Estrutura library](#estrutura-library "Estrutura library")
-- [Utilização](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/INSTALLING.md "Utilização")
-- [Atualizações](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/CHANGELOG.md "Atualizações")
+- [Tabela de erros](#tabela-de-erros "Tabela de erros")
 - [Funcionamento](#funcionamento "Funcionamento")
-- [Contribuir](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/CONTRIBUTING.md "Contribuir")
 - [Última versão estável](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "Última versão estável") 
+
+
+## Instalação:
+
+Veja o arquivo [INSTALLING.md](INSTALLING.md).
+
+## Contribuição:
+
+Veja o arquivo [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Atualizações:
+
+Veja o arquivo [CHANGELOG.md](CHANGELOG.md).
 
 ## Features:
 
@@ -23,16 +35,17 @@
 - Loader para aguardar requisição de pagamento
 - Logs a cada status da transação
 
+
 ## Estrutura da library:
 | Função | Razão |
 | ------ | ------ |
-| getSession | Gerar uma sessão de pagamento obrigatória| 
-| requestNotification | Receber notificação do PagSeguro de alteração de status |
-| paymentBillet | Gerar pagamento por boleto bancário |
-| paymentCard | Gerar pagamento por cartão de crédito | 
-| store | Adicionar uma transação ao banco de dados | 
-| edit | Editar um status de transação no banco de dados |
-| notifyStatus | Envia notificação por e-mail sobre o status do pedido | 
+| `getSession` | Gerar uma sessão de pagamento obrigatória| 
+| `requestNotification` | Receber notificação do PagSeguro de alteração de status |
+| `paymentBillet` | Gerar pagamento por boleto bancário |
+| `paymentCard` | Gerar pagamento por cartão de crédito | 
+| `store` | Adicionar uma transação ao banco de dados | 
+| `edit` | Editar um status de transação no banco de dados |
+| `notifyStatus` | Envia notificação por e-mail sobre o status do pedido | 
 
 - Na pasta `/Demo` contém a versão já instalada no Codeigniter 4.  
 
