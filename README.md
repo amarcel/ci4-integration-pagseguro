@@ -53,6 +53,18 @@ $pagseguro->function();
 
 - Para utilizar o módulo de notificação em localhost, basta acessar o PagSeguro e simular uma troca de status.
 
+## Tabela de erros:
+| Código | Descrição |
+| ------ | ------ |
+| 1000 | Erro ao gerar sessão de pagamento | 
+| 1001 | Parâmetros incorretos na configuração do Pagseguro |
+| 1002 | Erro ao receber código de notificação |
+| 1003 | Não existe código de transação |
+| 1004 | Erro ao cadastrar transação no banco de dados do tipo boleto|
+| 1005 | Erro ao gerar transação do tipo boleto |
+| 1006 | Erro ao cadastrar transação do tipo cartão |
+| 1007 | Erro ao gerar transação do tipo cartão |
+
 
 ## Funcionamento:
 Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
