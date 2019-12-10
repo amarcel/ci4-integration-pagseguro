@@ -53,21 +53,21 @@ class PagSeguro
         $params['token'] = $this->token;
 
         try {
-            $ch = curl_init();
+            $chamada = curl_init();
 
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_POST, count($params));
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+            curl_setopt($chamada, CURLOPT_URL, $url);
+            curl_setopt($chamada, CURLOPT_POST, count($params));
+            curl_setopt($chamada, CURLOPT_POSTFIELDS, http_build_query($params));
+            curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
+            curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
 
             //Verificar o SSL para TRUE
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
 
-            $result = curl_exec($ch);
+            $result = curl_exec($chamada);
 
-            curl_close($ch);
+            curl_close($chamada);
 
             $xml    = simplexml_load_string($result);
             $json   = json_encode($xml);
@@ -119,18 +119,18 @@ class PagSeguro
          */
         $url = $this->pagSeguroConfig->urlNotification . $request['notificationCode'] . '?' . $data;
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+        $chamada = curl_init();
+        curl_setopt($chamada, CURLOPT_URL, $url);
+        curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
+        curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
 
         //Verificar o SSL para TRUE
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
 
-        $result = curl_exec($ch);
+        $result = curl_exec($chamada);
 
-        curl_close($ch);
+        curl_close($chamada);
 
         $xml    = simplexml_load_string($result);
         $json   = json_encode($xml);
@@ -226,20 +226,20 @@ class PagSeguro
          */
         $url = $this->pagSeguroConfig->urlTransaction;
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, count($pagarBoleto));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pagarBoleto));
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+        $chamada = curl_init();
+        curl_setopt($chamada, CURLOPT_URL, $url);
+        curl_setopt($chamada, CURLOPT_POST, count($pagarBoleto));
+        curl_setopt($chamada, CURLOPT_POSTFIELDS, http_build_query($pagarBoleto));
+        curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
+        curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
 
         //Verificar o SSL para TRUE
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
 
-        $result = curl_exec($ch);
+        $result = curl_exec($chamada);
 
-        curl_close($ch);
+        curl_close($chamada);
 
         $xml    = simplexml_load_string($result);
         $json   = json_encode($xml);
@@ -336,18 +336,18 @@ class PagSeguro
         //Configurações do PagSeguro para verificar a URL
         $url = $this->pagSeguroConfig->urlTransaction;
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, count($pagarCartao));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pagarCartao));
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+        $chamada = curl_init();
+        curl_setopt($chamada, CURLOPT_URL, $url);
+        curl_setopt($chamada, CURLOPT_POST, count($pagarCartao));
+        curl_setopt($chamada, CURLOPT_POSTFIELDS, http_build_query($pagarCartao));
+        curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
+        curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
 
         //Verificar o SSL para TRUE
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $result = curl_exec($ch);
-        curl_close($ch);
+        curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($chamada);
+        curl_close($chamada);
         $xml    = simplexml_load_string($result);
         $json   = json_encode($xml);
         $std  = json_decode($json);

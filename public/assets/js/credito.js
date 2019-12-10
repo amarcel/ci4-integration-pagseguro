@@ -10,7 +10,7 @@ function getInstallments() {
 		amount: ($('#valor').val() * $('#quantidade').val()),
 		maxInstallmentNoInterest: 12,
 		brand: 'visa',
-		success: function (res) {
+		success(res) {
 			// Retorna as opções de parcelamento disponíveis
 			var valorParcela = res.installments.visa[parc].installmentAmount;
 			var valor = res.installments.visa[parc].totalAmount;
@@ -21,7 +21,7 @@ function getInstallments() {
 			$('#vparcela').val(parseFloat(valorParcela));
 			$('#valorTotal').val(parseFloat(valor));
 		},
-		error: function (response) {
+		error(response) {
 			alert('Erro getInstallments() in credito.js' + response.error);
 			// callback para chamadas que falharam.
 		}
@@ -61,19 +61,18 @@ function pagarCartao() {
 		url: 'gerarPagamento',
 		data: $('.form').serialize(),
 		dataType: 'json',
-		beforeSend: function () {
+		beforeSend() {
 			$('.msg').html('<div class="loading style-2"><div class="loading-wheel"></div></div');
 		}
 	}).done(function (res) {
-		console.log(res.error);
 		if (res.error === 0) {
 			$('#btn_pagar').val('Pagamento solicitado com sucesso');
 			$('.msg').html('Enviado com sucesso. Código da compra: ' + res.code.code);
 		} else {
-			$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
+			$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message);
 		}
 	}).fail(function (res) {
-		$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message)
+		$('.msg').html('Ocorreu um erro: ' + res.error + ' ' + res.message);
 
 	}).always(function (res) {
 		$('#parcelas').attr('disabled', true);
@@ -104,7 +103,7 @@ function gerarToken(e) {
 		cvv: cvv, // CVV do cartão
 		expirationMonth: mes, // Mês da expiração do cartão
 		expirationYear: ano, // Ano da expiração do cartão, é necessário os 4 dígitos.
-		success: function (response) {
+		success(response) {
 			// Retorna o cartão tokenizado.
 			var tokenPagamento = response.card.token;
 
@@ -117,7 +116,7 @@ function gerarToken(e) {
 				pagarCartao();
 			}
 		},
-		error: function (response) {
+		error(response) {
 			// Callback para chamadas que falharam.
 			alert('Erro ao gerar token de pagamento' + response.error);
 			console.log(response.error);

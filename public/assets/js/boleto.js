@@ -9,7 +9,7 @@ function pagarBoleto(e) {
 		url: 'gerarPagamento',
 		data: $('.form').serialize(),
 		dataType: 'json',
-		beforeSend: function () {
+		beforeSend() {
 			$('.msg').html('<div class="loading style-2"><div class="loading-wheel"></div></div');
 		}
 	}).done(function (res) {

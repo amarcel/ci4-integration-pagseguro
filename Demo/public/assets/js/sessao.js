@@ -9,10 +9,9 @@ function setSessionIdPagSeguro() {
     $('#btn_pagar').attr("disabled", true);
 
     $.ajax({
-        url: url,
+        url,
         dataType: 'json',
-        success: function (res) {
-            console.log(res);
+        success(res) {
             if (res.error === 0) {
                 //Setar id_sessao
                 PagSeguroDirectPayment.setSessionId(res.id_sessao);
@@ -27,7 +26,7 @@ function setSessionIdPagSeguro() {
                 alert('Erro - Código: ' + res.error + '. Mensagem: ' + res.message);
             }
         },
-        error: function () {
+        error(res) {
             alert('Erro - Código: ' + res.error + '. Mensagem: ' + res.message);
         }
     });
