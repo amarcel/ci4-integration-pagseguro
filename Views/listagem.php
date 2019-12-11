@@ -22,12 +22,12 @@
             </div>
             <table class="mx-auto col-9 table table-striped" aria-describedby="Listagem transações">
                 <tr class="font-weight-bold">
-                    <th>ID</th>
-                    <th>Código</th>
-                    <th>Tipo</th>
-                    <th>Status</th>
-                    <th>Valor</th>
-                    <th>Link</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Código</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Link</th>
                 </tr>
                 <?php if (!empty($transacoes) && is_array($transacoes)) :  ?>
                     <?php foreach ($transacoes as $transacoes_item) :  ?>
