@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="pt-br">
 
 <head>
 	<title>Cartão de crédito - API de Pagamento PagSeguro</title>
@@ -17,7 +17,7 @@
 <body>
 	<div class="card">
 		<div class=" text-center card-header">
-			<a href="/listagem">Voltar</a> - <a target="_blank" href="https://github.com/matheuscastroweb/ci4-integration-pagseguro">CodeIgniter 4 Integration PagSeguro API</a>
+			<a href="/listagem">Voltar</a> - <a rel="noopener noreferrer" target="_blank" href="https://github.com/matheuscastroweb/ci4-integration-pagseguro">CodeIgniter 4 Integration PagSeguro API</a>
 		</div>
 		<div class="card-body">
 			<div class="text-center">
@@ -153,7 +153,7 @@
 			</div>
 		</div>
 		<div class="card-footer text-muted text-center">
-			<a target="_blank" href='https://github.com/matheuscastroweb'>GitHub</a> - Matheus de Castro Pelegrino < matheuscastroweb@gmail.com>
+			<a rel="noopener noreferrer" target="_blank" href='https://github.com/matheuscastroweb'>GitHub</a> - Matheus de Castro Pelegrino < matheuscastroweb@gmail.com>
 		</div>
 	</div>
 

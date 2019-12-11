@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="pt-br">
 
 <head>
     <title>Listagem - API de Pagamento PagSeguro</title>
@@ -12,7 +12,7 @@
 <body>
     <div class="card">
         <div class=" text-center card-header">
-            <a target="_blank" href="https://github.com/matheuscastroweb/ci4-integration-pagseguro">CodeIgniter 4 Integration PagSeguro API</a>
+            <a rel="noopener noreferrer" target="_blank" href="https://github.com/matheuscastroweb/ci4-integration-pagseguro">CodeIgniter 4 Integration PagSeguro API</a>
         </div>
 
         <div class="card-body">
@@ -20,16 +20,15 @@
                 <h5 class="card-title">Listagens de transações</h5>
                 <p class="card-text mb-3">Criar novo pagamento com: <a href="/pagar/boleto">Boleto</a> ou <a href="/pagar/credito">Cartão de crédito</a></p>
             </div>
-            <table class="mx-auto col-9 table table-striped">
-                <tr class="font-weight-bold">
-                    <td>Referência</td>
-                    <td>Código</td>
-                    <td>Tipo</td>
-                    <td>Status</td>
-                    <td>Valor</td>
-                    <td>Link</td>
-
-                </tr>
+            <table class="mx-auto col-9 table table-striped" aria-describedby="Listagem transações">
+                <th class="font-weight-bold">
+                <td>Referência</td>
+                <td>Código</td>
+                <td>Tipo</td>
+                <td>Status</td>
+                <td>Valor</td>
+                <td>Link</td>
+                </th>
                 <?php if (!empty($transacoes) && is_array($transacoes)) :  ?>
                     <?php foreach ($transacoes as $transacoes_item) :  ?>
                         <tr>
@@ -66,13 +65,13 @@
                     <div class="modal-body text-center">
                         <p class="aviso"></p>
                         <p class="loading"></p>
-                        <iframe id="iframe_boleto" src="" width="100%" height="90%" style="border: none;"></iframe>
+                        <iframe title="Boleto de pagamento" id="iframe_boleto" src="" width="100%" height="90%" style="border: none;"></iframe>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-footer text-muted text-center">
-            <a target="_blank" href='https://github.com/matheuscastroweb'>GitHub</a> - Matheus de Castro Pelegrino < matheuscastroweb@gmail.com>
+            <a rel="noopener noreferrer" target="_blank" href='https://github.com/matheuscastroweb'>GitHub</a> - Matheus de Castro Pelegrino < matheuscastroweb@gmail.com>
         </div>
     </div>
 
