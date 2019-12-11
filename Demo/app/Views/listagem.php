@@ -21,8 +21,8 @@
                 <p class="card-text mb-3">Criar novo pagamento com: <a href="/pagar/boleto">Boleto</a> ou <a href="/pagar/credito">Cartão de crédito</a></p>
             </div>
             <table class="mx-auto col-9 table table-striped" aria-describedby="Listagem transações">
-                <th class="font-weight-bold">
-                <td id="ref">Referência</td>
+                <th id="listTransacoes" class="font-weight-bold">
+                <td>Referência</td>
                 <td>Código</td>
                 <td>Tipo</td>
                 <td>Status</td>
@@ -32,7 +32,7 @@
                 <?php if (!empty($transacoes) && is_array($transacoes)) :  ?>
                     <?php foreach ($transacoes as $transacoes_item) :  ?>
                         <tr>
-                            <td id="<?= substr($transacoes_item['referencia_transacao'], 1, 3)  ?>" class=" text-uppercase"><?= substr($transacoes_item['referencia_transacao'], 1, 5) ?></td>
+                            <td class=" text-uppercase"><?= substr($transacoes_item['referencia_transacao'], 1, 5) ?></td>
                             <td><?= $transacoes_item['codigo_transacao'] ?></td>
                             <td><?= getStatusTypePag($transacoes_item['tipo_transacao']) ?></td>
                             <td><?= getStatusCodePag($transacoes_item['status_transacao']) ?></td>
