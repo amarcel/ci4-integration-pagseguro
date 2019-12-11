@@ -2,6 +2,7 @@
 > Dez 11, 2019
 
 - Adição do método `_getChamada`
+- Removendo código duplicado
 
 ## [v0.0.7]
 
