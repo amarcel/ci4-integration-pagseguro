@@ -1,4 +1,10 @@
+## [v0.0.8]
+> Dez 11, 2019
+
+- Adição do método `_getChamada`
+
 ## [v0.0.7]
+
 > Dez 10, 2019
 
 - Adicionado tabela de erros

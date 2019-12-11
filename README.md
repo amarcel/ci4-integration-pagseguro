@@ -43,9 +43,10 @@ Veja o arquivo [CHANGELOG.md](CHANGELOG.md).
 | `requestNotification` | Receber notificação do PagSeguro de alteração de status |
 | `paymentBillet` | Gerar pagamento por boleto bancário |
 | `paymentCard` | Gerar pagamento por cartão de crédito | 
-| `store` | Adicionar uma transação ao banco de dados | 
-| `edit` | Editar um status de transação no banco de dados |
-| `notifyStatus` | Envia notificação por e-mail sobre o status do pedido | 
+| `_store` | Adicionar uma transação ao banco de dados | 
+| `_edit` | Editar um status de transação no banco de dados |
+| `_notifyStatus` | Envia notificação por e-mail sobre o status do pedido | 
+| `_getChamada` | Realizar a chamada cURL ao servidor do PagSeguro | 
 
 - Na pasta `/Demo` contém a versão já instalada no Codeigniter 4.  
 
@@ -77,6 +78,7 @@ $pagseguro->function();
 | 1005 | Erro ao gerar transação do tipo boleto |
 | 1006 | Erro ao cadastrar transação do tipo cartão |
 | 1007 | Erro ao gerar transação do tipo cartão |
+| 1008 | Erro ao realizar chamada ao servidor |
 
 
 ## Funcionamento:
