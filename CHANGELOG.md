@@ -1,9 +1,23 @@
+## [v0.0.8]
+> Dez 11, 2019
+
+- Adição do método `_getChamada`
+
+## [v0.0.7]
+
+> Dez 10, 2019
+
+- Adicionado tabela de erros
+- Alterado métodos privados com o prefixo `_method`
+- Utilização do Codacy para melhoria de código
+
 ## [v0.0.62]
 > Dez 09, 2019
 
 - Adicionado Demo 
 - Separação da versão develop (Versão em desenvolvimento) e master (Última versão funcional)
 - Correção do bug de não aparecer ID
+- Adicionado verificação de erro quando não é possível gerar a sessão
 
 ## [v0.0.61]
 > Dez 08, 2019

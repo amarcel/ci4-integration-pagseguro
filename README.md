@@ -1,16 +1,28 @@
 # CodeIgniter 4  Integration PagSeguro API
-![](https://img.shields.io/github/issues-raw/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/contributors/matheuscastroweb/ci4-integration-pagseguro) ![](https://img.shields.io/github/stars/matheuscastroweb/ci4-integration-pagseguro) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5e86f42e3060402d96d20804335b3681)](https://www.codacy.com/manual/matheuscastroweb/ci4-integration-pagseguro?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=matheuscastroweb/ci4-integration-pagseguro&amp;utm_campaign=Badge_Grade) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=matheuscastroweb_ci4-integration-pagseguro&metric=alert_status)](https://sonarcloud.io/dashboard?id=matheuscastroweb_ci4-integration-pagseguro)
 
-### Em desenvolvimento. Última versão testada [ aqui (master)](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "aqui (master)").
+### Em desenvolvimento. Última versão testada [ aqui ](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "aqui)").
+
 ## Conteúdo:
 
 - [Features](#features "Features")
 - [Estrutura library](#estrutura-library "Estrutura library")
-- [Utilização](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/INSTALLING.md "Utilização")
-- [Atualizações](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/CHANGES.md "Atualizações")
+- [Tabela de erros](#tabela-de-erros "Tabela de erros")
 - [Funcionamento](#funcionamento "Funcionamento")
-- [Contribuir](https://github.com/matheuscastroweb/ci4-integration-pagseguro/blob/develop/CONTRIBUTING.md "Contribuir")
 - [Última versão estável](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "Última versão estável") 
+
+
+## Instalação:
+
+Veja o arquivo [INSTALLING.md](INSTALLING.md).
+
+## Contribuição:
+
+Veja o arquivo [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Atualizações:
+
+Veja o arquivo [CHANGELOG.md](CHANGELOG.md).
 
 ## Features:
 
@@ -23,16 +35,18 @@
 - Loader para aguardar requisição de pagamento
 - Logs a cada status da transação
 
-## Estrutura da library:
+
+## Estrutura library:
 | Função | Razão |
 | ------ | ------ |
-| getSession | Gerar uma sessão de pagamento obrigatória| 
-| requestNotification | Receber notificação do PagSeguro de alteração de status |
-| paymentBillet | Gerar pagamento por boleto bancário |
-| paymentCard | Gerar pagamento por cartão de crédito | 
-| store | Adicionar uma transação ao banco de dados | 
-| edit | Editar um status de transação no banco de dados |
-| notifyStatus | Envia notificação por e-mail sobre o status do pedido | 
+| `getSession` | Gerar uma sessão de pagamento obrigatória| 
+| `requestNotification` | Receber notificação do PagSeguro de alteração de status |
+| `paymentBillet` | Gerar pagamento por boleto bancário |
+| `paymentCard` | Gerar pagamento por cartão de crédito | 
+| `_store` | Adicionar uma transação ao banco de dados | 
+| `_edit` | Editar um status de transação no banco de dados |
+| `_notifyStatus` | Envia notificação por e-mail sobre o status do pedido | 
+| `_getChamada` | Realizar a chamada cURL ao servidor do PagSeguro | 
 
 - Na pasta `/Demo` contém a versão já instalada no Codeigniter 4.  
 
@@ -52,6 +66,19 @@ $pagseguro->function();
 -  Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email` para utilizar em modo desenvolvimento do PagSeguro e fazer os pagamentos. 
 
 - Para utilizar o módulo de notificação em localhost, basta acessar o PagSeguro e simular uma troca de status.
+
+## Tabela de erros:
+| Código | Descrição |
+| ------ | ------ |
+| 1000 | Erro ao gerar sessão de pagamento | 
+| 1001 | Parâmetros incorretos na configuração do Pagseguro |
+| 1002 | Erro ao receber código de notificação |
+| 1003 | Não existe código de transação |
+| 1004 | Erro ao cadastrar transação no banco de dados do tipo boleto|
+| 1005 | Erro ao gerar transação do tipo boleto |
+| 1006 | Erro ao cadastrar transação do tipo cartão |
+| 1007 | Erro ao gerar transação do tipo cartão |
+| 1008 | Erro ao realizar chamada ao servidor |
 
 
 ## Funcionamento:

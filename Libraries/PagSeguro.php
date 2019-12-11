@@ -52,41 +52,30 @@ class PagSeguro
         $params['email'] = $this->email;
         $params['token'] = $this->token;
 
-        $ch = curl_init();
+        try {
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, count($params));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+            $std  = $this->_getChamada($url, $params);
 
-        //Verificar o SSL para TRUE
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            if (isset($std->id)) {
 
-        $result = curl_exec($ch);
+                $json = [
+                    'error'     =>  0,
+                    'message'   => 'Sessao gerada com sucesso',
+                    'id_sessao' => $std->id
+                ];
+            } else {
 
-        curl_close($ch);
-
-        $xml    = simplexml_load_string($result);
-        $json   = json_encode($xml);
-        $std  = json_decode($json);
-
-        if (isset($std->id)) {
-
+                $json = [
+                    'error'     =>  1000,
+                    'message'   => 'Erro ao gerar sessao de pagamento'
+                ];
+            }
+        } catch (\Exception $e) {
             $json = [
-                'error'     =>  0,
-                'message'   => 'Sessao gerada com sucesso',
-                'id_sessao' => $std->id
-            ];
-        } else {
-
-            $json = [
-                'error'     =>  5000,
-                'message'   => 'Erro ao gerar sessao de pagamento'
+                'error'     =>  1001,
+                'message'   => 'Não foi possivel fazer a busca. Verifique se está configurado corretamente o parâmetro $email e $senha da API.',
             ];
         }
-
 
         header('Content-Type: application/json');
         return json_encode($json);
@@ -112,18 +101,18 @@ class PagSeguro
          */
         $url = $this->pagSeguroConfig->urlNotification . $request['notificationCode'] . '?' . $data;
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+        $chamada = curl_init();
+        curl_setopt($chamada, CURLOPT_URL, $url);
+        curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
+        curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
 
         //Verificar o SSL para TRUE
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
 
-        $result = curl_exec($ch);
+        $result = curl_exec($chamada);
 
-        curl_close($ch);
+        curl_close($chamada);
 
         $xml    = simplexml_load_string($result);
         $json   = json_encode($xml);
@@ -145,29 +134,28 @@ class PagSeguro
 
             //Função para cadastrar transação
             try {
-                $this->edit($std);
+                $this->_edit($std);
                 //Notificar por e-mail status de aguardando pagamento
                 //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-                $this->notifyStatus($std, 2);
+                $this->_notifyStatus($std, 2);
                 log_message('info', 'Transação atualizada {codigo_transacao}', ['codigo_transacao' => $std->code]);
             } catch (Exception $e) {
                 log_message('error', 'Erro ao receber notificação do código {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
                 $retorno = [
-                    'error'     => 5000,
+                    'error'     => 1002,
                     'message'   => 'Erro ao receber notificação do código'
                 ];
             }
         } else {
 
             $retorno = [
-                'error'     => 5000,
+                'error'     => 1003,
                 'message'   => 'Não existe código de transação'
             ];
         };
 
         return json_encode($retorno);
     }
-
     /**
      * Realizar solicitação de pagamento para o PagSeguro (Boleto)
      * @param array $request
@@ -187,14 +175,11 @@ class PagSeguro
             'receiverEmail' => $this->email,
             'currency'      => 'BRL',
             'extraAmount'   => '',
-
             'itemId1'           => $request['itemId1'],
             'itemDescription1'  => $request['itemDescription1'],
             'itemAmount1'       => number_format($request['itemAmount1'], 2, '.', ''),
             'itemQuantity1'     => $request['itemQuantity1'],
-
             'notificationURL'   => base_url('notificacao'),
-
             'reference'         => $request['ref'],
             'senderName'        => $request['nome'],
             'senderCPF'         => $request['cpf'],
@@ -204,7 +189,6 @@ class PagSeguro
             'senderHash'        => $request['hash_pagamento'],
 
             'shippingAddressRequired' => 'false'
-
             /*
             Caso queira utilizar o envio, colocar a variável acima para true e descomentar o abaixo
             'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
@@ -218,71 +202,45 @@ class PagSeguro
             'shippingType'              => '1',
             'shippingCost'              => '1.00',
             */
-
         );
-
         /**
          * Configurações do PagSeguro para verificar a URL
          */
         $url = $this->pagSeguroConfig->urlTransaction;
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, count($pagarBoleto));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pagarBoleto));
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
-
-        //Verificar o SSL para TRUE
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        $result = curl_exec($ch);
-
-        curl_close($ch);
-
-        $xml    = simplexml_load_string($result);
-        $json   = json_encode($xml);
-        $std  = json_decode($json);
+        $std  = $this->_getChamada($url, $pagarBoleto);
 
         if (isset($std->error->code)) {
-
             $retorno = [
                 'error'     =>  $std->error->code,
                 'message'   => $std->error->message
             ];
         }
-
         if (isset($std->code)) {
-
             $retorno = [
                 'error'     =>  0,
                 'code'      => $std
             ];
             //Função para cadastrar transação
             try {
-
-                $this->store($std);
-                //Notificar por e-mail status de aguardando pagamento
-                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-                $this->notifyStatus($std, 1);
+                $this->_store($std);
+                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail. Notificar por e-mail status de aguardando pagamento
+                $this->_notifyStatus($std, 1);
                 log_message('info', 'Transação cadastrada {codigo_transacao}', ['codigo_transacao' => $std->code]);
             } catch (Exception $e) {
 
                 log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
                 $retorno = [
-                    'error'     => 5000,
-                    'message'   => 'Erro ao cadastrar transação'
+                    'error'     => 1004,
+                    'message'   => 'Erro ao cadastrar transação do tipo boleto'
                 ];
             }
         } else {
-
             $retorno = [
-                'error'     => 5000,
-                'message'   => 'Não existe código de transação'
+                'error'     => 1005,
+                'message'   => 'Erro ao gerar transação do tipo boleto'
             ];
         }
-
         return json_encode($retorno);
     }
 
@@ -294,35 +252,21 @@ class PagSeguro
      */
     public function paymentCard(array $request)
     {
-
-        //Bloqueia para ser acessível apenas por Ajax
-        //if (!($this->request->isAJAX())) throw new \CodeIgniter\Exceptions\PageNotFoundException("1002 - Não é possível acessar", 401);
-
         $preco = $request['valor_parcela'];
-
-        /**
-         * Parâmetros necessários para requisição a API
-         * Dados abaixo estão apenas por via de demonstração
-         */
-
+        //Parâmetros necessários para requisição a API Dados abaixo estão apenas por via de demonstração
         $pagarCartao = array(
             'email'         => $this->email,
             'token'         => $this->token,
-
             'paymentMode'   => 'default',
             'paymentMethod' => 'creditCard',
             'currency'      => 'BRL',
             'receiverEmail' => $this->email,
-
             'extraAmount'   => '',
-
             'itemId1'           => $request['itemId1'],
             'itemDescription1'  => $request['itemDescription1'],
             'itemAmount1'       => number_format($request['itemAmount1'], 2, '.', ''),
             'itemQuantity1'     => $request['itemQuantity1'],
-
             'notificationURL'   => base_url('notificacao'),
-
             'reference'         => $request['ref'],
             'senderName'        => $request['nome'],
             'senderCPF'         => $request['cpf'],
@@ -330,37 +274,18 @@ class PagSeguro
             'senderPhone'       => $request['number'],
             'senderEmail'       => $request['email'],
             'senderHash'        => $request['hash_pagamento'],
-
             //Dados para implemento de frete
             'shippingAddressRequired' => 'false',
-
-            /**
-             * Caso queira utilizar o envio, colocar a variável acima para true e descomentar o abaixo
-             */
-            /*   
-            'shippingAddressStreet'     => 'Av. Brig. Faria Lima',
-            'shippingAddressNumber'     => '1384',
-            'shippingAddressComplement' => '5o andar',
-            'shippingAddressDistrict'   => 'Jardim Paulistano',
-            'shippingAddressPostalCode' => '01452002',
-            'shippingAddressCity'       => 'Sao Paulo',
-            'shippingAddressState'      => 'SP',
-            'shippingAddressCountry'    => 'BRA',
-            'shippingType'              => '1',
-            'shippingCost'              => '1.00',
-             */
 
             //DADOS DO DONO DO CARTÂO
             'creditCardToken'           => $request['credit_token'],
             'installmentQuantity'       => $request['parcelas'],
             'installmentValue'          => number_format($preco, 2, '.', ''),
-
             'creditCardHolderName'      => 'Jose Comprador',
             'creditCardHolderCPF'       => '02690170035',
             'creditCardHolderBirthDate' => '27/10/1987',
             'creditCardHolderAreaCode'  => '11',
             'creditCardHolderPhone'     => '56273440',
-
             'billingAddressStreet'      => "Av. Brig. Faria Lima",
             'billingAddressNumber'      => '1384',
             'billingAddressComplement'  => '5o andar',
@@ -370,44 +295,17 @@ class PagSeguro
             'billingAddressState'       => 'SP',
             'billingAddressCountry'     => 'BRA'
         );
-
-        /**
-         * Verificar se existe parcelas, se existir colocar o juros se não, não faça nada
-         * 12 é o número de parcelas que não terão juros
-         */
+        // Verificar se existe parcelas, se existir colocar o juros se não, não faça nada 12 é o número de parcelas que não terão juros
         $request['parcelas'] > 1 ?  $pagarCartao['noInterestInstallmentQuantity'] = 12 : null;
 
-
-        /**
-         * Configurações do PagSeguro para verificar a URL
-         */
+        //Configurações do PagSeguro para verificar a URL
         $url = $this->pagSeguroConfig->urlTransaction;
 
+        //Chamada ao CURL
+        $std  = $this->_getChamada($url, $pagarCartao);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, count($pagarCartao));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($pagarCartao));
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
-
-        //Verificar o SSL para TRUE
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        $result = curl_exec($ch);
-
-        curl_close($ch);
-
-        $xml    = simplexml_load_string($result);
-        $json   = json_encode($xml);
-        $std  = json_decode($json);
-
-        /**
-         * Caso exista algum erro no retorno da função do pagseguro
-         */
+        //Caso exista algum erro no retorno da função do pagseguro
         if (isset($std->error->code)) {
-
             $retorno = [
                 'error'     =>  $std->error->code,
                 'message'   => $std->error->message
@@ -415,33 +313,29 @@ class PagSeguro
         }
 
         if (isset($std->code)) {
-
             $retorno = [
                 'error'     =>  0,
                 'code'      => $std
             ];
-
             //Função para cadastrar transação
             try {
-                $this->store($std);
-                //Notificar por e-mail status de aguardando pagamento
-                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail
-                $this->notifyStatus($std, 1);
+                $this->_store($std);
+                //Verificar se a variavel de ambiente está setada como true para usar o envio de e-mail Notificar por e-mail status de aguardando pagamento
+                $this->_notifyStatus($std, 1);
                 log_message('info', 'Transação cadastrada {codigo_transacao}', ['codigo_transacao' => $std->code]);
             } catch (Exception $e) {
                 log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
                 $retorno = [
-                    'error'     => 5000,
-                    'message'   => 'Erro ao cadastrar transação'
+                    'error'     => 1006,
+                    'message'   => 'Erro ao cadastrar transação do tipo cartão'
                 ];
             }
         } else {
             $retorno = [
-                'error'     => 5000,
-                'message'   => 'Não existe código de transação'
+                'error'     => 1007,
+                'message'   => 'Erro ao gerar transação do tipo cartao'
             ];
         }
-        //header('Content-Type: application/json');
         return json_encode($retorno);
     }
 
@@ -451,7 +345,7 @@ class PagSeguro
      * @param array $std
      * @return bool
      */
-    protected function store($std = null): bool
+    protected function _store($std = null): bool
     {
         try {
             $model = new \App\Models\TransacoesModel();
@@ -483,7 +377,7 @@ class PagSeguro
      * @param array $std
      * @return bool
      */
-    protected function edit($std = null): bool
+    protected function _edit($std = null): bool
     {
         if ($std == null) return false;
 
@@ -507,6 +401,43 @@ class PagSeguro
     }
 
     /**
+     * Chamada para o servidor pelo cURL
+     *
+     * @param String $url do servidor que será chamada
+     * @param array $params a serem passados
+     * @return array resposta
+     */
+    protected function _getChamada(String $url, array $params)
+    {
+        try {
+            $chamada = curl_init();
+
+            curl_setopt($chamada, CURLOPT_URL, $url);
+            curl_setopt($chamada, CURLOPT_POST, count($params));
+            curl_setopt($chamada, CURLOPT_POSTFIELDS, http_build_query($params));
+            curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
+            curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+
+            //Verificar o SSL para TRUE
+            curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
+
+            $result = curl_exec($chamada);
+
+            curl_close($chamada);
+
+            $xml    = simplexml_load_string($result);
+            $json   = json_encode($xml);
+        } catch (\Exception $e) {
+            $json = [
+                'error'     => 1008,
+                'message'   => 'Não foi possível gerar a chamada'
+            ];
+        }
+        return json_decode($json);
+    }
+
+    /**
      * Realiza o envio de e-mail de acordo com cada requisição a API
      *
      * @param array $std -> Mensagem passada por completo
@@ -516,7 +447,7 @@ class PagSeguro
      * Assim, é posível saber se o texto será "Pedido realizado" ou "Alteração de pagamento"
      * @return boolean
      */
-    protected function notifyStatus($std = null, $who = null): bool
+    protected function _notifyStatus($std = null, $who = null): bool
     {
 
         if ($std == null or $who == null) return false;

@@ -9,11 +9,10 @@ function setSessionIdPagSeguro() {
     $('#btn_pagar').attr("disabled", true);
 
     $.ajax({
-        url: url,
+        url,
         dataType: 'json',
-        success: function (res) {
-            console.log(res);
-            if (res.error == 0) {
+        success(res) {
+            if (res.error === 0) {
                 //Setar id_sessao
                 PagSeguroDirectPayment.setSessionId(res.id_sessao);
                 /**
@@ -24,11 +23,11 @@ function setSessionIdPagSeguro() {
                 }
 
             } else {
-                alert('Erro ao setar a sessão' + res.error + ' ' + res.message);
+                alert('Erro - Código: ' + res.error + '. Mensagem: ' + res.message);
             }
         },
-        error: function () {
-            alert('Erro ao gerar sessão' + res.error + ' ' + res.message);
+        error(res) {
+            alert('Erro - Código: ' + res.error + '. Mensagem: ' + res.message);
         }
     });
 }
