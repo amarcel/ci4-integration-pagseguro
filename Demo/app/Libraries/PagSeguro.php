@@ -53,26 +53,8 @@ class PagSeguro
         $params['token'] = $this->token;
 
         try {
-            $chamada = curl_init();
 
-            curl_setopt($chamada, CURLOPT_URL, $url);
-            curl_setopt($chamada, CURLOPT_POST, count($params));
-            curl_setopt($chamada, CURLOPT_POSTFIELDS, http_build_query($params));
-            curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
-            curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
-
-            //Verificar o SSL para TRUE
-            curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
-
-            $result = curl_exec($chamada);
-
-            curl_close($chamada);
-
-            $xml    = simplexml_load_string($result);
-            $json   = json_encode($xml);
-            $std  = json_decode($json);
-
+            $std  = $this->_getChamada($url, $params);
 
             if (isset($std->id)) {
 
@@ -226,24 +208,7 @@ class PagSeguro
          */
         $url = $this->pagSeguroConfig->urlTransaction;
 
-        $chamada = curl_init();
-        curl_setopt($chamada, CURLOPT_URL, $url);
-        curl_setopt($chamada, CURLOPT_POST, count($pagarBoleto));
-        curl_setopt($chamada, CURLOPT_POSTFIELDS, http_build_query($pagarBoleto));
-        curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
-
-        //Verificar o SSL para TRUE
-        curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
-
-        $result = curl_exec($chamada);
-
-        curl_close($chamada);
-
-        $xml    = simplexml_load_string($result);
-        $json   = json_encode($xml);
-        $std  = json_decode($json);
+        $std  = $this->_getChamada($url, $pagarBoleto);
 
         if (isset($std->error->code)) {
             $retorno = [
@@ -336,21 +301,8 @@ class PagSeguro
         //Configurações do PagSeguro para verificar a URL
         $url = $this->pagSeguroConfig->urlTransaction;
 
-        $chamada = curl_init();
-        curl_setopt($chamada, CURLOPT_URL, $url);
-        curl_setopt($chamada, CURLOPT_POST, count($pagarCartao));
-        curl_setopt($chamada, CURLOPT_POSTFIELDS, http_build_query($pagarCartao));
-        curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
-        curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
-
-        //Verificar o SSL para TRUE
-        curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
-        $result = curl_exec($chamada);
-        curl_close($chamada);
-        $xml    = simplexml_load_string($result);
-        $json   = json_encode($xml);
-        $std  = json_decode($json);
+        //Chamada ao CURL
+        $std  = $this->_getChamada($url, $pagarCartao);
 
         //Caso exista algum erro no retorno da função do pagseguro
         if (isset($std->error->code)) {
@@ -446,6 +398,43 @@ class PagSeguro
             log_message('error', 'Erro ao cadastrar transação {codigo_transacao}. Exception {e}', ['codigo_transacao' => $std->code, 'e' => $e]);
             return false;
         }
+    }
+
+    /**
+     * Chamada para o servidor pelo cURL
+     *
+     * @param String $url do servidor que será chamada
+     * @param array $params a serem passados
+     * @return array resposta
+     */
+    protected function _getChamada(String $url, array $params)
+    {
+        try {
+            $chamada = curl_init();
+
+            curl_setopt($chamada, CURLOPT_URL, $url);
+            curl_setopt($chamada, CURLOPT_POST, count($params));
+            curl_setopt($chamada, CURLOPT_POSTFIELDS, http_build_query($params));
+            curl_setopt($chamada, CURLOPT_CONNECTTIMEOUT, 45);
+            curl_setopt($chamada, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($chamada, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+
+            //Verificar o SSL para TRUE
+            curl_setopt($chamada, CURLOPT_SSL_VERIFYPEER, false);
+
+            $result = curl_exec($chamada);
+
+            curl_close($chamada);
+
+            $xml    = simplexml_load_string($result);
+            $json   = json_encode($xml);
+        } catch (\Exception $e) {
+            $json = [
+                'error'     => 1008,
+                'message'   => 'Não foi possível gerar a chamada'
+            ];
+        }
+        return json_decode($json);
     }
 
     /**
