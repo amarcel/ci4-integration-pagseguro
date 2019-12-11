@@ -21,14 +21,14 @@
                 <p class="card-text mb-3">Criar novo pagamento com: <a href="/pagar/boleto">Boleto</a> ou <a href="/pagar/credito">Cartão de crédito</a></p>
             </div>
             <table class="mx-auto col-9 table table-striped" aria-describedby="Listagem transações">
-                <th id="listTransacoes" class="font-weight-bold">
-                <td>Referência</td>
-                <td>Código</td>
-                <td>Tipo</td>
-                <td>Status</td>
-                <td>Valor</td>
-                <td>Link</td>
-                </th>
+                <tr class="font-weight-bold">
+                    <th>ID</th>
+                    <th>Código</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Valor</th>
+                    <th>Link</th>
+                </tr>
                 <?php if (!empty($transacoes) && is_array($transacoes)) :  ?>
                     <?php foreach ($transacoes as $transacoes_item) :  ?>
                         <tr>
