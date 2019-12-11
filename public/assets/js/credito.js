@@ -34,7 +34,7 @@ function getInstallments() {
  * Função responsável por validar e o número de parcelas e chamar a getInstallments
  */
 
-$('#parcelas').on('change', function (e) {
+$('#parcelas').on('change', function () {
 	var parcelas = $(this).val();
 	if (parcelas !== 0) {
 		getInstallments();
@@ -74,7 +74,7 @@ function pagarCartao() {
 	}).fail(function (res) {
 		$('.msg').html('Ocorreu um erro na verificacao: ' + res.error + ' ' + res.message);
 
-	}).always(function (res) {
+	}).always(function () {
 		$('#parcelas').attr('disabled', true);
 		$('#btn_pagar').attr('disabled', true);
 	});

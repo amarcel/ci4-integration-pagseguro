@@ -22,7 +22,7 @@ function pagarBoleto(e) {
 	}).fail(function (res) {
 		$('.msg').html('Ocorreu um erro de verificação: ' + res.error + ' ' + res.message);
 
-	}).always(function (res) {
+	}).always(function () {
 		$('#btn_pagar').attr('disabled', true);
 	});
 
