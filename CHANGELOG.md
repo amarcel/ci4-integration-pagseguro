@@ -1,79 +1,79 @@
 ## [v0.0.8]
-> Dez 11, 2019
+> Dec 11, 2019
 
-- Adição do método `_getChamada`
-- Removendo código duplicado
+- Addition of the `_getChamada` method
+- Removing duplicate code
 
 ## [v0.0.7]
 
-> Dez 10, 2019
+> Dec 10, 2019
 
-- Adicionado tabela de erros
-- Alterado métodos privados com o prefixo `_method`
-- Utilização do Codacy para melhoria de código
+- Added error table
+- Changed private methods with the prefix `_method`
+- Use of Codacy for code improvement
 
 ## [v0.0.62]
-> Dez 09, 2019
+> Dec 09, 2019
 
-- Adicionado Demo 
-- Separação da versão develop (Versão em desenvolvimento) e master (Última versão funcional)
-- Correção do bug de não aparecer ID
-- Adicionado verificação de erro quando não é possível gerar a sessão
+- Added Demo
+- Separation of the develop version (Development version) and master version (Last functional version)
+- Fixed bug not showing ID
+- Added error checking when the session cannot be generated
 
 ## [v0.0.61]
-> Dez 08, 2019
+> Dec 08, 2019
 
-- Melhora na documentação 
-- Adicionado INSTALING.md
-- Correção dos bugs de e-mail e insert no banco de dados
-- Adição do item na forma de pagamento
+- Improved documentation
+- Added INSTALING.md
+- Correction of email and insert bugs in the database
+- Addition of item in payment method
 
 ## [v0.0.6]
-> Dez 08, 2019
+> Dec 08, 2019
 
-- Criação da Library de pagamento
-- Alterações nas funções da library para previnir erros
-- Adição de um único método para o controller de pagamento
-- Adição da develop somente com os códigos necessários para integração
+- Payment library creation
+- Changes in library functions to prevent errors
+- Addition of a single method for the payment controller
+- Add develop only with the necessary codes for integration
 
 ## [v0.0.5]
-> Dez 07, 2019
+> Dec 07, 2019
 
-- Adição do extension=openssl para funcionamento do envio de e-mail
-- Alterado os dados de configuração de URL do PagSeguro para `Config/PagSeguro.php`
-- Removido parâmetro `api.mode` do .env
-- Alterado new `Config\PagSeguro` para `config('PagSeguro')`
+- Addition of extension = openssl for working with sending e-mail
+- Changed the PagSeguro URL configuration data to `Config / PagSeguro.php`
+- Removed `api.mode` parameter from .env
+- Changed new `Config \ PagSeguro` to` config ('PagSeguro') `
 
 ## [v0.0.4]
-> Dez 06, 2019
+> Dec 06, 2019
 
-- Correção da versão [v0.0.3] para fazer a verificação apenas no Controller necessário.
-- Alteração do pagamento helper para limpar código
-- Realocação da session pagseguro para um novo controller
-- Aperfeiçoando o layout
-- Colocar do boleto na função de notificar por e-mail 
-- Aguardar a requisição da Session para liberar o botão de pagamento
+- Correction of version [v0.0.3] to make the verification only on the necessary Controller.
+- Changing the payment helper to clear code
+- Relocation of the pagseguro session to a new controller
+- Perfecting the layout
+- Place the boleto in the function of notifying by email
+- Wait for the Session request to release the payment button
 
 ## [v0.0.3]
-> Dez 05, 2019
+> Dec 05, 2019
 
-- Alterado o envio de e-mail para realizar apenas quando a variável de ambiente for `true`
+- Changed the sending of e-mail to perform only when the environment variable is `true`
 
 ## [v0.0.2]
-> Dez 04, 2019
+> Dec 04, 2019
 
-- Adição da página Status antes de inicar o código para que possa ser realizado as verificações do pagseguro.
-- Alterado `public $threshold = 9;` em `app/Config/Logger` para exibir todos os logs
-- Adicionado log de transações
-- Adicionado funcionalidade para utilizar ou não envio de e-mail `default: false`
-- Resolvido problema #4 do envio de e-mail
-- REMOVIDO :: Busca de transação por ID 
-- Adicionado no routes `$routes->get('/(:num)', 'Home::list/$1');`
+- Addition of the Status page before starting the code so that the checks of the insurance can be carried out.
+- Changed `public $ threshold = 9;` in `app / Config / Logger` to display all logs
+- Added transaction log
+- Added functionality for using or not sending `default: false` email
+- Resolved issue # 4 of sending email
+- REMOVED :: Transaction search by ID
+- Added in routes `$ routes-> get ('/ (: num)', 'Home :: list / $ 1');`
 
 ## [v0.0.1]
-> Dez 03, 2019
+> Dec 03, 2019
 
-- Finalização do método de pagamento por cartão
-- Correção de bugs
-- Adição do pre-loader de pagamento
-- Melhoria de organização de código
+- Finalization of the card payment method
+- Bug fixes
+- Addition of payment pre-loader
+- Improved code organization
