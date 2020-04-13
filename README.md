@@ -1,56 +1,55 @@
 # CodeIgniter 4  Integration PagSeguro API
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5e86f42e3060402d96d20804335b3681)](https://www.codacy.com/manual/matheuscastroweb/ci4-integration-pagseguro?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=matheuscastroweb/ci4-integration-pagseguro&amp;utm_campaign=Badge_Grade) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=matheuscastroweb_ci4-integration-pagseguro&metric=alert_status)](https://sonarcloud.io/dashboard?id=matheuscastroweb_ci4-integration-pagseguro)
 
-### Em desenvolvimento. Última versão testada [ aqui ](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "aqui)").
+### Under development. Last tested version [here](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "aqui)").
 
-## Conteúdo:
+## Content:
 
 - [Features](#features "Features")
-- [Estrutura library](#estrutura-library "Estrutura library")
-- [Tabela de erros](#tabela-de-erros "Tabela de erros")
-- [Funcionamento](#funcionamento "Funcionamento")
-- [Última versão estável](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "Última versão estável") 
+- [Structure library](#structure-library "Structure library")
+- [Error table](#error-table "Error table")
+- [Operation](#operation "Operation")
+- [Latest stable version](https://github.com/matheuscastroweb/ci4-integration-pagseguro/tree/master "Latest stable version") 
 
 
-## Instalação:
+## Installation:
 
-Veja o arquivo [INSTALLING.md](INSTALLING.md).
+See the archive [INSTALLING.md](INSTALLING.md).
 
-## Contribuição:
+## Contribution:
 
-Veja o arquivo [CONTRIBUTING.md](CONTRIBUTING.md).
+See the archive [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Atualizações:
+## Updates:
 
-Veja o arquivo [CHANGELOG.md](CHANGELOG.md).
+See the archive [CHANGELOG.md](CHANGELOG.md).
 
 ## Features:
 
-- Geração de boleto pela API
-- Pagamento por cartão de crédito
-- Callback ao atualizar algum status de pagamento
-- Validação com um código de referência unico
-- Envio de confirmação por e-mail do status do pedido
-- Boleto em Lightbox em um modal
-- Loader para aguardar requisição de pagamento
-- Logs a cada status da transação
+- Billet generation by API
+- Payment by credit card
+- Callback when updating any payment status
+- Validation with a unique reference code
+- Sending email confirmation of order status
+- Boleto in Lightbox in a modal
+- Loader to wait for payment request
+- Logs for each transaction status
 
-
-## Estrutura library:
-| Função | Razão |
+## Structure library:
+| Function | Reason |
 | ------ | ------ |
-| `getSession` | Gerar uma sessão de pagamento obrigatória| 
-| `requestNotification` | Receber notificação do PagSeguro de alteração de status |
-| `paymentBillet` | Gerar pagamento por boleto bancário |
-| `paymentCard` | Gerar pagamento por cartão de crédito | 
-| `_store` | Adicionar uma transação ao banco de dados | 
-| `_edit` | Editar um status de transação no banco de dados |
-| `_notifyStatus` | Envia notificação por e-mail sobre o status do pedido | 
-| `_getChamada` | Realizar a chamada cURL ao servidor do PagSeguro | 
+| `getSession` | Generate a mandatory payment session | 
+| `requestNotification` | Receive PagSeguro notification of status change |
+| `paymentBillet` | Generate payment by bank slip |
+| `paymentCard` | Generate payment by credit card | 
+| `_store` | Adds a transaction to the database | 
+| `_edit` | Edit a transaction status in the database |
+| `_notifyStatus` | Sends email notification about order status | 
+| `_getChamada` | Make the cURL call to the PagSeguro server | 
 
-- Na pasta `/Demo` contém a versão já instalada no Codeigniter 4.  
+- In the `/ Demo` folder contains the version already installed on Codeigniter 4.
 
-- Forma de utilização:  
+- Instructions for use:  
 
 ```php
 use App\Libraries\PagSeguro;
@@ -61,38 +60,38 @@ $pagseguro = new PagSeguro();
 $pagseguro->function();
 ```
 
--  É necessário criar uma conta no [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox"). A documentação pode ser acessar através do link [Documentação PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentação PagSeguro"). Altere `Config/PagSeguro.php` para acessar a URL de produção do PagSeguro quando finalizado o projeto.
+- It is necessary to create an account on [PagSeguro Sandbox](https://sandbox.pagseguro.uol.com.br/ "PagSeguro Sandbox"). The documentation can be accessed through the link [Documentation PagSeguro](https://dev.pagseguro.uol.com.br/docs "Documentation PagSeguro"). Change `Config/PagSeguro.php` to access the production URL of PagSeguro when the project is finished.
 
--  Alterar o email de teste disponibizado no PagSeguro `./Views/home` no campo `email` para utilizar em modo desenvolvimento do PagSeguro e fazer os pagamentos. 
+- Change the test email provided in PagSeguro `. / Views / home` in the` email` field to use in PagSeguro development mode and make payments.
 
-- Para utilizar o módulo de notificação em localhost, basta acessar o PagSeguro e simular uma troca de status.
+- To use the notification module at localhost, simply access PagSeguro and simulate a status change.
 
-## Tabela de erros:
-| Código | Descrição |
+## Error table:
+| Code | Description |
 | ------ | ------ |
-| 1000 | Erro ao gerar sessão de pagamento | 
-| 1001 | Parâmetros incorretos na configuração do Pagseguro |
-| 1002 | Erro ao receber código de notificação |
-| 1003 | Não existe código de transação |
-| 1004 | Erro ao cadastrar transação no banco de dados do tipo boleto|
-| 1005 | Erro ao gerar transação do tipo boleto |
-| 1006 | Erro ao cadastrar transação do tipo cartão |
-| 1007 | Erro ao gerar transação do tipo cartão |
-| 1008 | Erro ao realizar chamada ao servidor |
+| 1000 | Error generating payment session |
+| 1001 | Incorrect parameters in Pagseguro configuration |
+| 1002 | Error receiving notification code |
+| 1003 | There is no transaction code |
+| 1004 | Error when registering transaction in the boleto type database |
+| 1005 | Error generating billet type transaction |
+| 1006 | Error when registering card type transaction |
+| 1007 | Error generating card type transaction |
+| 1008 | Error when calling the server |
 
 
-## Funcionamento:
-Testes realizados em sandbox com geração de nome e CPF inválidos somentes para testes. 
+## Operation:
+Tests performed in sandbox with name generation and invalid CPF only for testing.
 
-### Listagem de todas transações:
+### List of all transactions:
 
-![Listagem](https://user-images.githubusercontent.com/45601574/70375547-a4350a80-18dd-11ea-8999-5a4b33df7d44.png)
+![List](https://user-images.githubusercontent.com/45601574/70375547-a4350a80-18dd-11ea-8999-5a4b33df7d44.png)
 
-### Pagamento cartão:
+### Card payment:
 
-![Pagamento-cartao](https://user-images.githubusercontent.com/45601574/70101423-90568380-1613-11ea-9f03-adfea52c4329.gif)
+![Card-payment](https://user-images.githubusercontent.com/45601574/70101423-90568380-1613-11ea-9f03-adfea52c4329.gif)
 
-### Pagamento boleto:
+### Payment slip:
 
-![Pagamento](https://user-images.githubusercontent.com/45601574/70101422-90568380-1613-11ea-9bb8-da7de6576753.gif)
+![Payment-slip](https://user-images.githubusercontent.com/45601574/70101422-90568380-1613-11ea-9bb8-da7de6576753.gif)
 
