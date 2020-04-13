@@ -1,14 +1,14 @@
 
-# Utilização Library PagSeguro:
+# Using Library PagSeguro:
 
-- Caso queira utilizar a Demo, basta utilizar `cd Demo` e `php spark serve` assumindo que esta instalação do PHP já está completa. Do contrário, acesse: [Instalação PHP](https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "Instalação PHP").
-1. Realizar o dowload do repositório:
+- If you want to use the Demo, just use `cd Demo` and` php spark serve` assuming that this installation of PHP is already complete. Otherwise, go to: [PHP installation] (https://github.com/matheuscastroweb/ci4-crud/blob/master/README.md "PHP installation").
+1. Download the repository:
 
 `git clone https://github.com/matheuscastroweb/ci4-integration-pagseguro.git`
 
-2. Copias pastas do repositório para dentro do seu projeto conforme abaixo:
+2. Copy folders from the repository into your project as follows:
 
-| Pasta | Destino |
+| Folder | Destiny |
 | ------ | ------ | 
 | Config |  `app/` | 
 | Controllers |  `app/` |
@@ -19,9 +19,9 @@
 | Views |  `app/` | 
 | public | `/` | 
 
-> **OBS.:** Irá solicitar que substitua os arquivos, basta confirmar.
+> **OBS.:** Will ask you to replace the files, just confirm.
 
-3. Criar banco de dados
+3. Create database
 
 
 ```sql
@@ -46,7 +46,7 @@ CREATE OR REPLACE TABLE transacao (
     deleted_at DATETIME DEFAULT NULL 
     );
 ```
-Ou utilizar a migration
+Or use migration
 ```php
 #Rodar a migration
 php spark migrate
@@ -54,7 +54,7 @@ php spark migrate
 ```
 
 
-4.  Configurar banco de dados dentro do framework
+4.  Configure database within the framework
 
 ```php
 #Location - app/Config/Database
@@ -69,7 +69,7 @@ php spark migrate
 	];
 ```
 
-5.  Configurar variáveis do PagSeguro
+5.  Configure PagSeguro variables
 
 ```php
 #Location - app/Config/PagSeguro
@@ -88,7 +88,7 @@ php spark migrate
 
 ```
 
-6.  Configurar E-mail:
+6.  Configure Email:
 
 - Serviço de e-mail utilizado [Mailtrap](https://mailtrap.io/ "Mailtrap").
 
@@ -123,7 +123,7 @@ php spark migrate
 
 ```
 
-7.  Altera Logger para visualizar os logs de transações
+7.  Change Logger to view transaction logs
 
 ```php
 #Location - app/Config/Logger
@@ -136,7 +136,7 @@ public $threshold = array(1, 2, 3, 7);
 
 ```
 
-8. Rodar o projeto e acessar o `/listagem`
+8. Run the project and access the `/listagem`
 
 `php spark serve`
 
@@ -152,5 +152,5 @@ extension=openssl
 
 
 
-> **OBS.:** Caso a base_url não seja localhost:8080, configurar neste documentos para gerar as sessões `assets/js/sessao.js `
+> **OBS.:** If base_url is not localhost:8080, configure this document to generate the sessions `assets/js/sessao.js `
 
