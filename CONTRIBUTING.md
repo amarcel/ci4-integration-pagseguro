@@ -1,24 +1,23 @@
-# Como contribuir com o projeto
+# How to contribute to the project
 
-- [Instalando o projeto](#instalando-o-projeto)
-- [Reportando Issues](#reportando-issues)
-- [Submetendo Pull Requests](#submetendo-pull-requests)
+- [Installing the project] (#installing-the-project)
+- [Reporting issues] (#reporting-issues)
+- [Submitting Pull Requests] (#submitting-pull-requests)
 
-## Instalando o projeto
+## Installing the project
 
-Para abrir um pull-request, primeiramente crie um fork do projeto para a sua conta, então clone o projeto em sua maquina:
+To open a pull-request, first create a fork of the project for your account, then clone the project on your machine:
 
-`git clone git@github.com:seu-usuario/ci4-integration-pagseguro.git`
+`git clone git@github.com: your-user / ci4-integration-pagseguro.git`
 
-Agora pronto, você já pode começar a contribuir com o projeto!
+Now ready, you can start contributing to the project!
 
-## Reportando Issues
+## Reporting Issues
 
-Você pode criar uma issue [aqui](https://github.com/matheuscastroweb/ci4-integration-pagseguro/issues), mas, lembre-se de ser claro e informar o máximo de detalhes possíveis.
+You can create an issue [here] (https://github.com/matheuscastroweb/ci4-integration-pagseguro/issues), but remember to be clear and provide as much detail as possible.
 
-## Submetendo Pull Requests
-* Crie pull requests pequenos, para que a revisão seja feita mais facilmente
-* Inclua detalhes do que está sendo feito na descrição
-* Altera a documentação se for necessário
-* Verifique se todos os testes estão passando localmente
-
+## Submitting Pull Requests
+* Create small pull requests, so that the review is easier
+* Include details of what is being done in the description
+* Change the documentation if necessary
+* Check that all tests are passing locally
